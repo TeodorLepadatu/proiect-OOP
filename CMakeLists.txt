@@ -1,3 +1,4 @@
+#include_directories(headers/c:/SFML/include)
 cmake_minimum_required(VERSION 3.24)
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing executable name in this file

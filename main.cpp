@@ -1,57 +1,121 @@
 #include <iostream>
-#include <array>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+#include <vector>
+//#include <SFML/Graphics.hpp>
+class Piesa {
+private:
+    int tip;
+    int culoare;
+public:
+    int gettip() const {
+        return tip;
+    }
 
-#include <Helper.h>
+    int getculoare() const {
+        return culoare;
+    }
+};
+class Camp {
+private:
+    bool culoare;
+    int valoare;
+    std::string resursa;
+    Piesa p;
+    int x;
+    int y; //coordonate (trebuie vazut cum le iau)
+public:
+    Camp(const bool culoare_, int val, std::string &res) : culoare{culoare_}, valoare{val}, resursa{res} {
+        std::cout << "constr de init" << std::endl;
+    }
+
+    Camp(const Camp &other) : culoare{other.culoare}, valoare{other.valoare}, resursa{other.resursa} {
+        std::cout << "constr copiere" << std::endl;
+    }
+
+    const std::string &getres() const {
+        return resursa;
+    }
+    Camp& operator=(Camp&& other) {
+        culoare = other.culoare;
+        valoare = other.valoare;
+        resursa = other.resursa;
+        std::cout << "operator=\n";
+        return *this;
+    }
+    friend std::ostream &operator<<(std::ostream &os, const Camp &Camp) {
+        os << "culoare: " << Camp.culoare << " valoare: " << Camp.valoare << " resursa: " << Camp.resursa;
+        return os;
+    }
+
+    ~Camp() {
+        std::cout << "destr" << std::endl;
+    }
+
+    std::string stabileste_resursa() {
+        std::string rez;
+        srand((unsigned int) time(NULL));
+        int roll = (rand() % 4) + 1;
+        if (roll == 0) {
+            rez = "materiale";
+        } else if (roll == 1) {
+            rez = "mancare";
+        } else if (roll == 2) {
+            rez = "arma";
+        } else {
+            rez = "apa";
+        }
+        return rez;
+    }
+
+    int stabileste_numar() {
+        srand((unsigned int) time(NULL));
+        int roll = (rand() % 12) + 1;
+        return roll;
+    }
+};
+
+class Pion : public Piesa {
+
+};
+
+class Cal : public Piesa {
+
+};
+
+class Nebun : public Piesa {
+
+};
+
+class Turn : public Piesa {
+
+};
+
+class Dama : public Piesa {
+
+};
+
+class Rege : public Piesa {
+
+};
+
+int dau_cu_zaru() {
+    srand((unsigned int) time(NULL));
+    int roll = 0;
+    int sides = 6;
+    int dice = 2;
+    int suma = 0;
+    for (int i = 1; i <= dice; i++) {
+        roll = (rand() % sides) + 1;
+        suma += roll;
+    }
+    return suma;
+}
 
 int main() {
-    std::cout << "Hello, world!\n";
-    std::array<int, 100> v{};
-    int nr;
-    std::cout << "Introduceți nr: ";
-    /////////////////////////////////////////////////////////////////////////
-    /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,
-    /// dați exemple de date de intrare folosind fișierul tastatura.txt
-    /// Trebuie să aveți în fișierul tastatura.txt suficiente date de intrare
-    /// (în formatul impus de voi) astfel încât execuția programului să se încheie.
-    /// De asemenea, trebuie să adăugați în acest fișier date de intrare
-    /// pentru cât mai multe ramuri de execuție.
-    /// Dorim să facem acest lucru pentru a automatiza testarea codului, fără să
-    /// mai pierdem timp de fiecare dată să introducem de la zero aceleași date de intrare.
-    ///
-    /// Pe GitHub Actions (bife), fișierul tastatura.txt este folosit
-    /// pentru a simula date introduse de la tastatură.
-    /// Bifele verifică dacă programul are erori de compilare, erori de memorie și memory leaks.
-    ///
-    /// Dacă nu puneți în tastatura.txt suficiente date de intrare, îmi rezerv dreptul să vă
-    /// testez codul cu ce date de intrare am chef și să nu pun notă dacă găsesc vreun bug.
-    /// Impun această cerință ca să învățați să faceți un demo și să arătați părțile din
-    /// program care merg (și să le evitați pe cele care nu merg).
-    ///
-    /////////////////////////////////////////////////////////////////////////
-    std::cin >> nr;
-    /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "v[" << i << "] = ";
-        std::cin >> v[i];
-    }
-    std::cout << "\n\n";
-    std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "- " << v[i] << "\n";
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    /// Pentru date citite din fișier, NU folosiți tastatura.txt. Creați-vă voi
-    /// alt fișier propriu cu ce alt nume doriți.
-    /// Exemplu:
-    /// std::ifstream fis("date.txt");
-    /// for(int i = 0; i < nr2; ++i)
-    ///     fis >> v2[i];
-    ///
-    ///////////////////////////////////////////////////////////////////////////
-    ///                Exemplu de utilizare cod generat                     ///
-    ///////////////////////////////////////////////////////////////////////////
-    Helper helper;
-    helper.help();
-    ///////////////////////////////////////////////////////////////////////////
+    std::string resursa = "grau";
+    Camp patrat{1, 8, resursa};
+    std::cout << "patratu are resursa " << patrat.getres();
     return 0;
 }
