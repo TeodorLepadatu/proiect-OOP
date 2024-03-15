@@ -1,57 +1,234 @@
 #include <iostream>
-#include <array>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+#include <vector>
+#include <SFML/Graphics.hpp>
 
-#include <Helper.h>
+class Piesa {
+private:
+    int tip;
+    int culoare;
+public:
+    int gettip() const {
+        return tip;
+    }
+
+    int getculoare() const {
+        return culoare;
+    }
+};
+
+class Locatie{
+private:
+    int linie;
+    int coloana;
+public:
+    Locatie(int linie_, int coloana_) : linie{linie_}, coloana{coloana_} {
+        //std::cout<<"constr init"<<std::endl;
+    }
+    Locatie(const Locatie &other) : linie{other.linie}, coloana{other.coloana} {
+        //std::cout << "constr copiere" << std::endl;
+    }
+    Locatie& operator=(Locatie&& other)
+    {
+        linie=other.linie;
+        coloana=other.coloana;
+        return *this;
+    }
+    int getLinie() const {
+        return linie;
+    }
+
+    int getColoana() const {
+        return coloana;
+    }
+
+    bool operator==(const Locatie &other) const {
+        return linie == other.linie &&
+               coloana == other.coloana;
+    }
+
+    bool operator!=(const Locatie &other) const {
+        return !(other == *this);
+    }
+
+    ~Locatie() {}
+
+    friend std::ostream &operator<<(std::ostream &os, const Locatie &locatie) {
+        os << "linie: " << locatie.linie << " coloana: " << locatie.coloana;
+        return os;
+    }
+    /*bool operator<(const Locatie &other) const {
+        if (linie < other.linie)
+            return true;
+        if (other.linie < linie)
+            return false;
+        return coloana < other.coloana;
+    }
+
+    bool operator>(const Locatie &other) const {
+        return other < *this;
+    }
+
+    bool operator<=(const Locatie &other) const {
+        return !(other < *this);
+    }
+
+    bool operator>=(const Locatie &other) const {
+        return !(*this < other);
+    }*/
+};
+
+class Culoare {
+private:
+    int color;     //ma gandesc sa nu fie doua culori
+    //bool ok=1;
+public:
+    explicit Culoare(bool culoare) : color{culoare} {}
+    bool getColor() const {
+        return color;
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Culoare &culoare) {
+        os << "color: " << culoare.color;
+        return os;
+    }
+    //copy constructor
+};
+
+class Camp {
+private:
+    const Culoare culoare;
+    const Locatie locatie;
+    bool ocupat;    //daca exista piesa pe respectivul patratel
+public:
+    Camp() : culoare(false), locatie(0, 0), ocupat(false) {} // Default constructor
+    Camp(const Culoare &culoare_, const Locatie &locatie_, bool ocupat_) : culoare{culoare_}, locatie{locatie_}, ocupat{ocupat_} {}
+
+    friend std::ostream &operator<<(std::ostream &os, const Camp &camp) {
+        os << "culoare: " << camp.culoare << " locatie: " << camp.locatie << " ocupat: " << camp.ocupat;
+        return os;
+    }
+
+    void reset()
+    {
+        this->ocupat=0;
+    }
+
+    const Culoare &getCuloare() const {
+        return culoare;
+    }
+
+    const Locatie &getLocatie() const {
+        return locatie;
+    }
+
+    bool isOcupat() const {
+        return ocupat;
+    }
+
+    void setOcupat(bool ocupat) {
+        Camp::ocupat = ocupat;
+    }
+
+    // Copy assignment operator
+    Camp& operator=(const Camp& other) {
+        // Check for self-assignment
+        if (this == &other)
+            return *this;
+
+        // Copy the non-const member variable
+        ocupat = other.ocupat;
+
+        return *this;
+    }
+//private:
+    std::string stabileste_resursa() {
+        std::string rez;
+        srand((unsigned int) time(NULL));
+        int roll = (rand() % 4) + 1;
+        if (roll == 0) {
+            rez = "materiale";
+        } else if (roll == 1) {
+            rez = "mancare";
+        } else if (roll == 2) {
+            rez = "arma";
+        } else {
+            rez = "apa";
+        }
+        return rez;
+    }
+
+    int stabileste_numar() {
+        srand((unsigned int) time(NULL));
+        int roll = (rand() % 12) + 1;
+        return roll;
+    }
+};
+
+class Tabla {
+private:
+    Camp m[9][9];  // Maximum number of squares
+public:
+    Tabla() {
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
+                Culoare c((i + j) % 2 == 0);
+                Locatie loc(i, j);
+                m[i][j] = Camp(c, loc, false);
+            }
+        }
+    }
+    void display() const {
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
+                std::cout << (m[i][j].getLocatie()) << " "; // Use "X" for occupied, "O" for empty
+            }
+            std::cout << std::endl;
+        }
+    }
+};
+
+class Pion : public Piesa {
+
+};
+
+class Cal : public Piesa {
+
+};
+
+class Nebun : public Piesa {
+
+};
+
+class Turn : public Piesa {
+
+};
+
+class Dama : public Piesa {
+
+};
+
+class Rege : public Piesa {
+
+};
+
+int dau_cu_zaru() {
+    srand((unsigned int) time(NULL));
+    int roll = 0;
+    int sides = 6;
+    int dice = 2;
+    int suma = 0;
+    for (int i = 1; i <= dice; i++) {
+        roll = (rand() % sides) + 1;
+        suma += roll;
+    }
+    return suma;
+}
 
 int main() {
-    std::cout << "Hello, world!\n";
-    std::array<int, 100> v{};
-    int nr;
-    std::cout << "Introduceți nr: ";
-    /////////////////////////////////////////////////////////////////////////
-    /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,
-    /// dați exemple de date de intrare folosind fișierul tastatura.txt
-    /// Trebuie să aveți în fișierul tastatura.txt suficiente date de intrare
-    /// (în formatul impus de voi) astfel încât execuția programului să se încheie.
-    /// De asemenea, trebuie să adăugați în acest fișier date de intrare
-    /// pentru cât mai multe ramuri de execuție.
-    /// Dorim să facem acest lucru pentru a automatiza testarea codului, fără să
-    /// mai pierdem timp de fiecare dată să introducem de la zero aceleași date de intrare.
-    ///
-    /// Pe GitHub Actions (bife), fișierul tastatura.txt este folosit
-    /// pentru a simula date introduse de la tastatură.
-    /// Bifele verifică dacă programul are erori de compilare, erori de memorie și memory leaks.
-    ///
-    /// Dacă nu puneți în tastatura.txt suficiente date de intrare, îmi rezerv dreptul să vă
-    /// testez codul cu ce date de intrare am chef și să nu pun notă dacă găsesc vreun bug.
-    /// Impun această cerință ca să învățați să faceți un demo și să arătați părțile din
-    /// program care merg (și să le evitați pe cele care nu merg).
-    ///
-    /////////////////////////////////////////////////////////////////////////
-    std::cin >> nr;
-    /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "v[" << i << "] = ";
-        std::cin >> v[i];
-    }
-    std::cout << "\n\n";
-    std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "- " << v[i] << "\n";
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    /// Pentru date citite din fișier, NU folosiți tastatura.txt. Creați-vă voi
-    /// alt fișier propriu cu ce alt nume doriți.
-    /// Exemplu:
-    /// std::ifstream fis("date.txt");
-    /// for(int i = 0; i < nr2; ++i)
-    ///     fis >> v2[i];
-    ///
-    ///////////////////////////////////////////////////////////////////////////
-    ///                Exemplu de utilizare cod generat                     ///
-    ///////////////////////////////////////////////////////////////////////////
-    Helper helper;
-    helper.help();
-    ///////////////////////////////////////////////////////////////////////////
+    Tabla tabla;
+    tabla.display();
     return 0;
 }
