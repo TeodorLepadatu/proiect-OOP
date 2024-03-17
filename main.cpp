@@ -30,12 +30,14 @@ public:
     Locatie(const Locatie &other) : linie{other.linie}, coloana{other.coloana} {
         //std::cout << "constr copiere" << std::endl;
     }
-    Locatie& operator=(Locatie&& other)
-    {
-        linie=other.linie;
-        coloana=other.coloana;
+    Locatie& operator=(const Locatie& other) {
+        if (this != &other) { // Check for self-assignment
+            linie = other.linie;
+            coloana = other.coloana;
+        }
         return *this;
     }
+
     int getLinie() const {
         return linie;
     }
@@ -53,11 +55,19 @@ public:
         return !(other == *this);
     }
 
-    ~Locatie() {}
+    //~Locatie() {}
 
     friend std::ostream &operator<<(std::ostream &os, const Locatie &locatie) {
         os << "linie: " << locatie.linie << " coloana: " << locatie.coloana;
         return os;
+    }
+
+    void setLinie(int linie) {
+        Locatie::linie = linie;
+    }
+
+    void setColoana(int coloana) {
+        Locatie::coloana = coloana;
     }
     /*bool operator<(const Locatie &other) const {
         if (linie < other.linie)
@@ -94,26 +104,36 @@ public:
         os << "color: " << culoare.color;
         return os;
     }
-    //copy constructor
+
+    void setColor(int color) {
+        Culoare::color = color;
+    }
+
+    Culoare(const Culoare &other) : color{other.color} {
+        //std::cout << "constr copiere" << std::endl;
+    }
 };
 
 class Camp {
 private:
-    const Culoare culoare;
-    const Locatie locatie;
+    Culoare culoare;
+    Locatie locatie;
     bool ocupat;    //daca exista piesa pe respectivul patratel
 public:
-    Camp() : culoare(false), locatie(0, 0), ocupat(false) {} // Default constructor
-    Camp(const Culoare &culoare_, const Locatie &locatie_, bool ocupat_) : culoare{culoare_}, locatie{locatie_}, ocupat{ocupat_} {}
+    Camp(const Culoare &culoare_ = Culoare(false), const Locatie &locatie_ = Locatie(0, 0), bool ocupat_ = false)
+            : culoare{culoare_}, locatie{locatie_}, ocupat{ocupat_} {}
 
-    friend std::ostream &operator<<(std::ostream &os, const Camp &camp) {
-        os << "culoare: " << camp.culoare << " locatie: " << camp.locatie << " ocupat: " << camp.ocupat;
-        return os;
-    }
+    // Copy assignment operator
+    Camp &operator=(const Camp &other) {
+        // Check for self-assignment
+        if (this == &other)
+            return *this;
 
-    void reset()
-    {
-        this->ocupat=0;
+        // Copy the non-const member variables
+        ocupat = other.ocupat;
+        culoare = other.culoare;  // Assigning to non-const member
+        locatie = other.locatie;  // Assigning to non-const member
+        return *this;
     }
 
     const Culoare &getCuloare() const {
@@ -124,25 +144,6 @@ public:
         return locatie;
     }
 
-    bool isOcupat() const {
-        return ocupat;
-    }
-
-    void setOcupat(bool ocupat) {
-        Camp::ocupat = ocupat;
-    }
-
-    // Copy assignment operator
-    Camp& operator=(const Camp& other) {
-        // Check for self-assignment
-        if (this == &other)
-            return *this;
-
-        // Copy the non-const member variable
-        ocupat = other.ocupat;
-
-        return *this;
-    }
 //private:
     std::string stabileste_resursa() {
         std::string rez;
@@ -166,7 +167,6 @@ public:
         return roll;
     }
 };
-
 class Tabla {
 private:
     Camp m[9][9];  // Maximum number of squares
@@ -183,35 +183,11 @@ public:
     void display() const {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
-                std::cout << (m[i][j].getLocatie()) << " "; // Use "X" for occupied, "O" for empty
+                std::cout << (m[i][j].getCuloare()) << " "; // Use "X" for occupied, "O" for empty
             }
             std::cout << std::endl;
         }
     }
-};
-
-class Pion : public Piesa {
-
-};
-
-class Cal : public Piesa {
-
-};
-
-class Nebun : public Piesa {
-
-};
-
-class Turn : public Piesa {
-
-};
-
-class Dama : public Piesa {
-
-};
-
-class Rege : public Piesa {
-
 };
 
 int dau_cu_zaru() {
