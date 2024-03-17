@@ -55,8 +55,6 @@ public:
         return !(other == *this);
     }
 
-    //~Locatie() {}
-
     friend std::ostream &operator<<(std::ostream &os, const Locatie &locatie) {
         os << "linie: " << locatie.linie << " coloana: " << locatie.coloana;
         return os;
@@ -69,6 +67,8 @@ public:
     void setColoana(int coloana) {
         Locatie::coloana = coloana;
     }
+
+    ~Locatie() {}
     /*bool operator<(const Locatie &other) const {
         if (linie < other.linie)
             return true;
@@ -123,6 +123,11 @@ public:
     Camp(const Culoare &culoare_ = Culoare(false), const Locatie &locatie_ = Locatie(0, 0), bool ocupat_ = false)
             : culoare{culoare_}, locatie{locatie_}, ocupat{ocupat_} {}
 
+    friend std::ostream &operator<<(std::ostream &os, const Camp &camp) {
+        os << "culoare: " << camp.culoare << " locatie: " << camp.locatie << " ocupat: " << camp.ocupat;
+        return os;
+    }
+
     // Copy assignment operator
     Camp &operator=(const Camp &other) {
         // Check for self-assignment
@@ -144,7 +149,6 @@ public:
         return locatie;
     }
 
-//private:
     std::string stabileste_resursa() {
         std::string rez;
         srand((unsigned int) time(NULL));
@@ -159,6 +163,10 @@ public:
             rez = "apa";
         }
         return rez;
+    }
+
+    void reset(bool& ocupat){
+        this->ocupat=false; //cand nu mai avem o piesa acolo
     }
 
     int stabileste_numar() {
@@ -188,6 +196,7 @@ public:
             std::cout << std::endl;
         }
     }
+    
 };
 
 int dau_cu_zaru() {
