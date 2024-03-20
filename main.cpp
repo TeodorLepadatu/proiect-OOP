@@ -1,9 +1,17 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <random>
 #include <string>
 #include <vector>
 #include <SFML/Graphics.hpp>
+
+int dau_cu_zaru() {
+    std::random_device rd;
+    std::mt19937 gen(rd()); //random number generator
+    std::uniform_int_distribution<> dis(1, 6);
+    int roll1 = dis(gen);
+    int roll2 = dis(gen);
+    return roll1 + roll2;
+}
 
 class Piesa {
 private:
@@ -90,41 +98,44 @@ public:
     }*/
 };
 
-class Culoare {
-private:
-    int color;     //ma gandesc sa nu fie doua culori
+//class Culoare {
+//private:
+//    int color;     //ma gandesc sa nu fie doua culori
     //bool ok=1;
-public:
-    explicit Culoare(bool culoare) : color{culoare} {}
-    bool getColor() const {
-        return color;
-    }
+//public:
+  //  explicit Culoare(int color) : color(color) {}
 
-    friend std::ostream &operator<<(std::ostream &os, const Culoare &culoare) {
-        os << "color: " << culoare.color;
-        return os;
-    }
+   // explicit Culoare(bool culoare) : color{culoare} {}
+    //bool getColor() const {
+      //  return color;
+    //}
 
-    void setColor(int color) {
-        Culoare::color = color;
-    }
+    //friend std::ostream &operator<<(std::ostream &os, const Culoare &culoare) {
+      //  os << "color: " << culoare.color;
+        //return os;
+    //}
 
-    Culoare(const Culoare &other) : color{other.color} {
+    //void setColor(int color) {
+      //  Culoare::color = color;
+    //}
+
+    //Culoare(const Culoare &other) : color{other.color} {
         //std::cout << "constr copiere" << std::endl;
-    }
-};
+    //}
+//};
 
 class Camp {
 private:
-    Culoare culoare;
+    std::string culoare;
     Locatie locatie;
+    int numar;
     bool ocupat;    //daca exista piesa pe respectivul patratel
 public:
-    Camp(const Culoare &culoare_ = Culoare(false), const Locatie &locatie_ = Locatie(0, 0), bool ocupat_ = false)
-            : culoare{culoare_}, locatie{locatie_}, ocupat{ocupat_} {}
+    Camp(const std::string &culoare_ = std::string("apa"), const Locatie &locatie_ = Locatie(0, 0), const int& numar_=0, bool ocupat_ = false)
+            : culoare{culoare_}, locatie{locatie_}, numar{numar_}, ocupat{ocupat_} {}
 
     friend std::ostream &operator<<(std::ostream &os, const Camp &camp) {
-        os << "culoare: " << camp.culoare << " locatie: " << camp.locatie << " ocupat: " << camp.ocupat;
+        os << "culoare: " << camp.culoare << " locatie: " << camp.locatie << " numar: " << camp.numar<<" ocupat: "<<camp.ocupat;
         return os;
     }
 
@@ -136,12 +147,13 @@ public:
 
         // Copy the non-const member variables
         ocupat = other.ocupat;
-        culoare = other.culoare;  // Assigning to non-const member
-        locatie = other.locatie;  // Assigning to non-const member
+        culoare = other.culoare;
+        numar=other.numar;
+        locatie = other.locatie;
         return *this;
     }
 
-    const Culoare &getCuloare() const {
+    const std::string &getCuloare() const {
         return culoare;
     }
 
@@ -149,31 +161,33 @@ public:
         return locatie;
     }
 
-    std::string stabileste_resursa() {
-        std::string rez;
-        srand((unsigned int) time(NULL));
-        int roll = (rand() % 4) + 1;
-        if (roll == 0) {
-            rez = "materiale";
-        } else if (roll == 1) {
-            rez = "mancare";
-        } else if (roll == 2) {
-            rez = "arma";
-        } else {
-            rez = "apa";
-        }
-        return rez;
+    int getNumar() const {
+        return numar;
     }
+
+    bool isOcupat() const {
+        return ocupat;
+    }
+//    std::string stabileste_resursa() {
+  //      std::string rez;
+    //    srand((unsigned int) time(NULL));
+  //      int roll = (rand() % 4) + 1;
+    //    if (roll == 0) {
+      //      rez = "materiale";
+      //  } else if (roll == 1) {
+        //    rez = "mancare";
+        //} else if (roll == 2) {
+          //  rez = "arma";
+        //} else {
+          //  rez = "apa";
+        //}
+        //return rez;
+    //}
 
     void reset(bool& ocupat){
         this->ocupat=false; //cand nu mai avem o piesa acolo
     }
 
-    int stabileste_numar() {
-        srand((unsigned int) time(NULL));
-        int roll = (rand() % 12) + 1;
-        return roll;
-    }
 };
 class Tabla {
 private:
@@ -182,35 +196,30 @@ public:
     Tabla() {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
-                Culoare c((i + j) % 2 == 0);
+                std::string c;
+                if ((i+j)%4==0)
+                    c="apa";
+                else if ((i+j)%4==1)
+                    c="mancare";
+                else if ((i+j)%4==2)
+                    c="piatra";
+                else
+                    c="arma";
                 Locatie loc(i, j);
-                m[i][j] = Camp(c, loc, false);
+                int nr=dau_cu_zaru();
+                m[i][j] = Camp(c, loc, nr, false);
             }
         }
     }
     void display() const {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
-                std::cout << (m[i][j].getCuloare()) << " "; // Use "X" for occupied, "O" for empty
+                std::cout << (m[i][j].getNumar()) << " ";
             }
             std::cout << std::endl;
         }
     }
-    
 };
-
-int dau_cu_zaru() {
-    srand((unsigned int) time(NULL));
-    int roll = 0;
-    int sides = 6;
-    int dice = 2;
-    int suma = 0;
-    for (int i = 1; i <= dice; i++) {
-        roll = (rand() % sides) + 1;
-        suma += roll;
-    }
-    return suma;
-}
 
 int main() {
     Tabla tabla;
