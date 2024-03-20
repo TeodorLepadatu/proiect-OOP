@@ -1,12 +1,9 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+Catanus chess
 
-### Important!
-Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar în folder-ul `generated`.
-Codul generat pus "ca să fie"/pe care nu îl înțelegeți se punctează doar pentru puncte bonus, doar în contextul
-în care oferă funcționalități ajutătoare și doar dacă are sens.
+Sah indian, doar ca pentru a muta piese iti trebuie resurse.
+Fiecare patrat de pe tabla de sah are o anumita resursa si un anumit numar. Fiecare jucator da cu zarul si vor primi o resursa de pe acel patrat.
 
-O cerință nu se consideră îndeplinită dacă este realizată doar ca o serie de apeluri proxy către cod generat.
-
+Cerinte:
 ### Cerințe modele de limbaj la nivel de semestru
 - [ ] minim o funcționalitate majoritar doar cu LLM
 - [ ] minim 2-3 funcționalități ~50% voi, ~50% LLM-ul
@@ -69,6 +66,3 @@ O cerință nu se consideră îndeplinită dacă este realizată doar ca o serie
 <!-- - [ ] o specializare pe funcție/clasă șablon -->
 - [ ] tag de `git`: de exemplu `v0.3` sau `v1.0`
 
-## Resurse
-
-- adăugați trimiteri către resursele externe care v-au ajutat sau pe care le-ați folosit
