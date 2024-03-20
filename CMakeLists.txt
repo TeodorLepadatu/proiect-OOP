@@ -111,6 +111,11 @@ add_executable(${PROJECT_NAME}
     main.cpp
     generated/src/Helper.cpp
     env_fixes.h
+        Piesa_abstracta.h
+        Locatie.h
+        Camp.h
+        functii.h
+        Tabla.h
 )
 
 ###############################################################################
