@@ -23,6 +23,10 @@ public:
     void setTurn(bool turn) {
         Player::turn = turn;
     }
+
+    const std::vector<Pacanea> &getInventar() const {
+        return inventar;
+    }
 };
 
 #endif
