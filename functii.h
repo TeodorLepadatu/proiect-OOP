@@ -13,4 +13,10 @@ int dau_cu_zaru() {
     return roll1 + roll2;
 }
 
+int random_number_generator() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 4);
+    return dis(gen);
+}
 #endif

@@ -52,7 +52,6 @@ public:
         resurse.push_back("apa");
         resurse.push_back("mancare");
     }
-
     std::vector<Locatie> muta_pion(Locatie &locatie, std::vector<Locatie> &mutari_posibile) {
         int i = locatie.getLinie();
         int j = locatie.getColoana();
@@ -73,6 +72,7 @@ public:
         }
         return mutari_posibile;
     }
+
 };
 
 class Cal : public Piesa {

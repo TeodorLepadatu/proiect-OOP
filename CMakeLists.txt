@@ -117,6 +117,7 @@ add_executable(${PROJECT_NAME}
         functii.h
         Tabla.h
         Player.h
+        Pacanea.h
 )
 
 ###############################################################################

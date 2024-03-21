@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include "Piesa_abstracta.h"
-
+#include "Pacanea.h"
 #ifndef OOP_PLAYER_H
 #define OOP_PLAYER_H
 
@@ -14,6 +14,7 @@ private:
     Nebun n;
     Turn t;
     Rege r;
+    std::vector<Pacanea> inventar;
 public:
     int getNr() const {
         return nr;
@@ -22,7 +23,6 @@ public:
     void setTurn(bool turn) {
         Player::turn = turn;
     }
-
 };
 
 #endif
