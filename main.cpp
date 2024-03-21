@@ -9,7 +9,6 @@
 #include "Player.h"
 #include "Pacanea.h"
 int main() {
-    Pacanea muie;
-    std::cout << muie;
+
     return 0;
 }
