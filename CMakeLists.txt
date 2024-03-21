@@ -116,6 +116,7 @@ add_executable(${PROJECT_NAME}
         Camp.h
         functii.h
         Tabla.h
+        Player.h
 )
 
 ###############################################################################

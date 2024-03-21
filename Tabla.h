@@ -1,9 +1,8 @@
 #include "functii.h"
 #include <iostream>
-
+#include "Locatie.h"
 #ifndef OOP_TABLA_H
 #define OOP_TABLA_H
-
 #include "Camp.h"
 
 class Tabla {
@@ -32,12 +31,10 @@ public:
     void display() const {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
-                std::cout << (m[i][j].getNumar()) << " ";
+                std::cout << m[i][j] << " ";
             }
             std::cout << std::endl;
         }
     }
 };
-
-
 #endif
