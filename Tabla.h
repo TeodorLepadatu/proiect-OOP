@@ -1,9 +1,11 @@
-#include "functii.h"
-#include <iostream>
-#include "Locatie.h"
 #ifndef OOP_TABLA_H
 #define OOP_TABLA_H
+
+#include <iostream>
 #include "Camp.h"
+#include "functii.h"
+#include "Locatie.h"
+#include "Piesa_abstracta.h"
 
 class Tabla {
 private:
@@ -28,13 +30,30 @@ public:
         }
     }
 
+    Camp getCamp(int i, int j) {
+        return m[i][j];
+    }
     void display() const {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
-                std::cout << m[i][j] << " ";
+                std::cout << m[i][j].getNumar() << " ";
             }
             std::cout << std::endl;
         }
     }
+
+    void displayreal() const {
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
+                if (m[i][j].isOcupat())
+                    std::cout << m[i][j].isOcupat() << " ";
+                    //std::cout << m[i][j].getPiesa().gettip() << " ";
+                else
+                    std::cout << 0 << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
 };
 #endif

@@ -6,15 +6,15 @@
 #include <iostream>
 #include <vector>
 #include "Locatie.h"
+
 class Piesa {
 protected:
     std::string tip;
-    std::string culoare;
+    int culoare;
     Locatie locatie;
     std::vector<std::string> resurse;
 public:
-
-    Piesa() : tip(""), culoare(""), locatie(0, 0) {}
+    Piesa() : tip(""), culoare(0), locatie(0, 0) {}
 
     friend std::ostream &operator<<(std::ostream &os, const Piesa &piesa) {
         os << "tip: " << piesa.tip << " culoare: " << piesa.culoare << " locatie: " << piesa.locatie;
@@ -25,7 +25,7 @@ public:
         return tip;
     }
 
-    std::string getculoare() const {
+    int getculoare() const {
         return culoare;
     }
 
@@ -33,14 +33,18 @@ public:
         return locatie;
     }
 
-    void setLocatie(const Locatie &locatie) {
-        Piesa::locatie = locatie;
+    void setLocatie(int linie, int coloana) {
+        locatie.setLinie(linie);
+        locatie.setColoana(coloana);
     }
 
-    void setCuloare(const std::string &culoare) {
+    void setCuloare(const int &culoare) {
         Piesa::culoare = culoare;
     }
 
+    void setTip(const std::string &tip) {
+        Piesa::tip = tip;
+    }
 };
 
 class Pion : public Piesa {
@@ -57,13 +61,13 @@ public:
         int j = locatie.getColoana();
         mutari_posibile.clear();
 
-        if (culoare == "alb") {
+        if (culoare == 1) {
             Locatie x(i + 1, j);
             mutari_posibile.push_back(x);
-        } else if (culoare == "verde") {
+        } else if (culoare == 2) {
             Locatie x(i, j - 1);
             mutari_posibile.push_back(x);
-        } else if (culoare == "negru") {
+        } else if (culoare == 3) {
             Locatie x(i - 1, j);
             mutari_posibile.push_back(x);
         } else {
@@ -335,7 +339,7 @@ private:
     std::vector<Locatie> mutari_posibile;
 public:
     Nebun() {
-        tip = "N";
+        tip = "B";
         resurse.push_back("apa");
         resurse.push_back("mancare");
         resurse.push_back("arma");
@@ -362,7 +366,7 @@ private:
     std::vector<Locatie> mutari_posibile;
 public:
     Turn() {
-        tip = "T";
+        tip = "R";
         resurse.push_back("arma");
         resurse.push_back("piatra");
     }
@@ -388,7 +392,7 @@ private:
     std::vector<Locatie> mutari_posibile;
 public:
     Rege() {
-        tip = "R";
+        tip = "K";
     }
 
     std::vector<Locatie> muta_rege(Locatie &locatie, std::vector<Locatie> &mutari_posibile) {

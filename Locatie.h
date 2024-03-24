@@ -55,7 +55,7 @@ public:
         Locatie::coloana = coloana;
     }
 
-    ~Locatie() {}
+    ~Locatie() = default;
 };
 
 

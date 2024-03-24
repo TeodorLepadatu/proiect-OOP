@@ -1,4 +1,3 @@
-
 #ifndef OOP_CAMP_H
 #define OOP_CAMP_H
 
