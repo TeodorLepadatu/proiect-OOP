@@ -17,6 +17,7 @@ int main() {
     Tabla tabla;
     std::cout << "The board:" << std::endl;
     tabla.display();
+    //std::cout<<tabla.getCamp(2,1).getNumar();
     std::cout << std::endl;
     std::cout << "Enter number of players (a number from 1 to 4):" << std::endl;
     bool ok = 0;
@@ -237,10 +238,13 @@ int main() {
         board[pair.second.getLinie()][pair.second.getColoana()] = pair.first;
         std::cout << pair.first << " " << pair.second << std::endl;
     }
+
+    std::cout << "The initial position: " << std::endl;
     for (int i = 1; i <= 8; i++) {
         for (int j = 1; j <= 8; j++)
             std::cout << board[i][j] << " ";
         std::cout << std::endl;
     }
+
     return 0;
 }

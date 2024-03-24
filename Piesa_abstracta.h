@@ -76,7 +76,6 @@ public:
         }
         return mutari_posibile;
     }
-
 };
 
 class Cal : public Piesa {

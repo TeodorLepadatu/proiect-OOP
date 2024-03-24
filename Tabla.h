@@ -42,18 +42,6 @@ public:
         }
     }
 
-    void displayreal() const {
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 8; j++) {
-                if (m[i][j].isOcupat())
-                    std::cout << m[i][j].isOcupat() << " ";
-                    //std::cout << m[i][j].getPiesa().gettip() << " ";
-                else
-                    std::cout << 0 << " ";
-            }
-            std::cout << std::endl;
-        }
-    }
 
 };
 #endif
