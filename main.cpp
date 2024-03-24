@@ -16,7 +16,7 @@ std::ifstream fin("tastatura.txt");
 int main() {
     Tabla tabla;
     std::cout << "The board:" << std::endl;
-    tabla.display();
+    tabla.displaynr();
     //std::cout<<tabla.getCamp(2,1).getNumar();
     std::cout << std::endl;
     std::cout << "Enter number of players (a number from 1 to 4):" << std::endl;
@@ -246,5 +246,13 @@ int main() {
         std::cout << std::endl;
     }
 
+    for (int i = 1; i <= 8; i++) {
+        for (int j = 1; j <= 8; j++) {
+            if (board[i][j] != "***") {
+                tabla.setCamp(i, j, true);
+            }
+        }
+    }
+    tabla.displayocupat();
     return 0;
 }

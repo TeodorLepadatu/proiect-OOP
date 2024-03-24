@@ -33,7 +33,13 @@ public:
     Camp getCamp(int i, int j) {
         return m[i][j];
     }
-    void display() const {
+
+    Camp setCamp(int i, int j, bool ocupat) {
+        m[i][j].setOcupat();
+        return m[i][j];
+    }
+
+    void displaynr() const {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
                 std::cout << m[i][j].getNumar() << " ";
@@ -42,6 +48,23 @@ public:
         }
     }
 
+    void displaycolor() const {
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
+                std::cout << m[i][j].getCuloare() << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    void displayocupat() const {
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
+                std::cout << m[i][j].isOcupat() << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
 
 };
 #endif
