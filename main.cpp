@@ -23,7 +23,7 @@ int main() {
     std::cout << "Enter number of players (a number from 1 to 4):" << std::endl;
     bool ok = 0;
     int nervi = 0;
-    int n;
+    int n = 0;
     while (ok == 0) {
         char nc;
         std::cin >> nc;
@@ -1067,7 +1067,7 @@ int main() {
 
         //break;
     }
-    int winner;
+    int winner = 0;
     for (int i = 1; i <= 8; i++)
         for (int j1 = 1; j1 <= 8; j1++) {
             if (board[i][j1] == "K1*")
