@@ -279,7 +279,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -301,7 +301,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -323,7 +323,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -345,7 +345,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -367,7 +367,7 @@ int main() {
                 moves = p.muta_cal(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -389,7 +389,7 @@ int main() {
                 moves = p.muta_nebun(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -411,7 +411,7 @@ int main() {
                 moves = p.muta_turn(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -433,7 +433,7 @@ int main() {
                 moves = p.muta_rege(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -467,7 +467,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -489,7 +489,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -511,7 +511,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -533,7 +533,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -555,7 +555,7 @@ int main() {
                 moves = p.muta_cal(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -577,7 +577,7 @@ int main() {
                 moves = p.muta_nebun(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -599,7 +599,7 @@ int main() {
                 moves = p.muta_turn(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -621,7 +621,7 @@ int main() {
                 moves = p.muta_rege(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -657,7 +657,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -679,7 +679,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -701,7 +701,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -723,7 +723,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -745,7 +745,7 @@ int main() {
                 moves = p.muta_cal(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -767,7 +767,7 @@ int main() {
                 moves = p.muta_nebun(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -789,7 +789,7 @@ int main() {
                 moves = p.muta_turn(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -811,7 +811,7 @@ int main() {
                 moves = p.muta_rege(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -845,7 +845,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -867,7 +867,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -889,7 +889,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -911,7 +911,7 @@ int main() {
                 moves = p.muta_pion(map[type], p);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -933,7 +933,7 @@ int main() {
                 moves = p.muta_cal(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -955,7 +955,7 @@ int main() {
                 moves = p.muta_nebun(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -977,7 +977,7 @@ int main() {
                 moves = p.muta_turn(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;
@@ -999,7 +999,7 @@ int main() {
                 moves = p.muta_rege(map[type]);
                 int ol = map[type].getLinie();    //old line
                 int oc = map[type].getColoana();  //old column
-                for (int i = 0; i < moves.size(); i++) {
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
                     std::cout << moves[i] << std::endl;
                 }
                 int l, c;

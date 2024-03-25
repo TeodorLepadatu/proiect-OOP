@@ -21,19 +21,15 @@ public:
         return os;
     }
 
-    // Copy assignment operator
-    Camp &operator=(const Camp &other) {
-        // Check for self-assignment
-        if (this == &other)
-            return *this;
-
-        // Copy the non-const member variables
-        ocupat = other.ocupat;
-        culoare = other.culoare;
-        numar = other.numar;
-        locatie = other.locatie;
-        return *this;
+    Camp(const Camp &other) {
+        // Copy member variables
+        this->culoare = other.culoare;
+        this->locatie = other.locatie;
+        this->numar = other.numar;
+        this->ocupat = other.ocupat;
     }
+
+    // Copy assignment operator
 
     const std::string &getCuloare() const {
         return culoare;
