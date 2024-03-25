@@ -47,7 +47,7 @@ public:
         Piesa::tip = tip;
     }
 
-    std::vector<Locatie> muta_pion(Locatie locatie, Piesa p) {
+    std::vector<Locatie> muta_pion(Locatie locatie, Piesa &p) {
         std::vector<Locatie> mutari_posibile;
         int i = locatie.getLinie();
         int j = locatie.getColoana();
