@@ -58,7 +58,7 @@ int main() {
     std::unordered_map<std::string, Locatie> map;
     for (int i = 1; i <= 8; i++) {
         for (int j = 0; j < n; j++) {
-            if (i >= 1 && i <= 4) {
+            if (i <= 4) {
                 std::cout << "Player " << j + 1
                           << " choose the location for a pawn by entering two numbers from 1 to 8: " << std::endl;
                 std::cout
@@ -1027,7 +1027,7 @@ int main() {
                 ok4 = 1;
         }
         for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 8; j++) {
+            for (int j1 = 1; j1 <= 8; j1++) {
                 if (ok1 == 0) {
                     if (board[i][j] == "P11" || board[i][j] == "P21" || board[i][j] == "P31" || board[i][j] == "P41" ||
                         board[i][j] == "N1*" || board[i][j] == "B1*" || board[i][j] == "R1*" || board[i][j] == "K1*") {
@@ -1069,14 +1069,14 @@ int main() {
     }
     int winner;
     for (int i = 1; i <= 8; i++)
-        for (int j = 1; j <= 8; j++) {
-            if (board[i][j] == "K1*")
+        for (int j1 = 1; j1 <= 8; j1++) {
+            if (board[i][j1] == "K1*")
                 winner = 1;
-            else if (board[i][j] == "K2*")
+            else if (board[i][j1] == "K2*")
                 winner = 2;
-            else if (board[i][j] == "K3*")
+            else if (board[i][j1] == "K3*")
                 winner = 3;
-            else if (board[i][j] == "K4*")
+            else if (board[i][j1] == "K4*")
                 winner = 4;
         }
     std::cout << "The winner is Player " << winner << ", congratulations!";
