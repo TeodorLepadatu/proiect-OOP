@@ -235,6 +235,7 @@ int main() {
         for (int j = 1; j <= 8; j++)
             board[i][j] = "***";
     }
+    std::vector<Piesa> piese; ///mai bine locatii
     for (auto pair: map) {
         board[pair.second.getLinie()][pair.second.getColoana()] = pair.first;
         std::cout << pair.first << " " << pair.second << std::endl;
@@ -251,9 +252,9 @@ int main() {
             }
         }
     }
-    //tabla.displayocupat();
+
     int j = 0;
-    while (run >= 1)       ///change to run>1!!!!!!!!!!!!!!!!!!!!!!!!!!
+    while (run > 1)       ///change to run>1!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         j++;
         if (j > run)
@@ -285,11 +286,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P11";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P21") {
                 std::cout
@@ -306,11 +308,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P21";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P31") {
                 std::cout
@@ -327,11 +330,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P31";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P41") {
                 std::cout
@@ -348,11 +352,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P41";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "N1*") {
                 std::cout
@@ -369,11 +374,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "N1*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "B1*") {
                 std::cout
@@ -390,11 +396,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "B1*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "R1*") {
                 std::cout
@@ -411,11 +418,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "R1*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "K1*") {
                 std::cout
@@ -432,11 +440,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "K1*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             }
         } else if (j == 2) {
@@ -465,11 +474,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P12";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P22") {
                 std::cout
@@ -486,11 +496,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P22";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P32") {
                 std::cout
@@ -507,11 +518,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P32";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P42") {
                 std::cout
@@ -528,11 +540,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P42";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "N2*") {
                 std::cout
@@ -549,11 +562,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "N2*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "B2*") {
                 std::cout
@@ -570,11 +584,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "B2*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "R2*") {
                 std::cout
@@ -591,11 +606,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "R2*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "K2*") {
                 std::cout
@@ -612,11 +628,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "K2*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             }
         } else if (j == 3) {
@@ -647,11 +664,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P13";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P23") {
                 std::cout
@@ -668,11 +686,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P23";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P33") {
                 std::cout
@@ -689,11 +708,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P33";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P43") {
                 std::cout
@@ -710,11 +730,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P43";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "N3*") {
                 std::cout
@@ -731,11 +752,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "N3*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "B3*") {
                 std::cout
@@ -752,11 +774,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "B3*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "R3*") {
                 std::cout
@@ -773,11 +796,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "R3*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "K3*") {
                 std::cout
@@ -794,11 +818,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "K3*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             }
         } else if (j == 4) {
@@ -827,11 +852,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P14";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P24") {
                 std::cout
@@ -848,11 +874,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P24";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P34") {
                 std::cout
@@ -869,11 +896,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P34";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "P44") {
                 std::cout
@@ -890,11 +918,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "P44";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "N4*") {
                 std::cout
@@ -911,11 +940,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "N4*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "B4*") {
                 std::cout
@@ -932,11 +962,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "B4*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "R4*") {
                 std::cout
@@ -953,11 +984,12 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "R4*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             } else if (type == "K4*") {
                 std::cout
@@ -974,16 +1006,79 @@ int main() {
                 std::cin >> l >> c;
                 map[type].setLinie(l);
                 map[type].setColoana(c);
+                if (board[l][c] != "***")
+                    map.erase(board[l][c]);
                 board[l][c] = "K4*";
                 tabla.setCamp(l, c);
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
-                tabla.displayocupat();
                 printboard(board);
             }
         }
+        int ok1 = 0, ok2 = 0, ok3 = 0, ok4 = 0;
+        for (auto pair: map) {
+            if (pair.first == "K1*")
+                ok1 = 1;
+            else if (pair.first == "K2*")
+                ok2 = 1;
+            else if (pair.first == "K3*")
+                ok3 = 1;
+            else if (pair.first == "K4*")
+                ok4 = 1;
+        }
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
+                if (ok1 == 0) {
+                    if (board[i][j] == "P11" || board[i][j] == "P21" || board[i][j] == "P31" || board[i][j] == "P41" ||
+                        board[i][j] == "N1*" || board[i][j] == "B1*" || board[i][j] == "R1*" || board[i][j] == "K1*") {
+                        auto it = map.find(board[i][j]);
+                        if (it != map.end())
+                            map.erase(it);
+                    }
+                }
+                if (ok2 == 0) {
+                    if (board[i][j] == "P12" || board[i][j] == "P22" || board[i][j] == "P32" || board[i][j] == "P42" ||
+                        board[i][j] == "N2*" || board[i][j] == "B2*" || board[i][j] == "R2*" || board[i][j] == "K2*") {
+                        auto it = map.find(board[i][j]);
+                        if (it != map.end())
+                            map.erase(it);
+                    }
+                }
+                if (ok3 == 0) {
+                    if (board[i][j] == "P13" || board[i][j] == "P23" || board[i][j] == "P33" || board[i][j] == "P43" ||
+                        board[i][j] == "N3*" || board[i][j] == "B3*" || board[i][j] == "R3*" || board[i][j] == "K3*") {
+                        auto it = map.find(board[i][j]);
+                        if (it != map.end())
+                            map.erase(it);
+                    }
+                }
+                if (ok4 == 0) {
+                    if (board[i][j] == "P14" || board[i][j] == "P24" || board[i][j] == "P34" || board[i][j] == "P44" ||
+                        board[i][j] == "N4*" || board[i][j] == "B4*" || board[i][j] == "R4*" || board[i][j] == "K4*") {
+                        auto it = map.find(board[i][j]);
+                        if (it != map.end())
+                            map.erase(it);
+                    }
+                }
+            }
+        }
         ///test daca avem rege
+        run = ok1 + ok2 + ok3 + ok4;
+
         //break;
     }
+    int winner;
+    for (int i = 1; i <= 8; i++)
+        for (int j = 1; j <= 8; j++) {
+            if (board[i][j] == "K1*")
+                winner = 1;
+            else if (board[i][j] == "K2*")
+                winner = 2;
+            else if (board[i][j] == "K3*")
+                winner = 3;
+            else if (board[i][j] == "K4*")
+                winner = 4;
+        }
+    std::cout << "The winner is Player " << winner << ", congratulations!";
     return 0;
 }

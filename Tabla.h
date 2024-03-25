@@ -4,9 +4,6 @@
 #include <iostream>
 #include "Camp.h"
 #include "functii.h"
-#include "Locatie.h"
-#include "Piesa_abstracta.h"
-
 class Tabla {
 private:
     Camp m[9][9];  // Maximum number of squares

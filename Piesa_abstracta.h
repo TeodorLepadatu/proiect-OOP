@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include "Locatie.h"
+#include "Tabla.h"
 
 class Piesa {
 protected:
@@ -343,6 +344,7 @@ public:
         }
         return mutari_posibile;
     }
+
 
     std::vector<Locatie> muta_rege(Locatie locatie) {
         std::vector<Locatie> mutari_posibile;
