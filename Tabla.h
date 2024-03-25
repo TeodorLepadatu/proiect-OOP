@@ -27,7 +27,7 @@ public:
         }
     }
 
-    Camp getCamp(int i, int j) {
+    Camp &getCamp(int i, int j) {
         return m[i][j];
     }
 

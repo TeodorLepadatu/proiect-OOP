@@ -22,15 +22,6 @@ public:
     }
 
 
-    Camp &operator=(const Camp &other) {
-        if (this == &other)
-            return *this;
-        culoare = other.culoare;
-        locatie = other.locatie;
-        numar = other.numar;
-        ocupat = other.ocupat;
-        return *this;
-    }
 
     const std::string &getCuloare() const {
         return culoare;
