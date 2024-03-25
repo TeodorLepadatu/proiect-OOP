@@ -21,15 +21,16 @@ public:
         return os;
     }
 
-    Camp(const Camp &other) {
-        // Copy member variables
-        this->culoare = other.culoare;
-        this->locatie = other.locatie;
-        this->numar = other.numar;
-        this->ocupat = other.ocupat;
-    }
 
-    // Copy assignment operator
+    Camp &operator=(const Camp &other) {
+        if (this == &other)
+            return *this;
+        culoare = other.culoare;
+        locatie = other.locatie;
+        numar = other.numar;
+        ocupat = other.ocupat;
+        return *this;
+    }
 
     const std::string &getCuloare() const {
         return culoare;

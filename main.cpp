@@ -235,7 +235,7 @@ int main() {
         for (int j = 1; j <= 8; j++)
             board[i][j] = "***";
     }
-    std::vector<Piesa> piese; ///mai bine locatii
+    //std::vector<Piesa> piese; ///mai bine locatii
     for (auto pair: map) {
         board[pair.second.getLinie()][pair.second.getColoana()] = pair.first;
         std::cout << pair.first << " " << pair.second << std::endl;

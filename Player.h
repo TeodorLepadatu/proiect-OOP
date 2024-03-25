@@ -8,7 +8,7 @@
 class Player {
 private:
     int nr;
-    bool yourmove;
+    //bool yourmove;
     Pion p1, p2, p3, p4;
     Cal c;
     Nebun n;
@@ -17,7 +17,7 @@ private:
     std::vector<Pacanea> inventar;
     int mutari_disponibile;
 public:
-    Player() : nr(0), yourmove(false), p1(), p2(), p3(), p4(), c(), n(), t(), r(), mutari_disponibile(0) {}
+    Player() : nr(0), p1(), p2(), p3(), p4(), c(), n(), t(), r(), mutari_disponibile(0) {}
     int getNr() const {
         return nr;
     }
