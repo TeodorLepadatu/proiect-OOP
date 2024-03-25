@@ -39,18 +39,18 @@ public:
         locatie.setColoana(coloana);
     }
 
-    void setCuloare(const int &culoare) {
-        Piesa::culoare = culoare;
+    void setCuloare(const int &culoare_) {
+        Piesa::culoare = culoare_;
     }
 
-    void setTip(const std::string &tip) {
-        Piesa::tip = tip;
+    void setTip(const std::string &tip_) {
+        Piesa::tip = tip_;
     }
 
-    std::vector<Locatie> muta_pion(Locatie locatie, Piesa const &p) {
+    std::vector<Locatie> muta_pion(Locatie const &locatie_, Piesa const &p) {
         std::vector<Locatie> mutari_posibile;
-        int i = locatie.getLinie();
-        int j = locatie.getColoana();
+        int i = locatie_.getLinie();
+        int j = locatie_.getColoana();
         mutari_posibile.clear();
         if (p.getculoare() == 1) {
             Locatie x(i + 1, j);
@@ -68,11 +68,11 @@ public:
         return mutari_posibile;
     }
 
-    std::vector<Locatie> muta_cal(Locatie locatie) {
+    std::vector<Locatie> muta_cal(Locatie const &locatie_) {
         std::vector<Locatie> mutari_posibile;
         mutari_posibile.clear();
-        int i = locatie.getLinie();
-        int j = locatie.getColoana();
+        int i = locatie_.getLinie();
+        int j = locatie_.getColoana();
         if (i == 1) {
             if (j == 1) {
                 Locatie x(2, 3);
@@ -313,10 +313,10 @@ public:
         return mutari_posibile;
     }
 
-    std::vector<Locatie> muta_nebun(Locatie locatie) {
+    std::vector<Locatie> muta_nebun(Locatie const &locatie_) {
         std::vector<Locatie> mutari_posibile;
-        int i = locatie.getLinie();
-        int j = locatie.getColoana();
+        int i = locatie_.getLinie();
+        int j = locatie_.getColoana();
         mutari_posibile.clear();
         for (int i1 = 1; i1 <= 8; i1++) {
             for (int j1 = 1; j1 <= 8; j1++) {
@@ -329,10 +329,10 @@ public:
         return mutari_posibile;
     }
 
-    std::vector<Locatie> muta_turn(Locatie locatie) {
+    std::vector<Locatie> muta_turn(Locatie const &locatie_) {
         std::vector<Locatie> mutari_posibile;
-        int i = locatie.getLinie();
-        int j = locatie.getColoana();
+        int i = locatie_.getLinie();
+        int j = locatie_.getColoana();
         mutari_posibile.clear();
         for (int i1 = 1; i1 <= 8; i1++) {
             for (int j1 = 1; j1 <= 8; j1++) {
@@ -346,10 +346,10 @@ public:
     }
 
 
-    std::vector<Locatie> muta_rege(Locatie locatie) {
+    std::vector<Locatie> muta_rege(Locatie const &locatie_) {
         std::vector<Locatie> mutari_posibile;
-        int i = locatie.getLinie();
-        int j = locatie.getColoana();
+        int i = locatie_.getLinie();
+        int j = locatie_.getColoana();
         mutari_posibile.clear();
         if (i == 1) {
             if (j == 1) {

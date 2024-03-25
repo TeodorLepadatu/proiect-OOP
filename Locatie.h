@@ -51,12 +51,12 @@ public:
         return os;
     }
 
-    void setLinie(int linie) {
-        Locatie::linie = linie;
+    void setLinie(int linie_) {
+        Locatie::linie = linie_;
     }
 
-    void setColoana(int coloana) {
-        Locatie::coloana = coloana;
+    void setColoana(int coloana_) {
+        Locatie::coloana = coloana_;
     }
 
     ~Locatie() = default;

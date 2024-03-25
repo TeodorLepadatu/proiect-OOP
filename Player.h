@@ -22,8 +22,8 @@ public:
         return nr;
     }
 
-    void setNr(int nr) {
-        Player::nr = nr;
+    void setNr(int nr_) {
+        Player::nr = nr_;
     }
 
 
