@@ -9,6 +9,10 @@ private:
     int linie;
     int coloana;
 public:
+    Locatie() {
+        linie = 0;
+        coloana = 0;
+    }
     Locatie(int linie_, int coloana_) : linie{linie_}, coloana{coloana_} {
         //std::cout<<"constr init"<<std::endl;
     }

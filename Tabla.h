@@ -34,11 +34,13 @@ public:
         return m[i][j];
     }
 
-    Camp setCamp(int i, int j, bool ocupat) {
+    void setCamp(int i, int j) {
         m[i][j].setOcupat();
-        return m[i][j];
     }
 
+    void resetCamp(int i, int j) {
+        m[i][j].reset();
+    }
     void displaynr() const {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {

@@ -45,29 +45,19 @@ public:
     void setTip(const std::string &tip) {
         Piesa::tip = tip;
     }
-};
 
-class Pion : public Piesa {
-private:
-    std::vector<Locatie> mutari_posibile;
-public:
-    Pion() {
-        tip = "P";
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
-    }
-    std::vector<Locatie> muta_pion(Locatie &locatie, std::vector<Locatie> &mutari_posibile) {
+    std::vector<Locatie> muta_pion(Locatie locatie, Piesa p) {
+        std::vector<Locatie> mutari_posibile;
         int i = locatie.getLinie();
         int j = locatie.getColoana();
         mutari_posibile.clear();
-
-        if (culoare == 1) {
+        if (p.getculoare() == 1) {
             Locatie x(i + 1, j);
             mutari_posibile.push_back(x);
-        } else if (culoare == 2) {
+        } else if (p.getculoare() == 2) {
             Locatie x(i, j - 1);
             mutari_posibile.push_back(x);
-        } else if (culoare == 3) {
+        } else if (p.getculoare() == 3) {
             Locatie x(i - 1, j);
             mutari_posibile.push_back(x);
         } else {
@@ -76,19 +66,9 @@ public:
         }
         return mutari_posibile;
     }
-};
 
-class Cal : public Piesa {
-    std::vector<Locatie> mutari_posibile;
-public:
-    Cal() {
-        tip = "C";
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
-        resurse.push_back("arma");
-    }
-
-    std::vector<Locatie> muta_cal(Locatie &locatie, std::vector<Locatie> &mutari_posibile) {
+    std::vector<Locatie> muta_cal(Locatie locatie) {
+        std::vector<Locatie> mutari_posibile;
         mutari_posibile.clear();
         int i = locatie.getLinie();
         int j = locatie.getColoana();
@@ -331,20 +311,9 @@ public:
         }
         return mutari_posibile;
     }
-};
 
-class Nebun : public Piesa {
-private:
-    std::vector<Locatie> mutari_posibile;
-public:
-    Nebun() {
-        tip = "B";
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
-        resurse.push_back("arma");
-    }
-
-    std::vector<Locatie> muta_nebun(Locatie &locatie, std::vector<Locatie> &mutari_posibile) {
+    std::vector<Locatie> muta_nebun(Locatie locatie) {
+        std::vector<Locatie> mutari_posibile;
         int i = locatie.getLinie();
         int j = locatie.getColoana();
         mutari_posibile.clear();
@@ -358,19 +327,9 @@ public:
         }
         return mutari_posibile;
     }
-};
 
-class Turn : public Piesa {
-private:
-    std::vector<Locatie> mutari_posibile;
-public:
-    Turn() {
-        tip = "R";
-        resurse.push_back("arma");
-        resurse.push_back("piatra");
-    }
-
-    std::vector<Locatie> muta_turn(Locatie &locatie, std::vector<Locatie> &mutari_posibile) {
+    std::vector<Locatie> muta_turn(Locatie locatie) {
+        std::vector<Locatie> mutari_posibile;
         int i = locatie.getLinie();
         int j = locatie.getColoana();
         mutari_posibile.clear();
@@ -384,17 +343,9 @@ public:
         }
         return mutari_posibile;
     }
-};
 
-class Rege : public Piesa {
-private:
-    std::vector<Locatie> mutari_posibile;
-public:
-    Rege() {
-        tip = "K";
-    }
-
-    std::vector<Locatie> muta_rege(Locatie &locatie, std::vector<Locatie> &mutari_posibile) {
+    std::vector<Locatie> muta_rege(Locatie locatie) {
+        std::vector<Locatie> mutari_posibile;
         int i = locatie.getLinie();
         int j = locatie.getColoana();
         mutari_posibile.clear();
@@ -471,5 +422,64 @@ public:
         }
         return mutari_posibile;
     }
+};
+
+class Pion : public Piesa {
+private:
+    std::vector<Locatie> mutari_posibile;
+public:
+    Pion() {
+        tip = "P";
+        resurse.push_back("apa");
+        resurse.push_back("mancare");
+    }
+};
+
+class Cal : public Piesa {
+    std::vector<Locatie> mutari_posibile;
+public:
+    Cal() {
+        tip = "C";
+        resurse.push_back("apa");
+        resurse.push_back("mancare");
+        resurse.push_back("arma");
+    }
+
+
+};
+
+class Nebun : public Piesa {
+private:
+    std::vector<Locatie> mutari_posibile;
+public:
+    Nebun() {
+        tip = "B";
+        resurse.push_back("apa");
+        resurse.push_back("mancare");
+        resurse.push_back("arma");
+    }
+
+};
+
+class Turn : public Piesa {
+private:
+    std::vector<Locatie> mutari_posibile;
+public:
+    Turn() {
+        tip = "R";
+        resurse.push_back("arma");
+        resurse.push_back("piatra");
+    }
+
+};
+
+class Rege : public Piesa {
+private:
+    std::vector<Locatie> mutari_posibile;
+public:
+    Rege() {
+        tip = "K";
+    }
+
 };
 #endif

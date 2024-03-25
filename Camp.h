@@ -55,7 +55,7 @@ public:
         Camp::ocupat = true;
     }
 
-    void reset(bool &ocupat) {
+    void reset() {
         this->ocupat = false; //cand nu mai avem o piesa acolo
     }
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -47,7 +48,7 @@ int main() {
             std::cout << "Stop trying to crash the game please!" << std::endl;
     }
     std::cout << "The number of players is " << n << std::endl;
-
+    int run = n;  //cat timp jocul inca ruleaza AKA cati regi sunt in joc
     std::vector<Player> players;
     for (int i = 1; i <= n; i++) {
         Player p;
@@ -134,13 +135,13 @@ int main() {
                     return 1;
                 }
                 if (j == 0)
-                    p.setTip("C1 ");
+                    p.setTip("N1*");
                 else if (j == 1)
-                    p.setTip("C2 ");
+                    p.setTip("N2*");
                 else if (j == 2)
-                    p.setTip("C3 ");
+                    p.setTip("N3*");
                 else
-                    p.setTip("C4 ");
+                    p.setTip("N4*");
                 p.setLocatie(lin, col);
                 p.setCuloare(j + 1);
                 map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
@@ -162,13 +163,13 @@ int main() {
                     return 3;
                 }
                 if (j == 0)
-                    p.setTip("B1 ");
+                    p.setTip("B1*");
                 else if (j == 1)
-                    p.setTip("B2 ");
+                    p.setTip("B2*");
                 else if (j == 2)
-                    p.setTip("B3 ");
+                    p.setTip("B3*");
                 else
-                    p.setTip("B4 ");
+                    p.setTip("B4*");
                 p.setLocatie(lin, col);
                 p.setCuloare(j + 1);
                 map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
@@ -194,13 +195,13 @@ int main() {
                     col = 8;
                 }
                 if (j == 0)
-                    p.setTip("R1 ");
+                    p.setTip("R1*");
                 else if (j == 1)
-                    p.setTip("R2 ");
+                    p.setTip("R2*");
                 else if (j == 2)
-                    p.setTip("R3 ");
+                    p.setTip("R3*");
                 else
-                    p.setTip("R4 ");
+                    p.setTip("R4*");
                 p.setLocatie(lin, col);
                 p.setCuloare(j + 1);
                 map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
@@ -216,13 +217,13 @@ int main() {
                 int col;
                 std::cin >> col;
                 if (j == 0)
-                    p.setTip("K1 ");
+                    p.setTip("K1*");
                 else if (j == 1)
-                    p.setTip("K2 ");
+                    p.setTip("K2*");
                 else if (j == 2)
-                    p.setTip("K3 ");
+                    p.setTip("K3*");
                 else
-                    p.setTip("K4 ");
+                    p.setTip("K4*");
                 p.setLocatie(lin, col);
                 p.setCuloare(j + 1);
                 map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
@@ -240,19 +241,749 @@ int main() {
     }
 
     std::cout << "The initial position: " << std::endl;
-    for (int i = 1; i <= 8; i++) {
-        for (int j = 1; j <= 8; j++)
-            std::cout << board[i][j] << " ";
-        std::cout << std::endl;
-    }
-
+    printboard(board);
+    std::vector<std::string> pieces;
     for (int i = 1; i <= 8; i++) {
         for (int j = 1; j <= 8; j++) {
             if (board[i][j] != "***") {
-                tabla.setCamp(i, j, true);
+                tabla.setCamp(i, j);
+                pieces.push_back(board[i][j]);
             }
         }
     }
-    tabla.displayocupat();
+    //tabla.displayocupat();
+    int j = 0;
+    while (run >= 1)       ///change to run>1!!!!!!!!!!!!!!!!!!!!!!!!!!
+    {
+        j++;
+        if (j > run)
+            j = 1;
+        p.setCuloare(j);
+        if (j == 1) {
+            std::cout << "Player " << j << ", choose the piece that you want to move: " << std::endl;
+            for (auto pair: map)
+                if (pair.first == "P11" || pair.first == "P21" || pair.first == "P31" || pair.first == "P41" ||
+                    pair.first == "N1*" || pair.first == "B1*" || pair.first == "R1*" || pair.first == "K1*")
+                    std::cout << pair.first << " ";
+            std::cout << std::endl;
+            std::string type;
+            std::cin >> type;
+            //std::cout<<map[type];
+
+            if (type == "P11") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P11";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P21") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P21";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P31") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P31";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P41") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P41";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "N1*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_cal(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "N1*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "B1*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_nebun(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "B1*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "R1*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_turn(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "R1*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "K1*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_rege(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "K1*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            }
+        } else if (j == 2) {
+            std::cout << "Player " << j << ", choose the piece that you want to move: " << std::endl;
+            for (auto pair: map)
+                if (pair.first == "P12" || pair.first == "P22" || pair.first == "P32" || pair.first == "P42" ||
+                    pair.first == "N2*" || pair.first == "B2*" || pair.first == "R2*" || pair.first == "K2*")
+                    std::cout << pair.first << " ";
+            std::cout << std::endl;
+            std::string type;
+            std::cin >> type;
+            //std::cout<<map[type];
+
+            if (type == "P12") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P12";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P22") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P22";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P32") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P32";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P42") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P42";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "N2*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_cal(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "N2*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "B2*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_nebun(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "B2*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "R2*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_turn(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "R2*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "K2*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_rege(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "K2*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            }
+        } else if (j == 3) {
+            std::cout << "Player " << j
+                      << ", choose the piece that you want to move (if you want to move a pawn, enter both the numbers and if you want to move anything else, type the letter, the number and the star, otherwise it will not work): "
+                      << std::endl;
+            for (auto pair: map)
+                if (pair.first == "P13" || pair.first == "P23" || pair.first == "P33" || pair.first == "P43" ||
+                    pair.first == "N3*" || pair.first == "B3*" || pair.first == "R3*" || pair.first == "K3*")
+                    std::cout << pair.first << " ";
+            std::cout << std::endl;
+            std::string type;
+            std::cin >> type;
+            //std::cout<<map[type];
+
+            if (type == "P13") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P13";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P23") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P23";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P33") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P33";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P43") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P43";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "N3*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_cal(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "N3*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "B3*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_nebun(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "B3*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "R3*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_turn(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "R3*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "K3*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_rege(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "K3*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            }
+        } else if (j == 4) {
+            std::cout << "Player " << j << ", choose the piece that you want to move: " << std::endl;
+            for (auto pair: map)
+                if (pair.first == "P14" || pair.first == "P24" || pair.first == "P34" || pair.first == "P44" ||
+                    pair.first == "N4*" || pair.first == "B4*" || pair.first == "R4*" || pair.first == "K4*")
+                    std::cout << pair.first << " ";
+            std::cout << std::endl;
+            std::string type;
+            std::cin >> type;
+            //std::cout<<map[type];
+
+            if (type == "P14") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P14";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P24") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P24";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P34") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P34";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "P44") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_pion(map[type], p);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "P44";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "N4*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_cal(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "N4*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "B4*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_nebun(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "B4*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "R4*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_turn(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "R4*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            } else if (type == "K4*") {
+                std::cout
+                        << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+                        << std::endl;
+                std::vector<Locatie> moves;
+                moves = p.muta_rege(map[type]);
+                int ol = map[type].getLinie();    //old line
+                int oc = map[type].getColoana();  //old column
+                for (int i = 0; i < moves.size(); i++) {
+                    std::cout << moves[i] << std::endl;
+                }
+                int l, c;
+                std::cin >> l >> c;
+                map[type].setLinie(l);
+                map[type].setColoana(c);
+                board[l][c] = "K4*";
+                tabla.setCamp(l, c);
+                board[ol][oc] = "***";
+                tabla.resetCamp(ol, oc);
+                tabla.displayocupat();
+                printboard(board);
+            }
+        }
+        ///test daca avem rege
+        //break;
+    }
     return 0;
 }
