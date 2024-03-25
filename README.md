@@ -1,7 +1,10 @@
 Catanus chess
 
-Sah indian, doar ca pentru a muta piese iti trebuie resurse.
-Fiecare patrat de pe tabla de sah are o anumita resursa si un anumit numar. Fiecare jucator da cu zarul si vor primi o resursa de pe acel patrat.
+Do you ever play chess and think: this game hasn't got an update in centuries! Are you bored of playing the same game over and over again?
+Well, i have the solution for you: CATANUS CHESS!
+This game is played by up to 4 players who want to capture all the other kings on the board. Every player has 8 pieces: 4 pawns, a rook, a knight, a bishop and, of course, a king. 
+After we enter the number of players, every player will enter the coordinates of their pieces. Every piece moves the exact same way as they move in normal chess, but the way the pawn will not capture diagonally, but the pieces in front of them. In order to win, you have to be the last king standing or you managed to push a pawn to the other side of the board. 
+Have fun!
 
 Cerinte:
 ### Cerințe modele de limbaj la nivel de semestru
