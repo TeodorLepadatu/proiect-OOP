@@ -252,16 +252,18 @@ int main() {
             }
         }
     }
-
-    int j = 0;
-    while (run > 1)       ///change to run>1!!!!!!!!!!!!!!!!!!!!!!!!!!
+    std::vector<int> playeri;
+    for (int i = 0; i < n; i++)
+        playeri.push_back(i + 1);
+    int j = -1;
+    while (playeri.size() > 1)       ///change to run>1!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         j++;
-        if (j > run)
-            j = 1;
-        p.setCuloare(j);
-        if (j == 1) {
-            std::cout << "Player " << j << ", choose the piece that you want to move: " << std::endl;
+        if (j >= playeri.size())
+            j = 0;
+        p.setCuloare(playeri[j]);
+        if (playeri[j] == 1) {
+            std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
             for (auto pair: map)
                 if (pair.first == "P11" || pair.first == "P21" || pair.first == "P31" || pair.first == "P41" ||
                     pair.first == "N1*" || pair.first == "B1*" || pair.first == "R1*" || pair.first == "K1*")
@@ -448,8 +450,8 @@ int main() {
                 tabla.resetCamp(ol, oc);
                 printboard(board);
             }
-        } else if (j == 2) {
-            std::cout << "Player " << j << ", choose the piece that you want to move: " << std::endl;
+        } else if (playeri[j] == 2) {
+            std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
             for (auto pair: map)
                 if (pair.first == "P12" || pair.first == "P22" || pair.first == "P32" || pair.first == "P42" ||
                     pair.first == "N2*" || pair.first == "B2*" || pair.first == "R2*" || pair.first == "K2*")
@@ -636,8 +638,8 @@ int main() {
                 tabla.resetCamp(ol, oc);
                 printboard(board);
             }
-        } else if (j == 3) {
-            std::cout << "Player " << j
+        } else if (playeri[j] == 3) {
+            std::cout << "Player " << playeri[j]
                       << ", choose the piece that you want to move (if you want to move a pawn, enter both the numbers and if you want to move anything else, type the letter, the number and the star, otherwise it will not work): "
                       << std::endl;
             for (auto pair: map)
@@ -826,8 +828,8 @@ int main() {
                 tabla.resetCamp(ol, oc);
                 printboard(board);
             }
-        } else if (j == 4) {
-            std::cout << "Player " << j << ", choose the piece that you want to move: " << std::endl;
+        } else if (playeri[j] == 4) {
+            std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
             for (auto pair: map)
                 if (pair.first == "P14" || pair.first == "P24" || pair.first == "P34" || pair.first == "P44" ||
                     pair.first == "N4*" || pair.first == "B4*" || pair.first == "R4*" || pair.first == "K4*")
@@ -1026,6 +1028,7 @@ int main() {
             else if (pair.first == "K4*")
                 ok4 = 1;
         }
+        std::cout << ok1 << " " << ok2 << " " << ok3 << " " << ok4 << std::endl; //gotta fix
         for (int i = 1; i <= 8; i++) {
             for (int j1 = 1; j1 <= 8; j1++) {
                 if (ok1 == 0) {
@@ -1035,6 +1038,12 @@ int main() {
                         if (it != map.end())
                             map.erase(it);
                     }
+                    int del = 1;
+                    auto it = find(playeri.begin(), playeri.end(), del);
+
+                    if (it != playeri.end()) {
+                        playeri.erase(it);
+                    }
                 }
                 if (ok2 == 0) {
                     if (board[i][j] == "P12" || board[i][j] == "P22" || board[i][j] == "P32" || board[i][j] == "P42" ||
@@ -1042,6 +1051,12 @@ int main() {
                         auto it = map.find(board[i][j]);
                         if (it != map.end())
                             map.erase(it);
+                    }
+                    int del = 2;
+                    auto it = find(playeri.begin(), playeri.end(), del);
+
+                    if (it != playeri.end()) {
+                        playeri.erase(it);
                     }
                 }
                 if (ok3 == 0) {
@@ -1051,6 +1066,12 @@ int main() {
                         if (it != map.end())
                             map.erase(it);
                     }
+                    int del = 3;
+                    auto it = find(playeri.begin(), playeri.end(), del);
+
+                    if (it != playeri.end()) {
+                        playeri.erase(it);
+                    }
                 }
                 if (ok4 == 0) {
                     if (board[i][j] == "P14" || board[i][j] == "P24" || board[i][j] == "P34" || board[i][j] == "P44" ||
@@ -1059,11 +1080,17 @@ int main() {
                         if (it != map.end())
                             map.erase(it);
                     }
+                    int del = 4;
+                    auto it = find(playeri.begin(), playeri.end(), del);
+
+                    if (it != playeri.end()) {
+                        playeri.erase(it);
+                    }
                 }
             }
         }
         ///test daca avem rege
-        run = ok1 + ok2 + ok3 + ok4;
+        //run = ok1 + ok2 + ok3 + ok4;
 
         //break;
     }
