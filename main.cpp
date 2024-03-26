@@ -48,7 +48,7 @@ int main() {
             std::cout << "Stop trying to crash the game please!" << std::endl;
     }
     std::cout << "The number of players is " << n << std::endl;
-    int run = n;  //cat timp jocul inca ruleaza AKA cati regi sunt in joc
+    //int run = n;  //cat timp jocul inca ruleaza AKA cati regi sunt in joc
     std::vector<Player> players;
     for (int i = 1; i <= n; i++) {
         Player p;
@@ -255,10 +255,9 @@ int main() {
     std::vector<int> playeri;
     for (int i = 0; i < n; i++)
         playeri.push_back(i + 1);
-    int j = -1;
+    unsigned long j = 0;
     while (playeri.size() > 1)       ///change to run>1!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
-        j++;
         if (j >= playeri.size())
             j = 0;
         p.setCuloare(playeri[j]);
@@ -1091,7 +1090,7 @@ int main() {
         }
         ///test daca avem rege
         //run = ok1 + ok2 + ok3 + ok4;
-
+        j++;
         //break;
     }
     int winner = 0;
