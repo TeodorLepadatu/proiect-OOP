@@ -285,12 +285,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                 map[type].setLinie(l);
                 map[type].setColoana(c);
                 if (board[l][c] != "***")
@@ -314,12 +314,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -343,12 +343,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -372,12 +372,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -401,12 +401,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -430,12 +430,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -459,12 +459,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -488,12 +488,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -529,12 +529,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -558,12 +558,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -587,12 +587,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -616,12 +616,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -645,12 +645,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -674,12 +674,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -703,12 +703,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -732,12 +732,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -775,12 +775,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -804,12 +804,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -833,12 +833,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -862,12 +862,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -891,12 +891,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -920,12 +920,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -949,12 +949,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -978,12 +978,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -1019,12 +1019,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -1048,12 +1048,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -1077,12 +1077,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -1106,12 +1106,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -1135,12 +1135,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -1164,12 +1164,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -1193,12 +1193,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
@@ -1222,12 +1222,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                int ok = 0;
+                int muta = 0;
                 for (long long unsigned int i = 0; i < moves.size(); i++) {
                     if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
-                        ok = 1;
+                        muta = 1;
                 }
-                if (ok == 1) {
+                if (muta == 1) {
                     map[type].setLinie(l);
                     map[type].setColoana(c);
                     if (board[l][c] != "***")
