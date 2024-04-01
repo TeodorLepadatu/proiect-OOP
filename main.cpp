@@ -13,7 +13,7 @@
 #include "Pacanea.h"
 #include <SFML/Graphics.hpp>
 
-std::ifstream fin("tastatura.txt");
+//std::ifstream fin("tastatura.txt");
 int main() {
     Tabla tabla;
     std::cout << "The board:" << std::endl;
