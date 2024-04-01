@@ -65,5 +65,9 @@ public:
         }
     }
 
+    friend std::ostream &operator<<(std::ostream &os, const Tabla &tabla) {
+        os << "m: " << tabla.m;
+        return os;
+    }
 };
 #endif

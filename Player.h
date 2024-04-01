@@ -34,6 +34,13 @@ public:
     int getMutariDisponibile() const {
         return mutari_disponibile;
     }
+
+    friend std::ostream &operator<<(std::ostream &os, const Player &player) {
+        os << "nr: " << player.nr << " p1: " << player.p1 << " p2: " << player.p2 << " p3: " << player.p3 << " p4: "
+           << player.p4 << " c: " << player.c << " n: " << player.n << " t: " << player.t << " r: " << player.r
+           << " inventar: " << " mutari_disponibile: " << player.mutari_disponibile;
+        return os;
+    }
 };
 
 #endif
