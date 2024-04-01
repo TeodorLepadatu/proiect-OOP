@@ -285,6 +285,12 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
                 map[type].setLinie(l);
                 map[type].setColoana(c);
                 if (board[l][c] != "***")
@@ -294,6 +300,7 @@ int main() {
                 board[ol][oc] = "***";
                 tabla.resetCamp(ol, oc);
                 printboard(board);
+                }
             } else if (type == "P21") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -307,15 +314,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P21";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P21";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P31") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -329,15 +343,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P31";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P31";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P41") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -351,15 +372,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P41";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P41";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "N1*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -373,15 +401,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "N1*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "N1*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "B1*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -395,15 +430,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "B1*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "B1*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "R1*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -417,15 +459,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "R1*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "R1*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "K1*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -439,15 +488,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "K1*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "K1*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             }
         } else if (playeri[j] == 2) {
             std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
@@ -473,15 +529,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P12";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P12";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P22") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -495,15 +558,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P22";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P22";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P32") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -517,15 +587,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P32";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P32";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P42") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -539,15 +616,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P42";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P42";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "N2*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -561,15 +645,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "N2*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "N2*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "B2*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -583,15 +674,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "B2*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "B2*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "R2*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -605,15 +703,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "R2*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "R2*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "K2*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -627,15 +732,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "K2*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "K2*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             }
         } else if (playeri[j] == 3) {
             std::cout << "Player " << playeri[j]
@@ -663,15 +775,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P13";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P13";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P23") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -685,15 +804,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P23";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P23";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P33") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -707,15 +833,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P33";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P33";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P43") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -729,15 +862,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P43";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P43";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "N3*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -751,15 +891,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "N3*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "N3*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "B3*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -773,15 +920,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "B3*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "B3*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "R3*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -795,15 +949,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "R3*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "R3*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "K3*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -817,15 +978,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "K3*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "K3*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             }
         } else if (playeri[j] == 4) {
             std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
@@ -851,15 +1019,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P14";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P14";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P24") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -873,15 +1048,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P24";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P24";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P34") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -895,15 +1077,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P34";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P34";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "P44") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -917,15 +1106,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "P44";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "P44";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "N4*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -939,15 +1135,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "N4*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "N4*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "B4*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -961,15 +1164,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "B4*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "B4*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "R4*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -983,15 +1193,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "R4*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "R4*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             } else if (type == "K4*") {
                 std::cout
                         << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
@@ -1005,15 +1222,22 @@ int main() {
                 }
                 int l, c;
                 std::cin >> l >> c;
-                map[type].setLinie(l);
-                map[type].setColoana(c);
-                if (board[l][c] != "***")
-                    map.erase(board[l][c]);
-                board[l][c] = "K4*";
-                tabla.setCamp(l, c);
-                board[ol][oc] = "***";
-                tabla.resetCamp(ol, oc);
-                printboard(board);
+                int ok = 0;
+                for (long long unsigned int i = 0; i < moves.size(); i++) {
+                    if (moves[i].getLinie() == l && moves[i].getColoana() == c)      ///LA FEL  LA TOATE PIESELE!!!!!!!!
+                        ok = 1;
+                }
+                if (ok == 1) {
+                    map[type].setLinie(l);
+                    map[type].setColoana(c);
+                    if (board[l][c] != "***")
+                        map.erase(board[l][c]);
+                    board[l][c] = "K4*";
+                    tabla.setCamp(l, c);
+                    board[ol][oc] = "***";
+                    tabla.resetCamp(ol, oc);
+                    printboard(board);
+                }
             }
         }
         int ok1 = 0, ok2 = 0, ok3 = 0, ok4 = 0;
