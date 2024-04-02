@@ -18,7 +18,8 @@ private:
     int mutari_disponibile;
 public:
     Player() : nr(0), p1(), p2(), p3(), p4(), c(), n(), t(), r(), mutari_disponibile(0) {}
-    int getNr() const {
+
+    [[nodiscard]] int getNr() const {
         return nr;
     }
 
@@ -27,11 +28,11 @@ public:
     }
 
 
-    const std::vector<Pacanea> &getInventar() const {
+    [[nodiscard]] const std::vector<Pacanea> &getInventar() const {
         return inventar;
     }
 
-    int getMutariDisponibile() const {
+    [[nodiscard]] int getMutariDisponibile() const {
         return mutari_disponibile;
     }
 

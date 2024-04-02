@@ -30,7 +30,7 @@ private:
 
 public:
 
-    const std::string &getTip() const {
+    [[nodiscard]] const std::string &getTip() const {
         return tip;
     }
 

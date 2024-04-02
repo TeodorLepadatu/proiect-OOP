@@ -3,6 +3,7 @@
 
 #include "Locatie.h"
 #include <iostream>
+#include <utility>
 
 class Camp {
 private:
@@ -11,9 +12,9 @@ private:
     int numar;
     bool ocupat;    //daca exista piesa pe respectivul patratel
 public:
-    Camp(const std::string &culoare_ = std::string("apa"), const Locatie &locatie_ = Locatie(0, 0),
+    explicit Camp(std::string culoare_ = std::string("apa"), const Locatie &locatie_ = Locatie(0, 0),
          const int &numar_ = 0, bool ocupat_ = false)
-            : culoare{culoare_}, locatie{locatie_}, numar{numar_}, ocupat{ocupat_} {}
+            : culoare{std::move(culoare_)}, locatie{locatie_}, numar{numar_}, ocupat{ocupat_} {}
 
     friend std::ostream &operator<<(std::ostream &os, const Camp &camp) {
         os << "culoare: " << camp.culoare << " locatie: " << camp.locatie << " numar: " << camp.numar << " ocupat: "
@@ -22,23 +23,24 @@ public:
     }
 
 
-
-    const std::string &getCuloare() const {
+    /*
+    [[nodiscard]] const std::string &getCuloare() const {
         return culoare;
     }
 
-    const Locatie &getLocatie() const {
+    [[nodiscard]] const Locatie &getLocatie() const {
         return locatie;
     }
-
-    int getNumar() const {
+    */
+    [[nodiscard]] int getNumar() const {
         return numar;
     }
 
-    bool isOcupat() const {
+    /*
+    [[nodiscard]] bool isOcupat() const {
         return ocupat;
     }
-
+    */
     void setOcupat() {
         Camp::ocupat = true;
     }
