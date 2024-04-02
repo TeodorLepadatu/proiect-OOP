@@ -3,7 +3,18 @@
 
 #include <iostream>
 #include "Camp.h"
-#include "functii.h"
+#include <random>
+//#include "functii.h"
+
+int dau_cu_zaru1() {
+    std::random_device rd;
+    std::mt19937 gen(rd()); //random number generator
+    std::uniform_int_distribution<> dis(1, 6);
+    int roll1 = dis(gen);
+    int roll2 = dis(gen);
+    return roll1 + roll2;
+}
+
 class Tabla {
 private:
     Camp m[9][9];  // Maximum number of squares
@@ -21,16 +32,17 @@ public:
                 else
                     c = "arma";
                 Locatie loc(i, j);
-                int nr = dau_cu_zaru();
+                int nr = dau_cu_zaru1();
                 m[i][j] = Camp(c, loc, nr, false);
             }
         }
     }
 
+    /*
     Camp &getCamp(int i, int j) {
         return m[i][j];
     }
-
+    */
     void setCamp(int i, int j) {
         m[i][j].setOcupat();
     }
@@ -47,6 +59,7 @@ public:
         }
     }
 
+    /*
     void displaycolor() const {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
@@ -64,10 +77,11 @@ public:
             std::cout << std::endl;
         }
     }
-
+    */
     friend std::ostream &operator<<(std::ostream &os, const Tabla &tabla) {
         os << "m: " << tabla.m;
         return os;
     }
 };
+
 #endif
