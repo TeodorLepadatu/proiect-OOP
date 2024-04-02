@@ -15,22 +15,22 @@ protected:
     Locatie locatie;
     std::vector<std::string> resurse;
 public:
-    Piesa() : tip(""), culoare(0), locatie(0, 0) {}
+    Piesa() : culoare(0), locatie(0, 0) {}
 
     friend std::ostream &operator<<(std::ostream &os, const Piesa &piesa) {
         os << "tip: " << piesa.tip << " culoare: " << piesa.culoare << " locatie: " << piesa.locatie;
         return os;
     }
 
-    std::string gettip() const {
+    [[nodiscard]] std::string gettip() const {
         return tip;
     }
 
-    int getculoare() const {
+    [[nodiscard]] int getculoare() const {
         return culoare;
     }
 
-    const Locatie &getLocatie() const {
+    [[nodiscard]] const Locatie &getLocatie() const {
         return locatie;
     }
 
@@ -419,6 +419,62 @@ public:
                 mutari_posibile.push_back(x);
                 x.setLinie(8);
                 x.setColoana(j + 1);
+                mutari_posibile.push_back(x);
+            }
+        } else {
+            if (j == 1) {
+                Locatie x(i - 1, 1);
+                mutari_posibile.push_back(x);
+                x.setLinie(i - 1);
+                x.setColoana(2);
+                mutari_posibile.push_back(x);
+                x.setLinie(i);
+                x.setColoana(2);
+                mutari_posibile.push_back(x);
+                x.setLinie(i + 1);
+                x.setColoana(2);
+                mutari_posibile.push_back(x);
+                x.setLinie(i + 1);
+                x.setColoana(1);
+                mutari_posibile.push_back(x);
+            } else if (j == 8) {
+                Locatie x(i - 1, 8);
+                mutari_posibile.push_back(x);
+                x.setLinie(i - 1);
+                x.setColoana(7);
+                mutari_posibile.push_back(x);
+                x.setLinie(i);
+                x.setColoana(7);
+                mutari_posibile.push_back(x);
+                x.setLinie(i + 1);
+                x.setColoana(7);
+                mutari_posibile.push_back(x);
+                x.setLinie(i + 1);
+                x.setColoana(8);
+                mutari_posibile.push_back(x);
+            } else {
+                Locatie x(i - 1, j - 1);
+                mutari_posibile.push_back(x);
+                x.setLinie(i - 1);
+                x.setColoana(j);
+                mutari_posibile.push_back(x);
+                x.setLinie(i - 1);
+                x.setColoana(j + 1);
+                mutari_posibile.push_back(x);
+                x.setLinie(i);
+                x.setColoana(j + 1);
+                mutari_posibile.push_back(x);
+                x.setLinie(i + 1);
+                x.setColoana(j + 1);
+                mutari_posibile.push_back(x);
+                x.setLinie(i + 1);
+                x.setColoana(j);
+                mutari_posibile.push_back(x);
+                x.setLinie(i + 1);
+                x.setColoana(j - 1);
+                mutari_posibile.push_back(x);
+                x.setLinie(i);
+                x.setColoana(j - 1);
                 mutari_posibile.push_back(x);
             }
         }
