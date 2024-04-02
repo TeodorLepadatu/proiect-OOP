@@ -471,6 +471,7 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
         }
     }
     crapa:
+    std::cout << "a crapat" << std::endl;
 }
 
 void player_count(int &n) {
