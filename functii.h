@@ -427,7 +427,9 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
 
             piece_chosen(type, p, board, tabla, map);
         }
-        int s = playeri.size();
+
+        long unsigned int s = playeri.size();
+
         int actualplayer = playeri[j];
         int nextplayer = 0;
         if (j == s - 1)
@@ -438,13 +440,21 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
         ///test daca avem rege
         if (playeri.size() < s) {
             bool nusasinucis = false;
+
+            for (long unsigned int x = 0; x < playeri.size(); x++)
+
             for (int x = 0; x < playeri.size(); x++)
+
                 if (playeri[x] == actualplayer) {
                     j = x;
                     nusasinucis = true;
                 }
             if (!nusasinucis) {
+
+                for (long unsigned int x = 0; x < playeri.size(); x++)
+
                 for (int x = 0; x < playeri.size(); x++)
+
                     if (playeri[x] == nextplayer)
                         j = x;
             }
