@@ -386,8 +386,9 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             std::string type;
             std::cin >> type;
             //std::cout<<map[type];
-
-            piece_chosen(type, p, board, tabla, map);
+            if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" || type == "B1*" ||
+                type == "R1*" || type == "K1*")
+                piece_chosen(type, p, board, tabla, map);
 
         } else if (playeri[j] == 2) {
             std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
@@ -398,8 +399,9 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             std::cout << std::endl;
             std::string type;
             std::cin >> type;
-
-            piece_chosen(type, p, board, tabla, map);
+            if (type == "P12" || type == "P22" || type == "P32" || type == "P42" || type == "N2*" || type == "B2*" ||
+                type == "R2*" || type == "K2*")
+                piece_chosen(type, p, board, tabla, map);
 
         } else if (playeri[j] == 3) {
             std::cout << "Player " << playeri[j]
@@ -412,8 +414,9 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             std::cout << std::endl;
             std::string type;
             std::cin >> type;
-
-            piece_chosen(type, p, board, tabla, map);
+            if (type == "P13" || type == "P23" || type == "P33" || type == "P43" || type == "N3*" || type == "B3*" ||
+                type == "R3*" || type == "K3*")
+                piece_chosen(type, p, board, tabla, map);
 
         } else if (playeri[j] == 4) {
             std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
@@ -424,8 +427,9 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             std::cout << std::endl;
             std::string type;
             std::cin >> type;
-
-            piece_chosen(type, p, board, tabla, map);
+            if (type == "P14" || type == "P24" || type == "P34" || type == "P44" || type == "N4*" || type == "B4*" ||
+                type == "R4*" || type == "K4*")
+                piece_chosen(type, p, board, tabla, map);
         }
         long unsigned int s = playeri.size();
         int actualplayer = playeri[j];
