@@ -389,6 +389,10 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" || type == "B1*" ||
                 type == "R1*" || type == "K1*")
                 piece_chosen(type, p, board, tabla, map);
+            else {
+                you_dumb();
+                goto crapa;
+            }
 
         } else if (playeri[j] == 2) {
             std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
@@ -402,7 +406,10 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             if (type == "P12" || type == "P22" || type == "P32" || type == "P42" || type == "N2*" || type == "B2*" ||
                 type == "R2*" || type == "K2*")
                 piece_chosen(type, p, board, tabla, map);
-
+            else {
+                you_dumb();
+                goto crapa;
+            }
         } else if (playeri[j] == 3) {
             std::cout << "Player " << playeri[j]
                       << ", choose the piece that you want to move (if you want to move a pawn, enter both the numbers and if you want to move anything else, type the letter, the number and the star, otherwise it will not work): "
@@ -417,7 +424,10 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             if (type == "P13" || type == "P23" || type == "P33" || type == "P43" || type == "N3*" || type == "B3*" ||
                 type == "R3*" || type == "K3*")
                 piece_chosen(type, p, board, tabla, map);
-
+            else {
+                you_dumb();
+                goto crapa;
+            }
         } else if (playeri[j] == 4) {
             std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
             for (const auto &pair: map)
@@ -430,6 +440,10 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             if (type == "P14" || type == "P24" || type == "P34" || type == "P44" || type == "N4*" || type == "B4*" ||
                 type == "R4*" || type == "K4*")
                 piece_chosen(type, p, board, tabla, map);
+            else {
+                you_dumb();
+                goto crapa;
+            }
         }
         long unsigned int s = playeri.size();
         int actualplayer = playeri[j];
@@ -456,6 +470,7 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             j++;
         }
     }
+    crapa:
 }
 
 void player_count(int &n) {
