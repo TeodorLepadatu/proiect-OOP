@@ -29,17 +29,16 @@ public:
         return *this;
     }
 
-    int getLinie() const {
+    [[nodiscard]] int getLinie() const {
         return linie;
     }
 
-    int getColoana() const {
+    [[nodiscard]] int getColoana() const {
         return coloana;
     }
 
     bool operator==(const Locatie &other) const {
-        return linie == other.linie &&
-               coloana == other.coloana;
+        return linie == other.linie && coloana == other.coloana;
     }
 
     bool operator!=(const Locatie &other) const {
@@ -47,7 +46,7 @@ public:
     }
 
     friend std::ostream &operator<<(std::ostream &os, const Locatie &locatie) {
-        os << "linie: " << locatie.linie << " coloana: " << locatie.coloana;
+        os << "line: " << locatie.linie << " column: " << locatie.coloana;
         return os;
     }
 
