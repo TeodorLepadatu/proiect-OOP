@@ -3,7 +3,7 @@ Catanus chess
 Do you ever play chess and think: this game hasn't got an update in centuries! Are you bored of playing the same game over and over again?
 Well, i have the solution for you: CATANUS CHESS!
 This game is played by up to 4 players who want to capture all the other kings on the board. Every player has 8 pieces: 4 pawns, a rook, a knight, a bishop and, of course, a king. 
-After we enter the number of players, every player will enter the coordinates of their pieces. Every piece moves the exact same way as they move in normal chess, but the way the pawn will not capture diagonally, but the pieces in front of them. In order to win, you have to be the last king standing.
+After we enter the number of players, every player will enter the coordinates of their pieces. Every piece moves the exact same way as they move in normal chess, but the way the pawn will capture is not diagonally, but the pieces in front of them. In order to win, you have to be the last king standing.
 Have fun!
 
 Cerinte:
