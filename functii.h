@@ -50,7 +50,7 @@ bool occupied(int l, int c, const std::unordered_map<std::string, Locatie> &map)
     return false;
 }
 
-void pune_pion(int i, int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_pion(int i, int j, Pion &p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for a pawn by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -111,7 +111,7 @@ void pune_pion(int i, int j, Piesa &p, std::unordered_map<std::string, Locatie> 
     }
 }
 
-void pune_cal(int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_cal(int j, Cal &p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the knight by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -138,7 +138,7 @@ void pune_cal(int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) {
     map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
 }
 
-void pune_nebun(int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_nebun(int j, Nebun &p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the bishop by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -170,7 +170,7 @@ void pune_nebun(int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) 
     }
 }
 
-void pune_tura(int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_tura(int j, Turn &p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the rook by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -205,7 +205,7 @@ void pune_tura(int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) {
     }
 }
 
-void pune_rege(int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_rege(int j, Rege &p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the king by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -234,22 +234,23 @@ void pune_rege(int j, Piesa &p, std::unordered_map<std::string, Locatie> &map) {
     }
 }
 
-void piece_chosen(const std::string &type, Piesa p, std::string board[][9], Tabla &tabla,
+void
+piece_chosen(const std::string &type, Pion p, Cal ca, Nebun ne, Turn t, Rege r, std::string board[][9], Tabla &tabla,
                   std::unordered_map<std::string, Locatie> &map) {
     std::cout
             << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
             << std::endl;
     std::vector<Locatie> moves;
     if (type[0] == 'P')
-        moves = p.muta_pion(map[type], p);
+        moves = p.muta(map[type], p);
     else if (type[0] == 'N')
-        moves = p.muta_cal(map[type]);
+        moves = ca.muta(map[type], ca);
     else if (type[0] == 'B')
-        moves = p.muta_nebun(map[type]);
+        moves = ne.muta(map[type], ne);
     else if (type[0] == 'R')
-        moves = p.muta_turn(map[type]);
+        moves = t.muta(map[type], t);
     else
-        moves = p.muta_rege(map[type]);
+        moves = r.muta(map[type], r);
     int ol = map[type].getLinie();    //old line
     int oc = map[type].getColoana();  //old column
     for (const auto &move: moves) {
@@ -367,7 +368,8 @@ void find_winner(std::string board[][9]) {
     std::cout << "The winner is Player " << winner << ", congratulations!";
 }
 
-void actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Piesa p, Tabla &tabla) {
+void actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Pion p, Cal c, Nebun ne,
+                 Turn t, Rege r, Tabla &tabla) {
     std::vector<int> playeri;
     for (int i = 0; i < n; i++)
         playeri.push_back(i + 1);
@@ -376,6 +378,10 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
         if (j >= playeri.size())
             j = 0;
         p.setCuloare(playeri[j]);
+        c.setCuloare(playeri[j]);
+        ne.setCuloare(playeri[j]);
+        t.setCuloare(playeri[j]);
+        r.setCuloare(playeri[j]);
         if (playeri[j] == 1) {
             std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
             for (const auto &pair: map)
@@ -388,7 +394,7 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             //std::cout<<map[type];
             if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" || type == "B1*" ||
                 type == "R1*" || type == "K1*")
-                piece_chosen(type, p, board, tabla, map);
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map);
             else {
                 you_dumb();
                 goto crapa;
@@ -405,7 +411,7 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             std::cin >> type;
             if (type == "P12" || type == "P22" || type == "P32" || type == "P42" || type == "N2*" || type == "B2*" ||
                 type == "R2*" || type == "K2*")
-                piece_chosen(type, p, board, tabla, map);
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map);
             else {
                 you_dumb();
                 goto crapa;
@@ -423,7 +429,7 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             std::cin >> type;
             if (type == "P13" || type == "P23" || type == "P33" || type == "P43" || type == "N3*" || type == "B3*" ||
                 type == "R3*" || type == "K3*")
-                piece_chosen(type, p, board, tabla, map);
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map);
             else {
                 you_dumb();
                 goto crapa;
@@ -439,7 +445,7 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
             std::cin >> type;
             if (type == "P14" || type == "P24" || type == "P34" || type == "P44" || type == "N4*" || type == "B4*" ||
                 type == "R4*" || type == "K4*")
-                piece_chosen(type, p, board, tabla, map);
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map);
             else {
                 you_dumb();
                 goto crapa;

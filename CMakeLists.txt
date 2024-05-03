@@ -118,6 +118,12 @@ add_executable(${PROJECT_NAME}
         Player.h
         Pacanea.h
         Piesa_abstracta.h
+        Tabla.cpp
+        Player.cpp
+        Locatie.cpp
+        Piesa_abstracta.cpp
+        Camp.cpp
+        Pacanea.cpp
 )
 
 ###############################################################################

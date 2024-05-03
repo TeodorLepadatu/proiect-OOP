@@ -9,11 +9,30 @@
 #include "Locatie.h"
 #include "functii.h"
 #include "Piesa_abstracta.h"
-
 //#include "Player.h"
 //#include "Pacanea.h"
-//#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
+
 int main() {
+    /*
+    sf::RenderWindow window(sf::VideoMode(950,950),"Catanus chess", sf::Style::Close | sf::Style::Titlebar);
+    while(window.isOpen())
+    {
+        sf::Event ev;
+        while(window.pollEvent(ev))
+        {
+            if(ev.type==ev.Closed)
+                window.close();
+            //else if(ev.type==ev.TextEntered)
+            //{
+            //    int num_players;
+            //    player_count(num_players);
+            //    std::cout<<num_players;
+            //}
+        }
+
+    }
+    */
     Tabla tabla;
     std::cout << "The board:" << std::endl;
     tabla.displaynr();
@@ -26,20 +45,24 @@ int main() {
         players.push_back(p);
     }
      */
-    Piesa p;
+    Pion p;
+    Cal c;
+    Nebun ne;
+    Turn t;
+    Rege r;
     std::unordered_map<std::string, Locatie> map;
     for (int i = 1; i <= 8; i++) {
         for (int j = 0; j < n; j++) {
             if (i <= 4) {
                 pune_pion(i, j, p, map);
             } else if (i == 5) {
-                pune_cal(j, p, map);
+                pune_cal(j, c, map);
             } else if (i == 6) {
-                pune_nebun(j, p, map);
+                pune_nebun(j, ne, map);
             } else if (i == 7) {
-                pune_tura(j, p, map);
+                pune_tura(j, t, map);
             } else {
-                pune_rege(j, p, map);
+                pune_rege(j, r, map);
             }
         }
     }
@@ -64,7 +87,7 @@ int main() {
             }
         }
     }
-    actual_play(n, board, map, p, tabla);
+    actual_play(n, board, map, p, c, ne, t, r, tabla);
     find_winner(board);
     return 0;
 }
