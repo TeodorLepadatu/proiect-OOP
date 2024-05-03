@@ -9,7 +9,7 @@
 #include <algorithm>
 #include "Locatie.h"
 #include "Tabla.h"
-
+#include "Player.h"
 /*
 int dau_cu_zaru() {
     std::random_device rd;
@@ -20,12 +20,6 @@ int dau_cu_zaru() {
     return roll1 + roll2;
 }
 */
-int random_number_generator() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 4);
-    return dis(gen);
-}
 
 void you_dumb() {
     std::cout << "You are just stupid" << std::endl;
@@ -235,24 +229,28 @@ void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
     }
 }
 
-void
-piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
-             Tabla &tabla,
-                  std::unordered_map<std::string, Locatie> &map) {
+void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
+                  Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player) {
     std::cout
             << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
             << std::endl;
     std::vector<Locatie> moves;
-    if (type[0] == 'P')
-        moves = p->muta(map[type], *p);
-    else if (type[0] == 'N')
-        moves = ca->muta(map[type], *ca);
-    else if (type[0] == 'B')
-        moves = ne->muta(map[type], *ne);
-    else if (type[0] == 'R')
-        moves = t->muta(map[type], *t);
-    else
-        moves = r->muta(map[type], *r);
+    if (type[0] == 'P') {
+        player.setCurrPiece(p);
+        moves = player.getCurrPiece()->muta(map[type], *p);
+    } else if (type[0] == 'N') {
+        player.setCurrPiece(ca);
+        moves = player.getCurrPiece()->muta(map[type], *ca);
+    } else if (type[0] == 'B') {
+        player.setCurrPiece(ne);
+        moves = player.getCurrPiece()->muta(map[type], *ne);
+    } else if (type[0] == 'R') {
+        player.setCurrPiece(t);
+        moves = player.getCurrPiece()->muta(map[type], *t);
+    } else {
+        player.setCurrPiece(r);
+        moves = player.getCurrPiece()->muta(map[type], *r);
+    }
     int ol = map[type].getLinie();    //old line
     int oc = map[type].getColoana();  //old column
     for (const auto &move: moves) {
@@ -358,21 +356,27 @@ void find_winner(std::string board[][9]) {
     int winner = 0;
     for (int i = 1; i <= 8; i++)
         for (int j1 = 1; j1 <= 8; j1++) {
-            if (board[i][j1] == "K1*")
+            if (board[i][j1] == "K1*") {
                 winner = 1;
-            else if (board[i][j1] == "K2*")
+                break;
+            } else if (board[i][j1] == "K2*") {
                 winner = 2;
-            else if (board[i][j1] == "K3*")
+                break;
+            } else if (board[i][j1] == "K3*") {
                 winner = 3;
-            else if (board[i][j1] == "K4*")
+                break;
+            } else if (board[i][j1] == "K4*") {
                 winner = 4;
+                break;
+            }
         }
     std::cout << "The winner is Player " << winner << ", congratulations!";
 }
 
 void
 actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Pion *p, Cal *c, Nebun *ne,
-            Turn *t, Rege *r, Tabla &tabla) {
+            Turn *t, Rege *r, Tabla &tabla, std::vector<Player> players) {
+    ///trebuie sa mai tai din playerii facuti din clasa
     std::vector<int> playeri;
     for (int i = 0; i < n; i++)
         playeri.push_back(i + 1);
@@ -396,8 +400,24 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             std::cin >> type;
             //std::cout<<map[type];
             if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" || type == "B1*" ||
-                type == "R1*" || type == "K1*")
-                piece_chosen(type, p, c, ne, t, r, board, tabla, map);
+                    type == "R1*" || type == "K1*") {
+                if (type[0] == 'P') {
+                    p->setType(type);
+                    p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                } else {
+                    p->setType("P11");
+                    p->setLocatie(map["P11"].getLinie(), map["P11"].getColoana());
+                }
+                c->setType("N1*");
+                c->setLocatie(map["N1*"].getLinie(), map["N1*"].getColoana());
+                ne->setType("B1*");
+                ne->setLocatie(map["B1*"].getLinie(), map["B1*"].getColoana());
+                t->setType("R1*");
+                t->setLocatie(map["R1*"].getLinie(), map["R1*"].getColoana());
+                r->setType("K1*");
+                r->setLocatie(map["K1*"].getLinie(), map["K1*"].getColoana());
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[j]);
+            }
             else {
                 you_dumb();
                 goto crapa;
@@ -413,8 +433,24 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             std::string type;
             std::cin >> type;
             if (type == "P12" || type == "P22" || type == "P32" || type == "P42" || type == "N2*" || type == "B2*" ||
-                type == "R2*" || type == "K2*")
-                piece_chosen(type, p, c, ne, t, r, board, tabla, map);
+                type == "R2*" || type == "K2*") {
+                if (type[0] == 'P') {
+                    p->setType(type);
+                    p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                } else {
+                    p->setType("P12");
+                    p->setLocatie(map["P12"].getLinie(), map["P12"].getColoana());
+                }
+                c->setType("N2*");
+                c->setLocatie(map["N2*"].getLinie(), map["N2*"].getColoana());
+                ne->setType("B2*");
+                ne->setLocatie(map["B2*"].getLinie(), map["B2*"].getColoana());
+                t->setType("R2*");
+                t->setLocatie(map["R2*"].getLinie(), map["R2*"].getColoana());
+                r->setType("K2*");
+                r->setLocatie(map["K2*"].getLinie(), map["K2*"].getColoana());
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[j]);
+            }
             else {
                 you_dumb();
                 goto crapa;
@@ -431,8 +467,24 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             std::string type;
             std::cin >> type;
             if (type == "P13" || type == "P23" || type == "P33" || type == "P43" || type == "N3*" || type == "B3*" ||
-                type == "R3*" || type == "K3*")
-                piece_chosen(type, p, c, ne, t, r, board, tabla, map);
+                type == "R3*" || type == "K3*") {
+                if (type[0] == 'P') {
+                    p->setType(type);
+                    p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                } else {
+                    p->setType("P13");
+                    p->setLocatie(map["P13"].getLinie(), map["P13"].getColoana());
+                }
+                c->setType("N3*");
+                c->setLocatie(map["N3*"].getLinie(), map["N3*"].getColoana());
+                ne->setType("B3*");
+                ne->setLocatie(map["B3*"].getLinie(), map["B3*"].getColoana());
+                t->setType("R3*");
+                t->setLocatie(map["R3*"].getLinie(), map["R3*"].getColoana());
+                r->setType("K3*");
+                r->setLocatie(map["K3*"].getLinie(), map["K3*"].getColoana());
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[j]);
+            }
             else {
                 you_dumb();
                 goto crapa;
@@ -447,8 +499,24 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             std::string type;
             std::cin >> type;
             if (type == "P14" || type == "P24" || type == "P34" || type == "P44" || type == "N4*" || type == "B4*" ||
-                type == "R4*" || type == "K4*")
-                piece_chosen(type, p, c, ne, t, r, board, tabla, map);
+                type == "R4*" || type == "K4*") {
+                if (type[0] == 'P') {
+                    p->setType(type);
+                    p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                } else {
+                    p->setType("P14");
+                    p->setLocatie(map["P14"].getLinie(), map["P14"].getColoana());
+                }
+                c->setType("N4*");
+                c->setLocatie(map["N4*"].getLinie(), map["P12"].getColoana());
+                ne->setType("B4*");
+                ne->setLocatie(map["B4*"].getLinie(), map["B4*"].getColoana());
+                t->setType("R4*");
+                t->setLocatie(map["R4*"].getLinie(), map["R4*"].getColoana());
+                r->setType("K4*");
+                r->setLocatie(map["K4*"].getLinie(), map["K4*"].getColoana());
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[j]);
+            }
             else {
                 you_dumb();
                 goto crapa;

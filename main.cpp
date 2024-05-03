@@ -9,7 +9,7 @@
 #include "Locatie.h"
 #include "functii.h"
 #include "Piesa_abstracta.h"
-//#include "Player.h"
+#include "Player.h"
 //#include "Pacanea.h"
 #include <SFML/Graphics.hpp>
 
@@ -38,19 +38,19 @@ int main() {
     tabla.displaynr();
     int n = 0;
     player_count(n);
-    /*
-    std::vector<Player> players;
-    for (int i = 1; i <= n; i++) {
-        Player p;
-        players.push_back(p);
-    }
-     */
+
+
     Piesa *p = new Pion;
     Piesa *c = new Cal;
     Piesa *ne = new Nebun;
     Piesa *t = new Turn;
     Piesa *r = new Rege;
 
+    std::vector<Player> players;
+    for (int i = 1; i <= n; i++) {
+        Player pl;
+        players.push_back(pl);
+    }
     std::unordered_map<std::string, Locatie> map;
     for (int i = 1; i <= 8; i++) {
         for (int j = 0; j < n; j++) {
@@ -89,7 +89,7 @@ int main() {
         }
     }
     actual_play(n, board, map, dynamic_cast<Pion *>(p), dynamic_cast<Cal *>(c), dynamic_cast<Nebun *>(ne),
-                dynamic_cast<Turn *>(t), dynamic_cast<Rege *>(r), tabla);
+                dynamic_cast<Turn *>(t), dynamic_cast<Rege *>(r), tabla, players);
     find_winner(board);
     return 0;
 }

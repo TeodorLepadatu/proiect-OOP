@@ -76,8 +76,8 @@ public:
         }
     }
 
-    void setType(const std::string &type) {
-        Piesa::type = type;
+    void setType(const std::string &type_) {
+        Piesa::type = type_;
     }
 
     const std::string &getType() const {
@@ -95,7 +95,6 @@ public:
         resurse.push_back("mancare");
     }
 
-    [[nodiscard]] tip gettip() const { return p_tip; }
 
     // Copy constructor
     Pion(const Pion &other) : Piesa(other), mutari_posibile(other.mutari_posibile) {}
