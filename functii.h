@@ -50,7 +50,7 @@ bool occupied(int l, int c, const std::unordered_map<std::string, Locatie> &map)
     return false;
 }
 
-void pune_pion(int i, int j, Pion &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for a pawn by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -66,52 +66,53 @@ void pune_pion(int i, int j, Pion &p, std::unordered_map<std::string, Locatie> &
     }
     if (i == 1) {
         if (j == 0)
-            p.setTip("P11");
+            p->setType("P11");
         else if (j == 1)
-            p.setTip("P12");
+            p->setType("P12");
         else if (j == 2)
-            p.setTip("P13");
+            p->setType("P13");
         else
-            p.setTip("P14");
+            p->setType("P14");
     } else if (i == 2) {
         if (j == 0)
-            p.setTip("P21");
+            p->setType("P21");
         else if (j == 1)
-            p.setTip("P22");
+            p->setType("P22");
         else if (j == 2)
-            p.setTip("P23");
+            p->setType("P23");
         else
-            p.setTip("P24");
+            p->setType("P24");
     } else if (i == 3) {
         if (j == 0)
-            p.setTip("P31");
+            p->setType("P31");
         else if (j == 1)
-            p.setTip("P32");
+            p->setType("P32");
         else if (j == 2)
-            p.setTip("P33");
+            p->setType("P33");
         else
-            p.setTip("P34");
+            p->setType("P34");
     } else {
         if (j == 0)
-            p.setTip("P41");
+            p->setType("P41");
         else if (j == 1)
-            p.setTip("P42");
+            p->setType("P42");
         else if (j == 2)
-            p.setTip("P43");
+            p->setType("P43");
         else
-            p.setTip("P44");
+            p->setType("P44");
     }
     if (!occupied(lin, col, map)) {
-        p.setLocatie(lin, col);
-        p.setCuloare(j + 1);
-        //std::cout << p.gettip() << " " << p.getLocatie() << " " << p.getculoare() << std::endl;
-        map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
+        p->setLocatie(lin, col);
+        p->setCuloare(j + 1);
+        std::string tip_str = p->getType(); // Convert enum to string
+        map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
     } else {
         you_dumb();
     }
 }
 
-void pune_cal(int j, Cal &p, std::unordered_map<std::string, Locatie> &map) {
+
+void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the knight by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -126,19 +127,19 @@ void pune_cal(int j, Cal &p, std::unordered_map<std::string, Locatie> &map) {
         you_dumb();
     }
     if (j == 0)
-        p.setTip("N1*");
+        p->setType("N1*");
     else if (j == 1)
-        p.setTip("N2*");
+        p->setType("N2*");
     else if (j == 2)
-        p.setTip("N3*");
+        p->setType("N3*");
     else
-        p.setTip("N4*");
-    p.setLocatie(lin, col);
-    p.setCuloare(j + 1);
-    map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
+        p->setType("N4*");
+    p->setLocatie(lin, col);
+    p->setCuloare(j + 1);
+    map.insert(std::pair<std::string, Locatie>(p->getType(), p->getLocatie()));
 }
 
-void pune_nebun(int j, Nebun &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the bishop by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -153,24 +154,24 @@ void pune_nebun(int j, Nebun &p, std::unordered_map<std::string, Locatie> &map) 
         you_dumb();
     }
     if (j == 0)
-        p.setTip("B1*");
+        p->setType("B1*");
     else if (j == 1)
-        p.setTip("B2*");
+        p->setType("B2*");
     else if (j == 2)
-        p.setTip("B3*");
+        p->setType("B3*");
     else
-        p.setTip("B4*");
+        p->setType("B4*");
     if (!occupied(lin, col, map)) {
-        p.setLocatie(lin, col);
-        p.setCuloare(j + 1);
-        //std::cout << p.gettip() << " " << p.getLocatie() << " " << p.getculoare() << std::endl;
-        map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
+        p->setLocatie(lin, col);
+        p->setCuloare(j + 1);
+        //std::cout << p.getType() << " " << p.getLocatie() << " " << p.getculoare() << std::endl;
+        map.insert(std::pair<std::string, Locatie>(p->getType(), p->getLocatie()));
     } else {
         you_dumb();
     }
 }
 
-void pune_tura(int j, Turn &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the rook by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -188,24 +189,24 @@ void pune_tura(int j, Turn &p, std::unordered_map<std::string, Locatie> &map) {
         you_dumb();
     }
     if (j == 0)
-        p.setTip("R1*");
+        p->setType("R1*");
     else if (j == 1)
-        p.setTip("R2*");
+        p->setType("R2*");
     else if (j == 2)
-        p.setTip("R3*");
+        p->setType("R3*");
     else
-        p.setTip("R4*");
+        p->setType("R4*");
     if (!occupied(lin, col, map)) {
-        p.setLocatie(lin, col);
-        p.setCuloare(j + 1);
-        //std::cout << p.gettip() << " " << p.getLocatie() << " " << p.getculoare() << std::endl;
-        map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
+        p->setLocatie(lin, col);
+        p->setCuloare(j + 1);
+        //std::cout << p.getType() << " " << p.getLocatie() << " " << p.getculoare() << std::endl;
+        map.insert(std::pair<std::string, Locatie>(p->getType(), p->getLocatie()));
     } else {
         you_dumb();
     }
 }
 
-void pune_rege(int j, Rege &p, std::unordered_map<std::string, Locatie> &map) {
+void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the king by entering two numbers from 1 to 8: " << std::endl;
     std::cout
@@ -217,40 +218,41 @@ void pune_rege(int j, Rege &p, std::unordered_map<std::string, Locatie> &map) {
     int col;
     std::cin >> col;
     if (j == 0)
-        p.setTip("K1*");
+        p->setType("K1*");
     else if (j == 1)
-        p.setTip("K2*");
+        p->setType("K2*");
     else if (j == 2)
-        p.setTip("K3*");
+        p->setType("K3*");
     else
-        p.setTip("K4*");
+        p->setType("K4*");
     if (!occupied(lin, col, map)) {
-        p.setLocatie(lin, col);
-        p.setCuloare(j + 1);
-        //std::cout << p.gettip() << " " << p.getLocatie() << " " << p.getculoare() << std::endl;
-        map.insert(std::pair<std::string, Locatie>(p.gettip(), p.getLocatie()));
+        p->setLocatie(lin, col);
+        p->setCuloare(j + 1);
+        //std::cout << p.getType() << " " << p.getLocatie() << " " << p.getculoare() << std::endl;
+        map.insert(std::pair<std::string, Locatie>(p->getType(), p->getLocatie()));
     } else {
         you_dumb();
     }
 }
 
 void
-piece_chosen(const std::string &type, Pion p, Cal ca, Nebun ne, Turn t, Rege r, std::string board[][9], Tabla &tabla,
+piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
+             Tabla &tabla,
                   std::unordered_map<std::string, Locatie> &map) {
     std::cout
             << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
             << std::endl;
     std::vector<Locatie> moves;
     if (type[0] == 'P')
-        moves = p.muta(map[type], p);
+        moves = p->muta(map[type], *p);
     else if (type[0] == 'N')
-        moves = ca.muta(map[type], ca);
+        moves = ca->muta(map[type], *ca);
     else if (type[0] == 'B')
-        moves = ne.muta(map[type], ne);
+        moves = ne->muta(map[type], *ne);
     else if (type[0] == 'R')
-        moves = t.muta(map[type], t);
+        moves = t->muta(map[type], *t);
     else
-        moves = r.muta(map[type], r);
+        moves = r->muta(map[type], *r);
     int ol = map[type].getLinie();    //old line
     int oc = map[type].getColoana();  //old column
     for (const auto &move: moves) {
@@ -368,8 +370,9 @@ void find_winner(std::string board[][9]) {
     std::cout << "The winner is Player " << winner << ", congratulations!";
 }
 
-void actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Pion p, Cal c, Nebun ne,
-                 Turn t, Rege r, Tabla &tabla) {
+void
+actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Pion *p, Cal *c, Nebun *ne,
+            Turn *t, Rege *r, Tabla &tabla) {
     std::vector<int> playeri;
     for (int i = 0; i < n; i++)
         playeri.push_back(i + 1);
@@ -377,11 +380,11 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
     while (playeri.size() > 1) {
         if (j >= playeri.size())
             j = 0;
-        p.setCuloare(playeri[j]);
-        c.setCuloare(playeri[j]);
-        ne.setCuloare(playeri[j]);
-        t.setCuloare(playeri[j]);
-        r.setCuloare(playeri[j]);
+        p->setCuloare(playeri[j]);
+        c->setCuloare(playeri[j]);
+        ne->setCuloare(playeri[j]);
+        t->setCuloare(playeri[j]);
+        r->setCuloare(playeri[j]);
         if (playeri[j] == 1) {
             std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
             for (const auto &pair: map)
@@ -477,7 +480,7 @@ void actual_play(int n, std::string board[][9], std::unordered_map<std::string, 
         }
     }
     crapa:
-    std::cout << "a crapat" << std::endl;
+    std::cout << "Game over!" << std::endl;
 }
 
 void player_count(int &n) {

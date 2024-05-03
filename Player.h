@@ -3,22 +3,40 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "Piesa_abstracta.h"
 #include "Pacanea.h"
 class Player {
 private:
-    int nr;
-    //bool yourmove;
-    Pion p1, p2, p3, p4;
-    Cal c;
-    Nebun n;
-    Turn t;
-    Rege r;
+    int nr{};
+    Piesa *curr_piece;
     std::vector<Pacanea> inventar;
-    int mutari_disponibile;
-public:
-    Player() : nr(0), p1(), p2(), p3(), p4(), c(), n(), t(), r(), mutari_disponibile(0) {}
+    int mutari_disponibile{};
 
+public:
+    Player(const Player &other) {
+        switch (other.curr_piece->getTip()) {
+            case Piesa::P:
+                curr_piece = new Pion(*dynamic_cast<Pion *>(other.curr_piece));
+                break;
+            case Piesa::C:
+                curr_piece = new Cal(*dynamic_cast<Cal *>(other.curr_piece));
+                break;
+            case Piesa::B:
+                curr_piece = new Nebun(*dynamic_cast<Nebun *>(other.curr_piece));
+                break;
+            case Piesa::T:
+                curr_piece = new Turn(*dynamic_cast<Turn *>(other.curr_piece));
+                break;
+            case Piesa::K:
+                curr_piece = new Rege(*dynamic_cast<Rege *>(other.curr_piece));
+                break;
+            default:
+                // eroare, caz lipsă!!!
+                curr_piece = nullptr;
+                break;
+        }
+    }
     [[nodiscard]] int getNr() const {
         return nr;
     }
@@ -36,12 +54,7 @@ public:
         return mutari_disponibile;
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const Player &player) {
-        os << "nr: " << player.nr << " p1: " << player.p1 << " p2: " << player.p2 << " p3: " << player.p3 << " p4: "
-           << player.p4 << " c: " << player.c << " n: " << player.n << " t: " << player.t << " r: " << player.r
-           << " inventar: " << " mutari_disponibile: " << player.mutari_disponibile;
-        return os;
-    }
+
 };
 
 #endif

@@ -5,13 +5,13 @@ std::vector<Locatie> Pion::muta(Locatie const &locatie_, Piesa const &p) {
     int i = locatie_.getLinie();
     int j = locatie_.getColoana();
     mutari_posibile.clear();
-    if (p.getculoare() == 1) {
+    if (p.getCuloare() == 1) {
         Locatie x(i + 1, j);
         mutari_posibile.push_back(x);
-    } else if (p.getculoare() == 2) {
+    } else if (p.getCuloare() == 2) {
         Locatie x(i, j - 1);
         mutari_posibile.push_back(x);
-    } else if (p.getculoare() == 3) {
+    } else if (p.getCuloare() == 3) {
         Locatie x(i - 1, j);
         mutari_posibile.push_back(x);
     } else {

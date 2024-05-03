@@ -45,24 +45,25 @@ int main() {
         players.push_back(p);
     }
      */
-    Pion p;
-    Cal c;
-    Nebun ne;
-    Turn t;
-    Rege r;
+    Piesa *p = new Pion;
+    Piesa *c = new Cal;
+    Piesa *ne = new Nebun;
+    Piesa *t = new Turn;
+    Piesa *r = new Rege;
+
     std::unordered_map<std::string, Locatie> map;
     for (int i = 1; i <= 8; i++) {
         for (int j = 0; j < n; j++) {
             if (i <= 4) {
-                pune_pion(i, j, p, map);
+                pune_pion(i, j, dynamic_cast<Pion *>(p), map);
             } else if (i == 5) {
-                pune_cal(j, c, map);
+                pune_cal(j, dynamic_cast<Cal *>(c), map);
             } else if (i == 6) {
-                pune_nebun(j, ne, map);
+                pune_nebun(j, dynamic_cast<Nebun *>(ne), map);
             } else if (i == 7) {
-                pune_tura(j, t, map);
+                pune_tura(j, dynamic_cast<Turn *>(t), map);
             } else {
-                pune_rege(j, r, map);
+                pune_rege(j, dynamic_cast<Rege *>(r), map);
             }
         }
     }
@@ -87,7 +88,8 @@ int main() {
             }
         }
     }
-    actual_play(n, board, map, p, c, ne, t, r, tabla);
+    actual_play(n, board, map, dynamic_cast<Pion *>(p), dynamic_cast<Cal *>(c), dynamic_cast<Nebun *>(ne),
+                dynamic_cast<Turn *>(t), dynamic_cast<Rege *>(r), tabla);
     find_winner(board);
     return 0;
 }
