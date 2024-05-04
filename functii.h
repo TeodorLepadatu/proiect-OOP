@@ -380,17 +380,20 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
     std::vector<int> playeri;
     for (int i = 0; i < n; i++)
         playeri.push_back(i + 1);
-    unsigned long j = 0;
+    //unsigned long j = 0;
+    // /aici o sa incep cu staticul din Player
+    Player::setNr(0);
     while (playeri.size() > 1) {
-        if (j >= playeri.size())
-            j = 0;
-        p->setCuloare(playeri[j]);
-        c->setCuloare(playeri[j]);
-        ne->setCuloare(playeri[j]);
-        t->setCuloare(playeri[j]);
-        r->setCuloare(playeri[j]);
-        if (playeri[j] == 1) {
-            std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
+        if (Player::getNr() >= playeri.size())
+            Player::setNr(0);   ///aici era j-ul de la linia 384
+        p->setCuloare(playeri[Player::getNr()]);
+        c->setCuloare(playeri[Player::getNr()]);
+        ne->setCuloare(playeri[Player::getNr()]);
+        t->setCuloare(playeri[Player::getNr()]);
+        r->setCuloare(playeri[Player::getNr()]);
+        if (playeri[Player::getNr()] == 1) {
+            std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
+                      << std::endl;
             for (const auto &pair: map)
                 if (pair.first == "P11" || pair.first == "P21" || pair.first == "P31" || pair.first == "P41" ||
                     pair.first == "N1*" || pair.first == "B1*" || pair.first == "R1*" || pair.first == "K1*")
@@ -416,15 +419,16 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 t->setLocatie(map["R1*"].getLinie(), map["R1*"].getColoana());
                 r->setType("K1*");
                 r->setLocatie(map["K1*"].getLinie(), map["K1*"].getColoana());
-                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[j]);
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()]);
             }
             else {
                 you_dumb();
                 goto crapa;
             }
 
-        } else if (playeri[j] == 2) {
-            std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
+        } else if (playeri[Player::getNr()] == 2) {
+            std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
+                      << std::endl;
             for (const auto &pair: map)
                 if (pair.first == "P12" || pair.first == "P22" || pair.first == "P32" || pair.first == "P42" ||
                     pair.first == "N2*" || pair.first == "B2*" || pair.first == "R2*" || pair.first == "K2*")
@@ -449,14 +453,14 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 t->setLocatie(map["R2*"].getLinie(), map["R2*"].getColoana());
                 r->setType("K2*");
                 r->setLocatie(map["K2*"].getLinie(), map["K2*"].getColoana());
-                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[j]);
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()]);
             }
             else {
                 you_dumb();
                 goto crapa;
             }
-        } else if (playeri[j] == 3) {
-            std::cout << "Player " << playeri[j]
+        } else if (playeri[Player::getNr()] == 3) {
+            std::cout << "Player " << playeri[Player::getNr()]
                       << ", choose the piece that you want to move (if you want to move a pawn, enter both the numbers and if you want to move anything else, type the letter, the number and the star, otherwise it will not work): "
                       << std::endl;
             for (const auto &pair: map)
@@ -483,14 +487,15 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 t->setLocatie(map["R3*"].getLinie(), map["R3*"].getColoana());
                 r->setType("K3*");
                 r->setLocatie(map["K3*"].getLinie(), map["K3*"].getColoana());
-                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[j]);
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()]);
             }
             else {
                 you_dumb();
                 goto crapa;
             }
-        } else if (playeri[j] == 4) {
-            std::cout << "Player " << playeri[j] << ", choose the piece that you want to move: " << std::endl;
+        } else if (playeri[Player::getNr()] == 4) {
+            std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
+                      << std::endl;
             for (const auto &pair: map)
                 if (pair.first == "P14" || pair.first == "P24" || pair.first == "P34" || pair.first == "P44" ||
                     pair.first == "N4*" || pair.first == "B4*" || pair.first == "R4*" || pair.first == "K4*")
@@ -515,7 +520,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 t->setLocatie(map["R4*"].getLinie(), map["R4*"].getColoana());
                 r->setType("K4*");
                 r->setLocatie(map["K4*"].getLinie(), map["K4*"].getColoana());
-                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[j]);
+                piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()]);
             }
             else {
                 you_dumb();
@@ -523,28 +528,28 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             }
         }
         long unsigned int s = playeri.size();
-        int actualplayer = playeri[j];
+        int actualplayer = playeri[Player::getNr()];
         int nextplayer = 0;
-        if (j == s - 1)
+        if (Player::getNr() == s - 1)
             nextplayer = playeri[0];
         else
-            nextplayer = playeri[j + 1];
-        check_kings(j, board, playeri, map);
+            nextplayer = playeri[Player::getNr() + 1];
+        check_kings(Player::getNr(), board, playeri, map);
         ///test daca avem rege
         if (playeri.size() < s) {
             bool nusasinucis = false;
             for (long unsigned int x = 0; x < playeri.size(); x++)
                 if (playeri[x] == actualplayer) {
-                    j = x;
+                    Player::setNr(x);
                     nusasinucis = true;
                 }
             if (!nusasinucis) {
                 for (long unsigned int x = 0; x < playeri.size(); x++)
                     if (playeri[x] == nextplayer)
-                        j = x;
+                        Player::setNr(x);
             }
         } else {
-            j++;
+            Player::inclNr();
         }
     }
     crapa:

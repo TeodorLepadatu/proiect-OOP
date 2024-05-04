@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <random>
-#include "functii.h"
+//#include "functii.h"
 
 int random_number_generator() {
     std::random_device rd;

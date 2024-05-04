@@ -4,24 +4,28 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <unordered_map>
+#include <algorithm>
 #include "Piesa_abstracta.h"
-#include "Pacanea.h"
+
+//#include "Pacanea.h"
 class Player {
 private:
-    int nr{};
+    static unsigned long nr;
     Piesa *curr_piece;
-    std::vector<Pacanea> inventar;
+    //std::vector<Pacanea> inventar;
     int mutari_disponibile{};
 
 public:
     Player() : curr_piece(nullptr) {} // Initialize curr_piece to nullptr in the default constructor
 
     // Destructor to deallocate memory properly
+    /*
     ~Player() {
         delete curr_piece;
     }
-
-    Player(const Player &other) : nr(other.nr), inventar(other.inventar), mutari_disponibile(other.mutari_disponibile) {
+    */
+    Player(const Player &other) : mutari_disponibile(other.mutari_disponibile) {
         // Properly handle deep copy of curr_piece
         if (other.curr_piece) {
             switch (other.curr_piece->getTip()) {
@@ -79,11 +83,13 @@ public:
             }
             // Copy other members
             nr = other.nr;
-            inventar = other.inventar;
+            //inventar = other.inventar;
             mutari_disponibile = other.mutari_disponibile;
         }
         return *this;
     }
+
+    /*
     [[nodiscard]] int getNr() const {
         return nr;
     }
@@ -91,19 +97,14 @@ public:
     void setNr(int nr_) {
         Player::nr = nr_;
     }
+    */
 
-
-    [[nodiscard]] const std::vector<Pacanea> &getInventar() const {
-        return inventar;
-    }
 
     [[nodiscard]] int getMutariDisponibile() const {
         return mutari_disponibile;
     }
 
-    Player(int nr, const std::vector<Pacanea> &inventar, int mutariDisponibile) : nr(nr), inventar(inventar),
-                                                                                  mutari_disponibile(
-                                                                                          mutariDisponibile) {}
+    Player(int mutariDisponibile) : mutari_disponibile(mutariDisponibile) {}
 
     void setCurrPiece(Piesa *currPiece) {
         curr_piece = currPiece;
@@ -112,5 +113,17 @@ public:
     Piesa *getCurrPiece() const {
         return curr_piece;
     }
+
+    static unsigned long getNr() {
+        return nr;
+    }
+
+    static void setNr(unsigned long nr);
+
+    static unsigned long
+    nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map,
+               std::vector<int> playeri);
+
+    static void inclNr();
 };
 #endif

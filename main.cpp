@@ -88,6 +88,7 @@ int main() {
             }
         }
     }
+
     actual_play(n, board, map, dynamic_cast<Pion *>(p), dynamic_cast<Cal *>(c), dynamic_cast<Nebun *>(ne),
                 dynamic_cast<Turn *>(t), dynamic_cast<Rege *>(r), tabla, players);
     find_winner(board);
