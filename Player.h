@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <unordered_map>
+#include <unordered_map> ///pentru resursele pe care le are jucatorul
 #include <algorithm>
 #include "Piesa_abstracta.h"
 
@@ -15,17 +15,18 @@ private:
     Piesa *curr_piece;
     //std::vector<Pacanea> inventar;
     int mutari_disponibile{};
-
+    std::unordered_map<std::string, int> resurse;
 public:
-    Player() : curr_piece(nullptr) {} // Initialize curr_piece to nullptr in the default constructor
+    Player() : curr_piece(nullptr) {}
 
+    explicit Player(Piesa *currPiece);
     // Destructor to deallocate memory properly
     /*
     ~Player() {
         delete curr_piece;
     }
     */
-    Player(const Player &other) : mutari_disponibile(other.mutari_disponibile) {
+    Player(const Player &other) : resurse(other.resurse) {
         // Properly handle deep copy of curr_piece
         if (other.curr_piece) {
             switch (other.curr_piece->getTip()) {
@@ -120,10 +121,14 @@ public:
 
     static void setNr(unsigned long nr);
 
-    static unsigned long
-    nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map,
-               std::vector<int> playeri);
+    //static unsigned long nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri);
 
     static void inclNr();
+
+    std::unordered_map<std::string, int> &getResurse();
+
+    void setResurse(const std::unordered_map<std::string, int> &resurse);
+
+    void schimbaResurse(std::unordered_map<std::string, int> &resurse, const std::string &res, int c);
 };
 #endif

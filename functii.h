@@ -10,7 +10,7 @@
 #include "Locatie.h"
 #include "Tabla.h"
 #include "Player.h"
-/*
+
 int dau_cu_zaru() {
     std::random_device rd;
     std::mt19937 gen(rd()); //random number generator
@@ -19,7 +19,6 @@ int dau_cu_zaru() {
     int roll2 = dis(gen);
     return roll1 + roll2;
 }
-*/
 
 void you_dumb() {
     std::cout << "You are just stupid" << std::endl;
@@ -229,53 +228,6 @@ void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
     }
 }
 
-void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
-                  Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player) {
-    std::cout
-            << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
-            << std::endl;
-    std::vector<Locatie> moves;
-    if (type[0] == 'P') {
-        player.setCurrPiece(p);
-        moves = player.getCurrPiece()->muta(map[type], *p);
-    } else if (type[0] == 'N') {
-        player.setCurrPiece(ca);
-        moves = player.getCurrPiece()->muta(map[type], *ca);
-    } else if (type[0] == 'B') {
-        player.setCurrPiece(ne);
-        moves = player.getCurrPiece()->muta(map[type], *ne);
-    } else if (type[0] == 'R') {
-        player.setCurrPiece(t);
-        moves = player.getCurrPiece()->muta(map[type], *t);
-    } else {
-        player.setCurrPiece(r);
-        moves = player.getCurrPiece()->muta(map[type], *r);
-    }
-    int ol = map[type].getLinie();    //old line
-    int oc = map[type].getColoana();  //old column
-    for (const auto &move: moves) {
-        std::cout << move << std::endl;
-    }
-    int l, c;
-    std::cin >> l >> c;
-    int muta = 0;
-    for (const auto &move: moves) {
-        if (move.getLinie() == l && move.getColoana() == c)
-            muta = 1;
-    }
-    if (muta == 1) {
-        map[type].setLinie(l);
-        map[type].setColoana(c);
-        if (board[l][c] != "***")
-            map.erase(board[l][c]);
-        board[l][c] = type;
-        tabla.setCamp(l, c);
-        board[ol][oc] = "***";
-        tabla.resetCamp(ol, oc);
-        printboard(board);
-    }
-}
-
 void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playeri,
                  std::unordered_map<std::string, Locatie> &map) {
     int ok1 = 0, ok2 = 0, ok3 = 0, ok4 = 0;
@@ -373,6 +325,126 @@ void find_winner(std::string board[][9]) {
     std::cout << "The winner is Player " << winner << ", congratulations!";
 }
 
+void primeste_resurse(std::string board[][9], Tabla &tabla, std::vector<Player> &players) {
+    std::cout << "Press any key to roll the dice" << std::endl;
+    std::string temp;
+    std::cin >> temp;
+    int roll = dau_cu_zaru();
+    std::cout << "You rolled " << roll << std::endl;
+    for (int i = 1; i <= 8; i++)
+        for (int j = 1; j <= 8; j++) {
+            if (board[i][j] != "***" && tabla.displayCamp(i, j).getNumar() == roll) {
+                if (board[i][j][0] == 'P') {
+                    int p = board[i][j][2] - '1';
+                    players[p].schimbaResurse(players[p].getResurse(), tabla.displayCamp(i, j).getCuloare(), 1);
+                } else {
+                    int p = board[i][j][1] - '1';
+                    players[p].schimbaResurse(players[p].getResurse(), tabla.displayCamp(i, j).getCuloare(), 1);
+                }
+            }
+        }
+}
+
+void show_resources_and_pieces(Pion *p, Cal *c, Nebun *ne, Turn *t, Rege *r, std::vector<Player> players) {
+    std::cout << std::endl;
+    std::cout << "Your resources are:" << std::endl;
+    std::unordered_map<std::string, int> temp_res;
+    temp_res = players[Player::getNr()].getResurse();
+    for (const auto &pair: temp_res)
+        std::cout << pair.first << " " << pair.second << std::endl;
+    std::cout << "You can move the following pieces: ";
+    bool ok = true;
+    for (const auto &req: p->getResurse()) {
+        if (temp_res[req] == 0)
+            ok = false;
+    }
+    if (ok)
+        std::cout << "pawn ";
+    ok = true;
+    for (const auto &req: c->getResurse()) {
+        if (temp_res[req] == 0)
+            ok = false;
+    }
+    if (ok)
+        std::cout << "knight ";
+    ok = true;
+    for (const auto &req: ne->getResurse()) {
+        if (temp_res[req] == 0)
+            ok = false;
+    }
+    if (ok)
+        std::cout << "bishop ";
+    ok = true;
+    for (const auto &req: t->getResurse()) {
+        if (temp_res[req] == 0)
+            ok = false;
+    }
+    if (ok)
+        std::cout << "rook ";
+    ok = true;
+    for (const auto &req: r->getResurse()) {
+        if (temp_res[req] == 0)
+            ok = false;
+    }
+    if (ok)
+        std::cout << "king ";
+    std::cout << std::endl;
+    std::cout << "Do not try to move a piece that you do not have, as you will lose your move." << std::endl;
+    std::cout << "If you want to skip your move, press n." << std::endl;
+}
+
+void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
+                  Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player) {
+    std::cout
+            << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
+            << std::endl;
+    std::vector<Locatie> moves;
+    if (type[0] == 'P') {
+        player.setCurrPiece(p);
+        moves = player.getCurrPiece()->muta(map[type], *p);
+    } else if (type[0] == 'N') {
+        player.setCurrPiece(ca);
+        moves = player.getCurrPiece()->muta(map[type], *ca);
+    } else if (type[0] == 'B') {
+        player.setCurrPiece(ne);
+        moves = player.getCurrPiece()->muta(map[type], *ne);
+    } else if (type[0] == 'R') {
+        player.setCurrPiece(t);
+        moves = player.getCurrPiece()->muta(map[type], *t);
+    } else {
+        player.setCurrPiece(r);
+        moves = player.getCurrPiece()->muta(map[type], *r);
+    }
+    int ol = map[type].getLinie();    //old line
+    int oc = map[type].getColoana();  //old column
+    for (const auto &move: moves) {
+        std::cout << move << std::endl;
+    }
+    int l, c;
+    std::cin >> l >> c;
+    int muta = 0;
+    for (const auto &move: moves) {
+        if (move.getLinie() == l && move.getColoana() == c)
+            muta = 1;
+    }
+    if (muta == 1) {
+        map[type].setLinie(l);
+        map[type].setColoana(c);
+        if (board[l][c] != "***")
+            map.erase(board[l][c]);
+        board[l][c] = type;
+        tabla.setCamp(l, c);
+        board[ol][oc] = "***";
+        tabla.resetCamp(ol, oc);
+        printboard(board);
+        std::unordered_map<std::string, int> temp_res;
+        temp_res = player.getResurse();
+        for (const auto &req: player.getCurrPiece()->getResurse())
+            player.schimbaResurse(temp_res, req, -1);
+        player.setResurse(temp_res);
+    }
+}
+
 void
 actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Pion *p, Cal *c, Nebun *ne,
             Turn *t, Rege *r, Tabla &tabla, std::vector<Player> players) {
@@ -392,17 +464,21 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
         t->setCuloare(playeri[Player::getNr()]);
         r->setCuloare(playeri[Player::getNr()]);
         if (playeri[Player::getNr()] == 1) {
+            primeste_resurse(board, tabla, players);
+            printboard(board);
             std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
                       << std::endl;
             for (const auto &pair: map)
                 if (pair.first == "P11" || pair.first == "P21" || pair.first == "P31" || pair.first == "P41" ||
                     pair.first == "N1*" || pair.first == "B1*" || pair.first == "R1*" || pair.first == "K1*")
                     std::cout << pair.first << " ";
-            std::cout << std::endl;
+            show_resources_and_pieces(p, c, ne, t, r, players);
             std::string type;
             std::cin >> type;
             //std::cout<<map[type];
-            if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" || type == "B1*" ||
+            if (type == "n") {}
+            else if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" ||
+                     type == "B1*" ||
                     type == "R1*" || type == "K1*") {
                 if (type[0] == 'P') {
                     p->setType(type);
@@ -427,16 +503,20 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             }
 
         } else if (playeri[Player::getNr()] == 2) {
+            primeste_resurse(board, tabla, players);
             std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
                       << std::endl;
             for (const auto &pair: map)
                 if (pair.first == "P12" || pair.first == "P22" || pair.first == "P32" || pair.first == "P42" ||
                     pair.first == "N2*" || pair.first == "B2*" || pair.first == "R2*" || pair.first == "K2*")
                     std::cout << pair.first << " ";
-            std::cout << std::endl;
+            show_resources_and_pieces(p, c, ne, t, r, players);
+            printboard(board);
             std::string type;
             std::cin >> type;
-            if (type == "P12" || type == "P22" || type == "P32" || type == "P42" || type == "N2*" || type == "B2*" ||
+            if (type == "n") {}
+            else if (type == "P12" || type == "P22" || type == "P32" || type == "P42" || type == "N2*" ||
+                     type == "B2*" ||
                 type == "R2*" || type == "K2*") {
                 if (type[0] == 'P') {
                     p->setType(type);
@@ -460,6 +540,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 goto crapa;
             }
         } else if (playeri[Player::getNr()] == 3) {
+            primeste_resurse(board, tabla, players);
             std::cout << "Player " << playeri[Player::getNr()]
                       << ", choose the piece that you want to move (if you want to move a pawn, enter both the numbers and if you want to move anything else, type the letter, the number and the star, otherwise it will not work): "
                       << std::endl;
@@ -467,10 +548,13 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 if (pair.first == "P13" || pair.first == "P23" || pair.first == "P33" || pair.first == "P43" ||
                     pair.first == "N3*" || pair.first == "B3*" || pair.first == "R3*" || pair.first == "K3*")
                     std::cout << pair.first << " ";
-            std::cout << std::endl;
+            show_resources_and_pieces(p, c, ne, t, r, players);
+            printboard(board);
             std::string type;
             std::cin >> type;
-            if (type == "P13" || type == "P23" || type == "P33" || type == "P43" || type == "N3*" || type == "B3*" ||
+            if (type == "n") {}
+            else if (type == "P13" || type == "P23" || type == "P33" || type == "P43" || type == "N3*" ||
+                     type == "B3*" ||
                 type == "R3*" || type == "K3*") {
                 if (type[0] == 'P') {
                     p->setType(type);
@@ -494,16 +578,20 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 goto crapa;
             }
         } else if (playeri[Player::getNr()] == 4) {
+            primeste_resurse(board, tabla, players);
             std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
                       << std::endl;
             for (const auto &pair: map)
                 if (pair.first == "P14" || pair.first == "P24" || pair.first == "P34" || pair.first == "P44" ||
                     pair.first == "N4*" || pair.first == "B4*" || pair.first == "R4*" || pair.first == "K4*")
                     std::cout << pair.first << " ";
-            std::cout << std::endl;
+            show_resources_and_pieces(p, c, ne, t, r, players);
+            printboard(board);
             std::string type;
             std::cin >> type;
-            if (type == "P14" || type == "P24" || type == "P34" || type == "P44" || type == "N4*" || type == "B4*" ||
+            if (type == "n") {}
+            else if (type == "P14" || type == "P24" || type == "P34" || type == "P44" || type == "N4*" ||
+                     type == "B4*" ||
                 type == "R4*" || type == "K4*") {
                 if (type[0] == 'P') {
                     p->setType(type);

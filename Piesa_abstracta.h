@@ -80,8 +80,12 @@ public:
         Piesa::type = type_;
     }
 
-    const std::string &getType() const {
+    [[nodiscard]] const std::string &getType() const {
         return type;
+    }
+
+    [[nodiscard]] const std::vector<std::string> &getResurse() const {
+        return resurse;
     }
 };
 
@@ -94,7 +98,6 @@ public:
         resurse.push_back("apa");
         resurse.push_back("mancare");
     }
-
 
     // Copy constructor
     Pion(const Pion &other) : Piesa(other), mutari_posibile(other.mutari_posibile) {}
@@ -171,6 +174,7 @@ public:
         resurse.push_back("arma");
         resurse.push_back("piatra");
         resurse.push_back("apa");
+        resurse.push_back("mancare");
     }
 
     // Copy constructor
@@ -194,7 +198,7 @@ private:
 public:
     Rege() : Piesa() {
         p_tip = Piesa::K;
-        resurse.push_back("arma");
+        //resurse.push_back("arma");
         resurse.push_back("piatra");
         resurse.push_back("apa");
         resurse.push_back("mancare");

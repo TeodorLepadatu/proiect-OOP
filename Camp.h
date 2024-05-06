@@ -23,7 +23,6 @@ public:
     }
 
 
-    /*
     [[nodiscard]] const std::string &getCuloare() const {
         return culoare;
     }
@@ -31,7 +30,6 @@ public:
     [[nodiscard]] const Locatie &getLocatie() const {
         return locatie;
     }
-    */
     [[nodiscard]] int getNumar() const {
         return numar;
     }

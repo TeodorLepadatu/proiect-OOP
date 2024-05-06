@@ -48,7 +48,7 @@ int main() {
 
     std::vector<Player> players;
     for (int i = 1; i <= n; i++) {
-        Player pl;
+        Player pl(nullptr);
         players.push_back(pl);
     }
     std::unordered_map<std::string, Locatie> map;

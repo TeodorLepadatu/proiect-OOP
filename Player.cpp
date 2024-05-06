@@ -9,6 +9,26 @@ void Player::setNr(unsigned long nr) {
 void Player::inclNr() {
     nr++;
 }
+
+std::unordered_map<std::string, int> &Player::getResurse() {
+    return resurse;
+}
+
+Player::Player(Piesa *currPiece) : curr_piece(currPiece) {
+    this->resurse.insert({"apa", 0});
+    this->resurse.insert({"mancare", 0});
+    this->resurse.insert({"arma", 0});
+    this->resurse.insert({"piatra", 0});
+}
+
+
+void Player::schimbaResurse(std::unordered_map<std::string, int> &resurse, const std::string &res, int c) {
+    resurse[res] += c;
+}
+
+void Player::setResurse(const std::unordered_map<std::string, int> &resurse) {
+    Player::resurse = resurse;
+}
 /*
 unsigned long Player::nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri)
 {

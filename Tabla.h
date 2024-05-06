@@ -44,9 +44,11 @@ public:
 
     void displaynr() const;
 
-    /*
     void displaycolor() const;
 
+    [[nodiscard]] Camp displayCamp(int i, int j) const;
+
+    /*
     void displayocupat() const;
     */
     friend std::ostream &operator<<(std::ostream &os, const Tabla &tabla) {
