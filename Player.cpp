@@ -15,10 +15,10 @@ std::unordered_map<std::string, int> &Player::getResurse() {
 }
 
 Player::Player(Piesa *currPiece) : curr_piece(currPiece) {
-    this->resurse.insert({"apa", 0});
-    this->resurse.insert({"mancare", 0});
-    this->resurse.insert({"arma", 0});
-    this->resurse.insert({"piatra", 0});
+    this->resurse.insert({"WATER", 0});
+    this->resurse.insert({"FOOD", 0});
+    this->resurse.insert({"WEAPON", 0});
+    this->resurse.insert({"STONE", 0});
 }
 
 

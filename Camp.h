@@ -12,7 +12,7 @@ private:
     int numar;
     bool ocupat;    //daca exista piesa pe respectivul patratel
 public:
-    explicit Camp(std::string culoare_ = std::string("apa"), const Locatie &locatie_ = Locatie(0, 0),
+    explicit Camp(std::string culoare_ = std::string("WATER"), const Locatie &locatie_ = Locatie(0, 0),
          const int &numar_ = 0, bool ocupat_ = false)
             : culoare{std::move(culoare_)}, locatie{locatie_}, numar{numar_}, ocupat{ocupat_} {}
 

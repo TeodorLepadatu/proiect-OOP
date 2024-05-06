@@ -16,13 +16,13 @@ public:
             for (int j = 1; j <= 8; j++) {
                 std::string c;
                 if ((i + j) % 4 == 0)
-                    c = "apa";
+                    c = "WATER";
                 else if ((i + j) % 4 == 1)
-                    c = "mancare";
+                    c = "FOOD";
                 else if ((i + j) % 4 == 2)
-                    c = "piatra";
+                    c = "STONE";
                 else
-                    c = "arma";
+                    c = "WEAPON";
                 Locatie loc(i, j);
                 std::random_device rd;
                 std::mt19937 gen(rd()); //random number generator

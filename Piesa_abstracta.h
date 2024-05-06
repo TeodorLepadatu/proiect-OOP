@@ -95,8 +95,8 @@ private:
 public:
     Pion() : Piesa() {
         p_tip = Piesa::P;
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
+        resurse.push_back("WATER");
+        resurse.push_back("FOOD");
     }
 
     // Copy constructor
@@ -119,9 +119,9 @@ class Cal : public Piesa {
 public:
     Cal() : Piesa() {
         p_tip = Piesa::C;
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
-        resurse.push_back("arma");
+        resurse.push_back("WATER");
+        resurse.push_back("FOOD");
+        resurse.push_back("WEAPON");
     }
 
     // Copy constructor
@@ -145,9 +145,9 @@ private:
 public:
     Nebun() : Piesa() {
         p_tip = Piesa::B;
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
-        resurse.push_back("arma");
+        resurse.push_back("WATER");
+        resurse.push_back("FOOD");
+        resurse.push_back("WEAPON");
     }
 
     // Copy constructor
@@ -171,10 +171,10 @@ private:
 public:
     Turn() : Piesa() {
         p_tip = Piesa::T;
-        resurse.push_back("arma");
-        resurse.push_back("piatra");
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
+        resurse.push_back("WEAPON");
+        resurse.push_back("STONE");
+        resurse.push_back("WATER");
+        resurse.push_back("FOOD");
     }
 
     // Copy constructor
@@ -198,10 +198,9 @@ private:
 public:
     Rege() : Piesa() {
         p_tip = Piesa::K;
-        //resurse.push_back("arma");
-        resurse.push_back("piatra");
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
+        resurse.push_back("STONE");
+        resurse.push_back("WATER");
+        resurse.push_back("FOOD");
     }
 
     // Copy constructor

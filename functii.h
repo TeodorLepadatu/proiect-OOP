@@ -359,35 +359,35 @@ void show_resources_and_pieces(Pion *p, Cal *c, Nebun *ne, Turn *t, Rege *r, std
             ok = false;
     }
     if (ok)
-        std::cout << "pawn ";
+        std::cout << "PAWN ";
     ok = true;
     for (const auto &req: c->getResurse()) {
         if (temp_res[req] == 0)
             ok = false;
     }
     if (ok)
-        std::cout << "knight ";
+        std::cout << "KNIGHT ";
     ok = true;
     for (const auto &req: ne->getResurse()) {
         if (temp_res[req] == 0)
             ok = false;
     }
     if (ok)
-        std::cout << "bishop ";
+        std::cout << "BISHOP ";
     ok = true;
     for (const auto &req: t->getResurse()) {
         if (temp_res[req] == 0)
             ok = false;
     }
     if (ok)
-        std::cout << "rook ";
+        std::cout << "ROOK ";
     ok = true;
     for (const auto &req: r->getResurse()) {
         if (temp_res[req] == 0)
             ok = false;
     }
     if (ok)
-        std::cout << "king ";
+        std::cout << "KING ";
     std::cout << std::endl;
     std::cout << "Do not try to move a piece that you do not have, as you will lose your move." << std::endl;
     std::cout << "If you want to skip your move, press n." << std::endl;
@@ -417,8 +417,54 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
     }
     int ol = map[type].getLinie();    //old line
     int oc = map[type].getColoana();  //old column
-    for (const auto &move: moves) {
-        std::cout << move << std::endl;
+    std::unordered_map<std::string, int> temp_res;
+    temp_res = player.getResurse();
+    for (const auto &req: player.getCurrPiece()->getResurse())
+        player.schimbaResurse(temp_res, req, -1);
+    player.setResurse(temp_res);
+    std::cout << "You resources now are:" << std::endl;
+    for (const auto &pair: temp_res)
+        std::cout << pair.first << " " << pair.second << std::endl;
+    for (int i = 0; i < moves.size(); i++) {
+        if (board[moves[i].getLinie()][moves[i].getColoana()] == "***")
+            std::cout << moves[i] << std::endl;
+        else if (board[moves[i].getLinie()][moves[i].getColoana()][0] == 'P') {
+            if (player.getResurse()["WATER"] && player.getResurse()["FOOD"])
+                std::cout << moves[i] << std::endl;
+            else {
+                moves.erase(moves.begin() + i);
+                i--;
+            }
+        } else if (board[moves[i].getLinie()][moves[i].getColoana()][0] == 'N') {
+            if (player.getResurse()["WATER"] && player.getResurse()["FOOD"] && player.getResurse()["WEAPON"])
+                std::cout << moves[i] << std::endl;
+            else {
+                moves.erase(moves.begin() + i);
+                i--;
+            }
+        } else if (board[moves[i].getLinie()][moves[i].getColoana()][0] == 'B') {
+            if (player.getResurse()["WATER"] && player.getResurse()["FOOD"] && player.getResurse()["WEAPON"])
+                std::cout << moves[i] << std::endl;
+            else {
+                moves.erase(moves.begin() + i);
+                i--;
+            }
+        } else if (board[moves[i].getLinie()][moves[i].getColoana()][0] == 'R') {
+            if (player.getResurse()["WATER"] && player.getResurse()["FOOD"] && player.getResurse()["WEAPON"] &&
+                player.getResurse()["STONE"])
+                std::cout << moves[i] << std::endl;
+            else {
+                moves.erase(moves.begin() + i);
+                i--;
+            }
+        } else if (board[moves[i].getLinie()][moves[i].getColoana()][0] == 'K') {
+            if (player.getResurse()["WATER"] && player.getResurse()["FOOD"] && player.getResurse()["STONE"])
+                std::cout << moves[i] << std::endl;
+            else {
+                moves.erase(moves.begin() + i);
+                i--;
+            }
+        }
     }
     int l, c;
     std::cin >> l >> c;
@@ -430,18 +476,60 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
     if (muta == 1) {
         map[type].setLinie(l);
         map[type].setColoana(c);
-        if (board[l][c] != "***")
+        if (board[l][c] != "***") {
             map.erase(board[l][c]);
+            if (board[l][c][0] == 'P') {
+                temp_res = player.getResurse();
+                player.schimbaResurse(temp_res, "WATER", -1);
+                player.schimbaResurse(temp_res, "FOOD", -1);
+                player.setResurse(temp_res);
+                std::cout << "You resources now are:" << std::endl;
+                for (const auto &pair: temp_res)
+                    std::cout << pair.first << " " << pair.second << std::endl;
+            } else if (board[l][c][0] == 'N') {
+                temp_res = player.getResurse();
+                player.schimbaResurse(temp_res, "WATER", -1);
+                player.schimbaResurse(temp_res, "FOOD", -1);
+                player.schimbaResurse(temp_res, "WEAPON", -1);
+                player.setResurse(temp_res);
+                std::cout << "You resources now are:" << std::endl;
+                for (const auto &pair: temp_res)
+                    std::cout << pair.first << " " << pair.second << std::endl;
+            } else if (board[l][c][0] == 'B') {
+                temp_res = player.getResurse();
+                player.schimbaResurse(temp_res, "WATER", -1);
+                player.schimbaResurse(temp_res, "FOOD", -1);
+                player.schimbaResurse(temp_res, "WEAPON", -1);
+                player.setResurse(temp_res);
+                std::cout << "You resources now are:" << std::endl;
+                for (const auto &pair: temp_res)
+                    std::cout << pair.first << " " << pair.second << std::endl;
+            } else if (board[l][c][0] == 'R') {
+                temp_res = player.getResurse();
+                player.schimbaResurse(temp_res, "WATER", -1);
+                player.schimbaResurse(temp_res, "FOOD", -1);
+                player.schimbaResurse(temp_res, "WEAPON", -1);
+                player.schimbaResurse(temp_res, "STONE", -1);
+                player.setResurse(temp_res);
+                std::cout << "You resources now are:" << std::endl;
+                for (const auto &pair: temp_res)
+                    std::cout << pair.first << " " << pair.second << std::endl;
+            } else if (board[l][c][0] == 'K') {
+                temp_res = player.getResurse();
+                player.schimbaResurse(temp_res, "WATER", -1);
+                player.schimbaResurse(temp_res, "FOOD", -1);
+                player.schimbaResurse(temp_res, "STONE", -1);
+                player.setResurse(temp_res);
+                std::cout << "You resources now are:" << std::endl;
+                for (const auto &pair: temp_res)
+                    std::cout << pair.first << " " << pair.second << std::endl;
+            }
+        }
         board[l][c] = type;
         tabla.setCamp(l, c);
         board[ol][oc] = "***";
         tabla.resetCamp(ol, oc);
         printboard(board);
-        std::unordered_map<std::string, int> temp_res;
-        temp_res = player.getResurse();
-        for (const auto &req: player.getCurrPiece()->getResurse())
-            player.schimbaResurse(temp_res, req, -1);
-        player.setResurse(temp_res);
     }
 }
 
