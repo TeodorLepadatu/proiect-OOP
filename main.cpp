@@ -39,7 +39,6 @@ int main() {
     int n = 0;
     player_count(n);
 
-
     Piesa *p = new Pion;
     Piesa *c = new Cal;
     Piesa *ne = new Nebun;
