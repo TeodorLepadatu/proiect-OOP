@@ -728,6 +728,9 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             }
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
+                Player::ma_enervez();
+                if (check_stupidity())
+                    return;
             }
             catch (app_error &) {}
         } else if (playeri[Player::getNr()] == 2) {
@@ -770,6 +773,9 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             }
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
+                Player::ma_enervez();
+                if (check_stupidity())
+                    return;
             }
             catch (app_error &) {}
         } else if (playeri[Player::getNr()] == 3) {
@@ -813,6 +819,9 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             }
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
+                Player::ma_enervez();
+                if (check_stupidity())
+                    return;
             }
             catch (app_error &) {}
         } else if (playeri[Player::getNr()] == 4) {
@@ -855,8 +864,15 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             }
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
+                Player::ma_enervez();
+                if (check_stupidity())
+                    return;
             }
-            catch (app_error &) {}
+            catch (app_error &) {
+                Player::ma_enervez();
+                if (check_stupidity())
+                    return;
+            }
         }
         long unsigned int s = playeri.size();
         int actualplayer = playeri[Player::getNr()];

@@ -37,10 +37,11 @@ void Player::setResurse(const std::unordered_map<std::string, int> &resurse_) {
 int Player::getNervi() {
     return nervi;
 }
-
+/*
 void Player::setNervi(int nervi_) {
     Player::nervi = nervi_;
 }
+*/
 /*
 unsigned long Player::nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri)
 {

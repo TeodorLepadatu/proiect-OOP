@@ -124,7 +124,7 @@ public:
 
     static int getNervi();
 
-    static void setNervi(int nervi);
+    //static void setNervi(int nervi);
 
     //static unsigned long nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri);
     static void ma_enervez();
