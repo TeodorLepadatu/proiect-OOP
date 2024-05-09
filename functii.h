@@ -47,7 +47,7 @@ bool occupied(int l, int c, const std::unordered_map<std::string, Locatie> &map)
 void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for a pawn by entering two numbers from 1 to 8: " << std::endl;
-    int lin, col;
+    int lin = 0, col = 0;
     bool inputValid = false;
     while (!inputValid) {
         try {
@@ -121,7 +121,7 @@ void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &
 void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the knight by entering two numbers from 1 to 8: " << std::endl;
-    int lin, col;
+    int lin = 0, col = 0;
     bool inputValid = false;
     while (!inputValid) {
         try {
@@ -160,7 +160,7 @@ void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
 void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the bishop by entering two numbers from 1 to 8: " << std::endl;
-    int lin, col;
+    int lin = 0, col = 0;
     bool inputValid = false;
     while (!inputValid) {
         try {
@@ -204,7 +204,7 @@ void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) 
 void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the rook by entering two numbers from 1 to 8: " << std::endl;
-    int lin, col;
+    int lin = 0, col = 0;
     bool inputValid = false;
     while (!inputValid) {
         try {
@@ -248,7 +248,7 @@ void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
 void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the king by entering two numbers from 1 to 8: " << std::endl;
-    int lin, col;
+    int lin = 0, col = 0;
     bool inputValid = false;
     while (!inputValid) {
         try {
@@ -567,7 +567,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                 }
             }
         }
-        int l, c;
+        int l = 0, c = 0;
         bool inputValid = false;
         do {
             try {
