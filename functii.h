@@ -921,7 +921,7 @@ void player_count(int &n) {
                 throw input_error();
             }
         }
-        catch (input_error &eroare) {
+        catch (input_error &) {
             std::cout << "Stop trying to crash the game!" << std::endl;
         }
         if (nc == '2' || nc == '3' || nc == '4') {
