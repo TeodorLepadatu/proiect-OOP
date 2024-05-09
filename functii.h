@@ -48,20 +48,12 @@ void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &
     std::cout << "Player " << j + 1
               << " choose the location for a pawn by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
-            char lc, cc;
-            std::cout
-                    << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
-                    << std::endl;
-            std::cin.get(lc);
-            std::cout << "Choose the column (number from 1 to 8): " << std::endl;
-            std::cin.get(cc);
-    if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0) {
-        std::cout << "You are not playing with that piece then" << std::endl;
+    std::cin >> lin;
+    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
+    std::cin >> col;
+    if (col > 8 || col < 1) {
+        you_dumb();
     }
-            else {
-                lin = lc - '0';
-                col = cc - '0';
-            }
     if (i == 1) {
         if (j == 0)
             p->setType("P11");
@@ -114,18 +106,11 @@ void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the knight by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
-    char lc, cc;
-    std::cout
-            << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
-            << std::endl;
-    std::cin.get(lc);
-    std::cout << "Choose the column (number from 1 to 8): " << std::endl;
-    std::cin.get(cc);
-    if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0) {
-        std::cout << "You are not playing with that piece then" << std::endl;
-    } else {
-        lin = lc - '0';
-        col = cc - '0';
+    std::cin >> lin;
+    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
+    std::cin >> col;
+    if (col > 8 || col < 1) {
+        you_dumb();
     }
     if (j == 0)
         p->setType("N1*");
@@ -149,18 +134,11 @@ void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) 
     std::cout << "Player " << j + 1
               << " choose the location for the bishop by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
-    char lc, cc;
-    std::cout
-            << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
-            << std::endl;
-    std::cin.get(lc);
-    std::cout << "Choose the column (number from 1 to 8): " << std::endl;
-    std::cin.get(cc);
-    if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0) {
-        std::cout << "You are not playing with that piece then" << std::endl;
-    } else {
-        lin = lc - '0';
-        col = cc - '0';
+    std::cin >> lin;
+    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
+    std::cin >> col;
+    if (col > 8 || col < 1) {
+        you_dumb();
     }
     if (j == 0)
         p->setType("B1*");
@@ -184,18 +162,11 @@ void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the rook by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
-    char lc, cc;
-    std::cout
-            << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
-            << std::endl;
-    std::cin.get(lc);
-    std::cout << "Choose the column (number from 1 to 8): " << std::endl;
-    std::cin.get(cc);
-    if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0) {
-        std::cout << "You are not playing with that piece then" << std::endl;
-    } else {
-        lin = lc - '0';
-        col = cc - '0';
+    std::cin >> lin;
+    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
+    std::cin >> col;
+    if (col > 8 || col < 1) {
+        you_dumb();
     }
     if (j == 0)
         p->setType("R1*");
@@ -219,18 +190,11 @@ void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the king by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
-    char lc, cc;
-    std::cout
-            << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
-            << std::endl;
-    std::cin.get(lc);
-    std::cout << "Choose the column (number from 1 to 8): " << std::endl;
-    std::cin.get(cc);
-    if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0) {
-        std::cout << "You are not playing with that piece then" << std::endl;
-    } else {
-        lin = lc - '0';
-        col = cc - '0';
+    std::cin >> lin;
+    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
+    std::cin >> col;
+    if (col > 8 || col < 1) {
+        you_dumb();
     }
     if (j == 0)
         p->setType("K1*");
