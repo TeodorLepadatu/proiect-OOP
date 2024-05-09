@@ -11,26 +11,41 @@
 #include "Piesa_abstracta.h"
 #include "Player.h"
 //#include "Pacanea.h"
-#include <SFML/Graphics.hpp>
-
+//#include <SFML/Graphics.hpp>
+//#include <filesystem>
 int main() {
     /*
-    sf::RenderWindow window(sf::VideoMode(950,950),"Catanus chess", sf::Style::Close | sf::Style::Titlebar);
-    while(window.isOpen())
-    {
-        sf::Event ev;
-        while(window.pollEvent(ev))
-        {
-            if(ev.type==ev.Closed)
-                window.close();
-            //else if(ev.type==ev.TextEntered)
-            //{
-            //    int num_players;
-            //    player_count(num_players);
-            //    std::cout<<num_players;
-            //}
-        }
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Catanus Chess");
+    draw_board(window);
+    std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
+    std::string filename = "rege_rosu.png";
 
+    if (!std::filesystem::exists(filename)) {
+        std::cerr << "File '" << filename << "' does not exist." << std::endl;
+        return -1;
+    }
+
+    sf::Texture texture;
+    if (!texture.loadFromFile("images/rege_rosu.png")) {    ///ok nu mai da crash
+        // Handle loading failure
+        std::cerr << "Failed to load image." << std::endl;
+    /  std::cerr << "Error: " << texture.getNativeHandle() << std::endl;
+       return -1;
+    }
+    sf::Sprite sprite(texture);
+    window.display();
+    while (window.isOpen()) {
+        sf::Event event{};
+        while (window.pollEvent(event)) {
+           if (event.type == sf::Event::Closed) {
+               window.close();
+           }
+        }
+        // Clear the window
+        window.clear();
+
+        // Draw the sprite
+        window.draw(sprite);
     }
     */
     Tabla tabla;

@@ -11,6 +11,7 @@
 #include "Tabla.h"
 #include "Player.h"
 #include "Exceptii.h"
+#include <SFML/Graphics.hpp>
 int dau_cu_zaru() {
     std::random_device rd;
     std::mt19937 gen(rd()); //random number generator
@@ -325,7 +326,7 @@ void find_winner(std::string board[][9]) {
     std::cout << "The winner is Player " << winner << ", congratulations!";
 }
 
-void primeste_resurse(std::string board[][9], Tabla &tabla, std::vector<Player> &players) {
+void primeste_resurse(std::string board[][9], const Tabla &tabla, std::vector<Player> &players) {
     std::cout << "Press any key to roll the dice" << std::endl;
     std::string temp;
     std::cin >> temp;
@@ -461,7 +462,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
         std::cout << "You resources now are:" << std::endl;
         for (const auto &pair: temp_res)
             std::cout << pair.first << " " << pair.second << std::endl;
-        for (int i = 0; i < moves.size(); i++) {
+        for (long unsigned int i = 0; i < moves.size(); i++) {
             if (board[moves[i].getLinie()][moves[i].getColoana()] == "***")
                 std::cout << moves[i] << std::endl;
             else if (board[moves[i].getLinie()][moves[i].getColoana()][0] == 'P') {
@@ -571,9 +572,42 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
         }
     }
     catch (resource_error &eroare) {}
-    catch (app_error &c) {}
+    catch (app_error &x) {}
 }
 
+/*
+void draw_board(sf::RenderWindow& window)
+{
+    window.clear(sf::Color::Cyan); // Set background color to white
+
+    const int boardSize = 10;
+    const int squareSize = 100;
+    sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
+
+    for (int i = 0; i < boardSize; ++i) {
+        for (int j = 0; j < boardSize; ++j) {
+            if(i==0 || i==boardSize-1 || j==0 || j==boardSize-1){
+                square.setPosition(i * squareSize, j * squareSize);
+                square.setFillColor(sf::Color::Transparent);
+                window.draw(square); // Draw transparent square
+            }
+            else {
+                square.setPosition(i * squareSize, j * squareSize);
+                if ((i + j) % 4 == 0) {
+                    square.setFillColor(sf::Color::White);
+                } else if ((i + j) % 4 == 1) {
+                    square.setFillColor(sf::Color(255, 192, 203)); // pink
+                } else if ((i + j) % 4 == 2) {
+                    square.setFillColor(sf::Color(128, 128, 128)); // gray
+                } else {
+                    square.setFillColor(sf::Color(211, 211, 211));
+                }
+                window.draw(square); // Draw colored square
+            }
+        }
+    }
+}
+ */
 void
 actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Pion *p, Cal *c, Nebun *ne,
             Turn *t, Rege *r, Tabla &tabla, std::vector<Player> players) {
@@ -634,7 +668,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
             }
-            catch (app_error &c) {}
+            catch (app_error &x) {}
         } else if (playeri[Player::getNr()] == 2) {
             try {
                 primeste_resurse(board, tabla, players);
@@ -676,7 +710,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
             }
-            catch (app_error &c) {}
+            catch (app_error &x) {}
         } else if (playeri[Player::getNr()] == 3) {
             primeste_resurse(board, tabla, players);
             std::cout << "Player " << playeri[Player::getNr()]
@@ -719,7 +753,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
             }
-            catch (app_error &c) {}
+            catch (app_error &x) {}
         } else if (playeri[Player::getNr()] == 4) {
             primeste_resurse(board, tabla, players);
             std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
@@ -761,7 +795,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
             }
-            catch (app_error &c) {}
+            catch (app_error &x) {}
         }
         long unsigned int s = playeri.size();
         int actualplayer = playeri[Player::getNr()];

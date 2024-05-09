@@ -105,7 +105,7 @@ public:
         return mutari_disponibile;
     }
 
-    Player(int mutariDisponibile) : mutari_disponibile(mutariDisponibile) {}
+    explicit Player(int mutariDisponibile) : curr_piece(nullptr), mutari_disponibile(mutariDisponibile) {}
 
     void setCurrPiece(Piesa *currPiece) {
         curr_piece = currPiece;

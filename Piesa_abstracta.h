@@ -9,7 +9,7 @@
 
 class Piesa {
 protected:
-    Piesa() {}
+    Piesa() : culoare(0), p_tip(P) {}
     int culoare;
     Locatie locatie;
     std::vector<std::string> resurse;
@@ -17,7 +17,8 @@ protected:
 public:
 
     // Copy constructor
-    Piesa(const Piesa &other) : culoare(other.culoare), locatie(other.locatie), resurse(other.resurse) {}
+    Piesa(const Piesa &other) : culoare(other.culoare), locatie(other.locatie), resurse(other.resurse),
+                                p_tip(other.p_tip) {}
 
     // Copy assignment operator
     Piesa &operator=(const Piesa &other) {
@@ -25,6 +26,7 @@ public:
             culoare = other.culoare;
             locatie = other.locatie;
             resurse = other.resurse;
+            p_tip = other.p_tip;
         }
         return *this;
     }

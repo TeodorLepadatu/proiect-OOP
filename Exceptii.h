@@ -37,7 +37,7 @@ public:
 
 class object_error : public app_error {
 public:
-    object_error(std::string mesaj) {
+    explicit object_error(const std::string &mesaj) {
         std::cout << "Could not create the " << mesaj << " object." << std::endl;
     }
 };  ///o sa pun asta in constructori cand voi face grafica cu SFML (cand iau pozele cu piesele/tabla/resurse/etc sau altele)
