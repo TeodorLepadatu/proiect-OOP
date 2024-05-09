@@ -1,7 +1,7 @@
 #include "Piesa_abstracta.h"
 
 std::vector<Locatie> Pion::muta(Locatie const &locatie_, Piesa const &p) {
-    std::vector<Locatie> mutari_posibile;
+    //std::vector<Locatie> mutari_posibile;
     int i = locatie_.getLinie();
     int j = locatie_.getColoana();
     mutari_posibile.clear();
@@ -22,8 +22,7 @@ std::vector<Locatie> Pion::muta(Locatie const &locatie_, Piesa const &p) {
 }
 
 std::vector<Locatie> Cal::muta(Locatie const &locatie_, Piesa const &p) {
-
-    std::vector<Locatie> mutari_posibile;
+    //std::vector<Locatie> mutari_posibile;
     mutari_posibile.clear();
     int i = locatie_.getLinie();
     int j = locatie_.getColoana();
@@ -270,7 +269,7 @@ std::vector<Locatie> Cal::muta(Locatie const &locatie_, Piesa const &p) {
 }
 
 std::vector<Locatie> Nebun::muta(Locatie const &locatie_, Piesa const &p) {
-    std::vector<Locatie> mutari_posibile;
+    //std::vector<Locatie> mutari_posibile;
     int i = locatie_.getLinie();
     int j = locatie_.getColoana();
     mutari_posibile.clear();
@@ -288,7 +287,7 @@ std::vector<Locatie> Nebun::muta(Locatie const &locatie_, Piesa const &p) {
 }
 
 std::vector<Locatie> Turn::muta(Locatie const &locatie_, Piesa const &p) {
-    std::vector<Locatie> mutari_posibile;
+    //std::vector<Locatie> mutari_posibile;
     int i = locatie_.getLinie();
     int j = locatie_.getColoana();
     mutari_posibile.clear();
@@ -306,7 +305,7 @@ std::vector<Locatie> Turn::muta(Locatie const &locatie_, Piesa const &p) {
 }
 
 std::vector<Locatie> Rege::muta(Locatie const &locatie_, Piesa const &p) {
-    std::vector<Locatie> mutari_posibile;
+    //std::vector<Locatie> mutari_posibile;
     int i = locatie_.getLinie();
     int j = locatie_.getColoana();
     mutari_posibile.clear();

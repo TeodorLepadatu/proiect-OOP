@@ -47,16 +47,28 @@ bool occupied(int l, int c, const std::unordered_map<std::string, Locatie> &map)
 void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for a pawn by entering two numbers from 1 to 8: " << std::endl;
-    std::cout
-            << "Choose the line(if you enter something invalid, just restart the program, i can't be bothered to tell you multiple times that you don't know what a number is: "
-            << std::endl;
-    int lin;
-    std::cin >> lin;
-    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
-    int col;
-    std::cin >> col;
-    if (col > 8 || col < 1) {
-        you_dumb();
+    int lin, col;
+    bool inputValid = false;
+    while (!inputValid) {
+        try {
+            char lc, cc;
+            std::cout
+                    << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
+                    << std::endl;
+            std::cin >> lc;
+            std::cout << "Choose the column (number from 1 to 8): " << std::endl;
+            std::cin >> cc;
+            if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0)
+                throw input_error();
+            else {
+                inputValid = true; // Set the flag to true when input is valid
+                lin = lc - '0';
+                col = cc - '0';
+            }
+        }
+        catch (input_error &) {
+            you_dumb();
+        }
     }
     if (i == 1) {
         if (j == 0)
@@ -109,16 +121,28 @@ void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &
 void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the knight by entering two numbers from 1 to 8: " << std::endl;
-    std::cout
-            << "Choose the line(if you enter something invalid, just restart the program, i can't be bothered to tell you multiple times that you don't know what a number is: "
-            << std::endl;
-    int lin;
-    std::cin >> lin;
-    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
-    int col;
-    std::cin >> col;
-    if (col > 8 || col < 1) {
-        you_dumb();
+    int lin, col;
+    bool inputValid = false;
+    while (!inputValid) {
+        try {
+            char lc, cc;
+            std::cout
+                    << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
+                    << std::endl;
+            std::cin >> lc;
+            std::cout << "Choose the column (number from 1 to 8): " << std::endl;
+            std::cin >> cc;
+            if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0)
+                throw input_error();
+            else {
+                inputValid = true; // Set the flag to true when input is valid
+                lin = lc - '0';
+                col = cc - '0';
+            }
+        }
+        catch (input_error &) {
+            you_dumb();
+        }
     }
     if (j == 0)
         p->setType("N1*");
@@ -136,16 +160,28 @@ void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
 void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the bishop by entering two numbers from 1 to 8: " << std::endl;
-    std::cout
-            << "Choose the line: "
-            << std::endl;
-    int lin;
-    std::cin >> lin;
-    std::cout << "Choose the column: " << std::endl;
-    int col;
-    std::cin >> col;
-    if (col > 8 || col < 1) {
-        you_dumb();
+    int lin, col;
+    bool inputValid = false;
+    while (!inputValid) {
+        try {
+            char lc, cc;
+            std::cout
+                    << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
+                    << std::endl;
+            std::cin >> lc;
+            std::cout << "Choose the column (number from 1 to 8): " << std::endl;
+            std::cin >> cc;
+            if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0)
+                throw input_error();
+            else {
+                inputValid = true; // Set the flag to true when input is valid
+                lin = lc - '0';
+                col = cc - '0';
+            }
+        }
+        catch (input_error &) {
+            you_dumb();
+        }
     }
     if (j == 0)
         p->setType("B1*");
@@ -168,19 +204,28 @@ void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) 
 void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the rook by entering two numbers from 1 to 8: " << std::endl;
-    std::cout
-            << "Choose the line: "
-            << std::endl;
-    int lin;
-    std::cin >> lin;
-    if (lin > 8 || lin < 1) {
-        you_dumb();
-    }
-    std::cout << "Choose the column: " << std::endl;
-    int col;
-    std::cin >> col;
-    if (col > 8 || col < 1) {
-        you_dumb();
+    int lin, col;
+    bool inputValid = false;
+    while (!inputValid) {
+        try {
+            char lc, cc;
+            std::cout
+                    << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
+                    << std::endl;
+            std::cin >> lc;
+            std::cout << "Choose the column (number from 1 to 8): " << std::endl;
+            std::cin >> cc;
+            if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0)
+                throw input_error();
+            else {
+                inputValid = true; // Set the flag to true when input is valid
+                lin = lc - '0';
+                col = cc - '0';
+            }
+        }
+        catch (input_error &) {
+            you_dumb();
+        }
     }
     if (j == 0)
         p->setType("R1*");
@@ -203,14 +248,29 @@ void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
 void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
     std::cout << "Player " << j + 1
               << " choose the location for the king by entering two numbers from 1 to 8: " << std::endl;
-    std::cout
-            << "Choose the line: "
-            << std::endl;
-    int lin;
-    std::cin >> lin;
-    std::cout << "Choose the column: " << std::endl;
-    int col;
-    std::cin >> col;
+    int lin, col;
+    bool inputValid = false;
+    while (!inputValid) {
+        try {
+            char lc, cc;
+            std::cout
+                    << "Choose the line (if you enter something invalid, just restart the program, I can't be bothered to tell you multiple times that you don't know what a number is): "
+                    << std::endl;
+            std::cin >> lc;
+            std::cout << "Choose the column (number from 1 to 8): " << std::endl;
+            std::cin >> cc;
+            if (lc - '1' >= 8 || lc - '1' < 0 || cc - '1' >= 8 || cc - '1' < 0)
+                throw input_error();
+            else {
+                inputValid = true; // Set the flag to true when input is valid
+                lin = lc - '0';
+                col = cc - '0';
+            }
+        }
+        catch (input_error &) {
+            you_dumb();
+        }
+    }
     if (j == 0)
         p->setType("K1*");
     else if (j == 1)
@@ -504,7 +564,23 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
             }
         }
         int l, c;
-        std::cin >> l >> c;
+        bool inputValid = false;
+        do {
+            try {
+                char lc, cc;
+                std::cin >> lc >> cc;
+                if (lc - '0' > 8 || lc - '0' <= 0 || cc - '0' > 8 || cc - '0' <= 0)
+                    throw input_error();
+                else {
+                    l = lc - '0';
+                    c = cc - '0';
+                    inputValid = true;
+                }
+            }
+            catch (input_error &) {
+                you_dumb();
+            }
+        } while (!inputValid);
         int muta = 0;
         for (const auto &move: moves) {
             if (move.getLinie() == l && move.getColoana() == c)
@@ -571,8 +647,10 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
             std::cout << "You chose an invalid move" << std::endl;
         }
     }
-    catch (resource_error &eroare) {}
-    catch (app_error &x) {}
+    catch (resource_error &eroare) {
+        std::cout << eroare.what() << std::endl;
+    }
+    catch (app_error &) {}
 }
 
 /*
@@ -668,7 +746,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
             }
-            catch (app_error &x) {}
+            catch (app_error &) {}
         } else if (playeri[Player::getNr()] == 2) {
             try {
                 primeste_resurse(board, tabla, players);
@@ -710,7 +788,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
             }
-            catch (app_error &x) {}
+            catch (app_error &) {}
         } else if (playeri[Player::getNr()] == 3) {
             primeste_resurse(board, tabla, players);
             std::cout << "Player " << playeri[Player::getNr()]
@@ -753,7 +831,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
             }
-            catch (app_error &x) {}
+            catch (app_error &) {}
         } else if (playeri[Player::getNr()] == 4) {
             primeste_resurse(board, tabla, players);
             std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
@@ -795,7 +873,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             catch (piece_error &eroare) {
                 std::cout << eroare.what();
             }
-            catch (app_error &x) {}
+            catch (app_error &) {}
         }
         long unsigned int s = playeri.size();
         int actualplayer = playeri[Player::getNr()];
