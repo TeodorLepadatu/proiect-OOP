@@ -49,8 +49,10 @@ int main() {
     }
     */
     Tabla tabla;
-    std::cout << "The board:" << std::endl;
+    std::cout << "The numbers on the board: " << std::endl;
     tabla.displaynr();
+    std::cout << "The resources on the board: " << std::endl;
+    tabla.displaycolor();
     int n = 0;
     player_count(n);
 
