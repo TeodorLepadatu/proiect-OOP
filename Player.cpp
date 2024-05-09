@@ -1,13 +1,17 @@
 #include "Player.h"
 
 unsigned long Player::nr = 0;
-
+int Player::nervi = 0; ///ca sa nu mai dea inputuri infinite, ca lui Marius nu ii place
 void Player::setNr(unsigned long nr_) {
     Player::nr = nr_;
 }
 
 void Player::inclNr() {
     nr++;
+}
+
+void Player::ma_enervez() {
+    nervi++;
 }
 
 std::unordered_map<std::string, int> &Player::getResurse() {
@@ -28,6 +32,14 @@ void Player::schimbaResurse(std::unordered_map<std::string, int> &resurse_, cons
 
 void Player::setResurse(const std::unordered_map<std::string, int> &resurse_) {
     Player::resurse = resurse_;
+}
+
+int Player::getNervi() {
+    return nervi;
+}
+
+void Player::setNervi(int nervi_) {
+    Player::nervi = nervi_;
 }
 /*
 unsigned long Player::nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri)

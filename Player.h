@@ -12,6 +12,7 @@
 class Player {
 private:
     static unsigned long nr;
+    static int nervi;
     Piesa *curr_piece;
     //std::vector<Pacanea> inventar;
     int mutari_disponibile{};
@@ -121,8 +122,12 @@ public:
 
     static void setNr(unsigned long nr);
 
-    //static unsigned long nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri);
+    static int getNervi();
 
+    static void setNervi(int nervi);
+
+    //static unsigned long nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri);
+    static void ma_enervez();
     static void inclNr();
 
     std::unordered_map<std::string, int> &getResurse();

@@ -12,6 +12,12 @@
 #include "Player.h"
 #include "Exceptii.h"
 #include <SFML/Graphics.hpp>
+
+bool check_stupidity() {
+    if (Player::getNervi() > 10)
+        return true;
+    return false;
+}
 int dau_cu_zaru() {
     std::random_device rd;
     std::mt19937 gen(rd()); //random number generator
@@ -49,10 +55,19 @@ void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &
               << " choose the location for a pawn by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
     std::cin >> lin;
+    if (lin > 8 || lin < 1) {
+        you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
+    }
     std::cout << "Choose the column(number from 1 to 8): " << std::endl;
     std::cin >> col;
     if (col > 8 || col < 1) {
         you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
     }
     if (i == 1) {
         if (j == 0)
@@ -107,10 +122,19 @@ void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
               << " choose the location for the knight by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
     std::cin >> lin;
+    if (lin > 8 || lin < 1) {
+        you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
+    }
     std::cout << "Choose the column(number from 1 to 8): " << std::endl;
     std::cin >> col;
     if (col > 8 || col < 1) {
         you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
     }
     if (j == 0)
         p->setType("N1*");
@@ -135,10 +159,19 @@ void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) 
               << " choose the location for the bishop by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
     std::cin >> lin;
+    if (lin > 8 || lin < 1) {
+        you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
+    }
     std::cout << "Choose the column(number from 1 to 8): " << std::endl;
     std::cin >> col;
     if (col > 8 || col < 1) {
         you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
     }
     if (j == 0)
         p->setType("B1*");
@@ -163,10 +196,19 @@ void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
               << " choose the location for the rook by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
     std::cin >> lin;
+    if (lin > 8 || lin < 1) {
+        you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
+    }
     std::cout << "Choose the column(number from 1 to 8): " << std::endl;
     std::cin >> col;
     if (col > 8 || col < 1) {
         you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
     }
     if (j == 0)
         p->setType("R1*");
@@ -191,10 +233,19 @@ void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
               << " choose the location for the king by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
     std::cin >> lin;
+    if (lin > 8 || lin < 1) {
+        you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
+    }
     std::cout << "Choose the column(number from 1 to 8): " << std::endl;
     std::cin >> col;
     if (col > 8 || col < 1) {
         you_dumb();
+        Player::ma_enervez();
+        if (check_stupidity())
+            return;
     }
     if (j == 0)
         p->setType("K1*");
@@ -508,6 +559,9 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
             }
             catch (input_error &) {
                 you_dumb();
+                Player::ma_enervez();
+                if (check_stupidity())
+                    return;
             }
         } while (!inputValid);
         int muta = 0;
@@ -843,6 +897,9 @@ void player_count(int &n) {
         try {
             if (nc != '2' && nc != '3' && nc != '4') {
                 you_dumb();
+                Player::ma_enervez();
+                if (check_stupidity())
+                    return;
                 throw input_error();
             }
         }
