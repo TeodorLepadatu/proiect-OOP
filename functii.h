@@ -397,10 +397,14 @@ void primeste_resurse(std::string board[][9], const Tabla &tabla, std::vector<Pl
             if (board[i][j] != "***" && tabla.displayCamp(i, j).getNumar() == roll) {
                 if (board[i][j][0] == 'P') {
                     int p = board[i][j][2] - '1';
-                    players[p].schimbaResurse(players[p].getResurse(), tabla.displayCamp(i, j).getCuloare(), 1);
+                    auto temp_res = players[p].getResurse();
+                    players[p].schimbaResurse(temp_res, tabla.displayCamp(i, j).getCuloare(), 1);
+                    players[p].setResurse(temp_res);
                 } else {
                     int p = board[i][j][1] - '1';
-                    players[p].schimbaResurse(players[p].getResurse(), tabla.displayCamp(i, j).getCuloare(), 1);
+                    auto temp_res = players[p].getResurse();
+                    players[p].schimbaResurse(temp_res, tabla.displayCamp(i, j).getCuloare(), 1);
+                    players[p].setResurse(temp_res);
                 }
             }
         }

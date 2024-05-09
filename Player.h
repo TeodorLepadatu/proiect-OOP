@@ -129,6 +129,6 @@ public:
 
     void setResurse(const std::unordered_map<std::string, int> &resurse);
 
-    void schimbaResurse(std::unordered_map<std::string, int> &resurse, const std::string &res, int c);
+    static void schimbaResurse(std::unordered_map<std::string, int> &resurse, const std::string &res, int c);
 };
 #endif

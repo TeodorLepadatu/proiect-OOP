@@ -2,8 +2,8 @@
 
 unsigned long Player::nr = 0;
 
-void Player::setNr(unsigned long nr) {
-    Player::nr = nr;
+void Player::setNr(unsigned long nr_) {
+    Player::nr = nr_;
 }
 
 void Player::inclNr() {
@@ -22,12 +22,12 @@ Player::Player(Piesa *currPiece) : curr_piece(currPiece) {
 }
 
 
-void Player::schimbaResurse(std::unordered_map<std::string, int> &resurse, const std::string &res, int c) {
-    resurse[res] += c;
+void Player::schimbaResurse(std::unordered_map<std::string, int> &resurse_, const std::string &res, int c) {
+    resurse_[res] += c;
 }
 
-void Player::setResurse(const std::unordered_map<std::string, int> &resurse) {
-    Player::resurse = resurse;
+void Player::setResurse(const std::unordered_map<std::string, int> &resurse_) {
+    Player::resurse = resurse_;
 }
 /*
 unsigned long Player::nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri)
