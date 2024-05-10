@@ -1,11 +1,24 @@
-Catanus chess
+#Catanus chess
 
 Do you ever play chess and think: this game hasn't got an update in centuries! Are you bored of playing the same game over and over again?
 Well, i have the solution for you: CATANUS CHESS!
-This game is played by up to 4 players who want to capture all the other kings on the board. Every player has 8 pieces: 4 pawns, a rook, a knight, a bishop and, of course, a king. 
-After we enter the number of players, every player will enter the coordinates of their pieces. Every piece moves the exact same way as they move in normal chess, but the way the pawn will capture is not diagonally, but the pieces in front of them. In order to win, you have to be the last king standing.
-Have fun!
 
+This game is played by 2-4 players. The player with the last king left on the board wins. 
+
+Every tile on the board has a number and a resource. Before every turn, you roll the dice. If you have a piece on a tile which has that number on it, you will receive one copy of that resource. To move and capture pieces you will need resources as written here:
+
+PAWN: WATER+FOOD
+KNIGHT: WATER+FOOD+WEAPON
+BISHOP: WATER+FOOD+WEAPON
+ROOK: WATER+FOOD+WEAPON+STONE
+KING: WATER+FOOD+STONE
+
+To move a piece on an empty square, you only need the resources to move that piece, but when you want to capture another piece, you need the resources to move the piece that you want to capture as well.
+There are a couple differences from normal chess:
+
+1. The pawn does not promote and captures vertically
+2. No castling
+3. Every piece can jump over any other piece.
 Cerinte:
 ### Cerințe modele de limbaj la nivel de semestru
 - [ ] minim o funcționalitate majoritar doar cu LLM
