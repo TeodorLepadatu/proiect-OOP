@@ -1,34 +1,60 @@
-Catanus Chess
-Introduction
+# Catanus Chess
+
+## Introduction
+
 Are you tired of the same old game of chess? Want something new, fresh, and exciting? Look no further than Catanus Chess! This innovative twist on the classic game of chess brings resource management and strategy to the forefront, making each move a crucial decision.
 
-Overview
+## Overview
 Catanus Chess is played by 2-4 players, each vying for supremacy on the board. The goal is simple: be the last player with their king standing. But achieving this goal requires cunning, resource management, and strategic thinking.
 
-Setup
+## Setup
+
 Board: The board consists of tiles, each marked with a number and a resource type.
+
 Pieces: Each player starts with a set of pieces: pawn, knight, bishop, rook, and king.
+
 Resources: Players gather resources (water, food, weapon, stone) based on the numbers rolled on the dice.
-Gameplay
+
+## Gameplay
+
 Roll the Dice: Before each turn, players roll the dice. The number rolled determines which tiles produce resources.
+
 Resource Management: Use gathered resources to move and capture pieces. Different pieces require different combinations of resources.
+
 Pawn: Water + Food
+
 Knight: Water + Food + Weapon
+
 Bishop: Water + Food + Weapon
+
 Rook: Water + Food + Weapon + Stone
+
 King: Water + Food + Stone
+
 Movement: Pieces can move to any empty square on the board, provided the player has the necessary resources. To capture an opponent's piece, resources for both moving and capturing are required.
-Special Rules:
+
+## Special Rules:
+
 Pawn: Does not promote and captures vertically.
+
 No Castling: Traditional castling is not allowed.
+
 Piece Movement: Every piece can jump over any other piece.
-Strategy
+
+## Strategy
+
 Resource Allocation: Decide whether to gather resources for more powerful pieces or maintain a balanced army.
+
 Positioning: Utilize the unique movement abilities of each piece to outmaneuver opponents and control key areas of the board.
+
 Timing: Know when to strike and when to consolidate your defenses, as resources can be scarce.
+
 Adaptability: Be prepared to adjust your strategy based on dice rolls and opponent movements.
-Conclusion
+
+## Conclusion
+
 Catanus Chess breathes new life into the timeless game of chess, offering a dynamic and engaging experience for players of all skill levels. Are you ready to conquer the board and emerge victorious? Gather your resources, plot your moves, and claim victory in Catanus Chess!
+
 Cerinte:
 ### Cerințe modele de limbaj la nivel de semestru
 - [ ] minim o funcționalitate majoritar doar cu LLM
