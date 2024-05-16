@@ -1,10 +1,59 @@
-Catanus chess
+# Catanus Chess
 
-Do you ever play chess and think: this game hasn't got an update in centuries! Are you bored of playing the same game over and over again?
-Well, i have the solution for you: CATANUS CHESS!
-This game is played by up to 4 players who want to capture all the other kings on the board. Every player has 8 pieces: 4 pawns, a rook, a knight, a bishop and, of course, a king. 
-After we enter the number of players, every player will enter the coordinates of their pieces. Every piece moves the exact same way as they move in normal chess, but the way the pawn will capture is not diagonally, but the pieces in front of them. In order to win, you have to be the last king standing.
-Have fun!
+## Introduction
+
+Are you tired of the same old game of chess? Want something new, fresh, and exciting? Look no further than Catanus Chess! This innovative twist on the classic game of chess brings resource management and strategy to the forefront, making each move a crucial decision.
+
+## Overview
+Catanus Chess is played by 2-4 players, each vying for supremacy on the board. The goal is simple: be the last player with their king standing. But achieving this goal requires cunning, resource management, and strategic thinking.
+
+## Setup
+
+Board: The board consists of tiles, each marked with a number and a resource type.
+
+Pieces: Each player starts with a set of pieces: pawn, knight, bishop, rook, and king.
+
+Resources: Players gather resources (water, food, weapon, stone) based on the numbers rolled on the dice.
+
+## Gameplay
+
+Roll the Dice: Before each turn, players roll the dice. The number rolled determines which tiles produce resources.
+
+Resource Management: Use gathered resources to move and capture pieces. Different pieces require different combinations of resources.
+
+Pawn: Water + Food
+
+Knight: Water + Food + Weapon
+
+Bishop: Water + Food + Weapon
+
+Rook: Water + Food + Weapon + Stone
+
+King: Water + Food + Stone
+
+Movement: Pieces can move to any empty square on the board, provided the player has the necessary resources. To capture an opponent's piece, resources for both moving and capturing are required.
+
+## Special Rules:
+
+Pawn: Does not promote and captures vertically.
+
+No Castling: Traditional castling is not allowed.
+
+Piece Movement: Every piece can jump over any other piece.
+
+## Strategy
+
+Resource Allocation: Decide whether to gather resources for more powerful pieces or maintain a balanced army.
+
+Positioning: Utilize the unique movement abilities of each piece to outmaneuver opponents and control key areas of the board.
+
+Timing: Know when to strike and when to consolidate your defenses, as resources can be scarce.
+
+Adaptability: Be prepared to adjust your strategy based on dice rolls and opponent movements.
+
+## Conclusion
+
+Catanus Chess breathes new life into the timeless game of chess, offering a dynamic and engaging experience for players of all skill levels. Are you ready to conquer the board and emerge victorious? Gather your resources, plot your moves, and claim victory in Catanus Chess!
 
 Cerinte:
 ### Cerințe modele de limbaj la nivel de semestru
