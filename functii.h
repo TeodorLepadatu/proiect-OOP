@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Piesa_abstracta.h"
 #include <unordered_map>
+#include <utility>
 #include <vector>
 #include <algorithm>
 #include "Locatie.h"
@@ -50,7 +51,7 @@ bool occupied(int l, int c, const std::unordered_map<std::string, Locatie> &map)
     return false;
 }
 
-void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &map) {
+void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
     std::cout << "Player " << j + 1
               << " choose the location for a pawn by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
@@ -69,55 +70,31 @@ void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &
         if (check_stupidity())
             return;
     }
-    if (i == 1) {
-        if (j == 0)
-            p->setType("P11");
-        else if (j == 1)
-            p->setType("P12");
-        else if (j == 2)
-            p->setType("P13");
-        else
-            p->setType("P14");
-    } else if (i == 2) {
-        if (j == 0)
-            p->setType("P21");
-        else if (j == 1)
-            p->setType("P22");
-        else if (j == 2)
-            p->setType("P23");
-        else
-            p->setType("P24");
-    } else if (i == 3) {
-        if (j == 0)
-            p->setType("P31");
-        else if (j == 1)
-            p->setType("P32");
-        else if (j == 2)
-            p->setType("P33");
-        else
-            p->setType("P34");
-    } else {
-        if (j == 0)
-            p->setType("P41");
-        else if (j == 1)
-            p->setType("P42");
-        else if (j == 2)
-            p->setType("P43");
-        else
-            p->setType("P44");
-    }
+    Pion *temp = new Pion("P" + std::to_string(i) + std::to_string(j + 1));
+    ///creez obiect temporar, ii iau imaginea si dupa ii dau delete
+    ///PENTRU TOATE FUNCTIILE DE PUS PIESE!!!!
+    p->setType(temp->getType());
     if (!occupied(lin, col, map) && lin != 0 && col != 0) {
         p->setLocatie(lin, col);
         p->setCuloare(j + 1);
+        p->setTexture(temp->getTexture());
+        temp->setLocatie(lin, col);
+        temp->setCuloare(j + 1);
         std::string tip_str = p->getType(); // Convert enum to string
         map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
+        player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
+        //sf::Sprite sprite(temp.getTexture());
+        //sprite.setScale(0.69f, 0.69f);
+        //sprite.setPosition(100*lin,100*col);
+        //window.draw(sprite);
+        //window.display();
     } else {
         you_dumb();
     }
+    //delete temp;
 }
 
-
-void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
+void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
     std::cout << "Player " << j + 1
               << " choose the location for the knight by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
@@ -136,25 +113,28 @@ void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map) {
         if (check_stupidity())
             return;
     }
-    if (j == 0)
-        p->setType("N1*");
-    else if (j == 1)
-        p->setType("N2*");
-    else if (j == 2)
-        p->setType("N3*");
-    else
-        p->setType("N4*");
+    Cal *temp = new Cal("N" + std::to_string(j + 1) + "*");
+    p->setType(temp->getType());
     if (!occupied(lin, col, map) && lin != 0 && col != 0) {
         p->setLocatie(lin, col);
         p->setCuloare(j + 1);
+        p->setTexture(temp->getTexture());
+        temp->setLocatie(lin, col);
+        temp->setCuloare(j + 1);
         std::string tip_str = p->getType(); // Convert enum to string
         map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
+        player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
+        //sf::Sprite sprite(temp->getTexture());
+        //sprite.setScale(0.32f, 0.32f);
+        //sprite.setPosition(100*lin,100*col);
+        //window.draw(sprite);
+        //window.display();
     } else {
         you_dumb();
     }
 }
 
-void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) {
+void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
     std::cout << "Player " << j + 1
               << " choose the location for the bishop by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
@@ -173,25 +153,28 @@ void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map) 
         if (check_stupidity())
             return;
     }
-    if (j == 0)
-        p->setType("B1*");
-    else if (j == 1)
-        p->setType("B2*");
-    else if (j == 2)
-        p->setType("B3*");
-    else
-        p->setType("B4*");
+    Nebun *temp = new Nebun("B" + std::to_string(j + 1) + "*");
+    p->setType(temp->getType());
     if (!occupied(lin, col, map) && lin != 0 && col != 0) {
         p->setLocatie(lin, col);
         p->setCuloare(j + 1);
+        p->setTexture(temp->getTexture());
+        temp->setLocatie(lin, col);
+        temp->setCuloare(j + 1);
         std::string tip_str = p->getType(); // Convert enum to string
         map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
+        player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
+        //sf::Sprite sprite(temp.getTexture());
+        //sprite.setScale(0.2f, 0.2f);
+        //sprite.setPosition(100*lin,100*col);
+        //window.draw(sprite);
+        //window.display();
     } else {
         you_dumb();
     }
 }
 
-void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
+void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
     std::cout << "Player " << j + 1
               << " choose the location for the rook by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
@@ -210,25 +193,28 @@ void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map) {
         if (check_stupidity())
             return;
     }
-    if (j == 0)
-        p->setType("R1*");
-    else if (j == 1)
-        p->setType("R2*");
-    else if (j == 2)
-        p->setType("R3*");
-    else
-        p->setType("R4*");
+    Turn *temp = new Turn("R" + std::to_string(j + 1) + "*");
+    p->setType(temp->getType());
     if (!occupied(lin, col, map) && lin != 0 && col != 0) {
         p->setLocatie(lin, col);
         p->setCuloare(j + 1);
+        p->setTexture(temp->getTexture());
+        temp->setLocatie(lin, col);
+        temp->setCuloare(j + 1);
         std::string tip_str = p->getType(); // Convert enum to string
         map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
+        player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
+        //sf::Sprite sprite(temp.getTexture());
+        //sprite.setScale(0.69f, 0.69f);
+        //sprite.setPosition(100*lin,100*col);
+        //window.draw(sprite);
+        //window.display();
     } else {
         you_dumb();
     }
 }
 
-void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
+void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
     std::cout << "Player " << j + 1
               << " choose the location for the king by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
@@ -247,19 +233,22 @@ void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map) {
         if (check_stupidity())
             return;
     }
-    if (j == 0)
-        p->setType("K1*");
-    else if (j == 1)
-        p->setType("K2*");
-    else if (j == 2)
-        p->setType("K3*");
-    else
-        p->setType("K4*");
+    Rege *temp = new Rege("K" + std::to_string(j + 1) + "*");
+    p->setType(temp->getType());
     if (!occupied(lin, col, map) && lin != 0 && col != 0) {
         p->setLocatie(lin, col);
         p->setCuloare(j + 1);
+        p->setTexture(temp->getTexture());
+        temp->setLocatie(lin, col);
+        temp->setCuloare(j + 1);
         std::string tip_str = p->getType(); // Convert enum to string
         map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
+        player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
+        //sf::Sprite sprite(temp.getTexture());
+        //sprite.setScale(0.69f, 0.69f);
+        //sprite.setPosition(100*lin,100*col);
+        //window.draw(sprite);
+        //window.display();
     } else {
         you_dumb();
     }
@@ -454,8 +443,64 @@ bool check_resources(const std::string &type, Player &player) {
     }
     return false;
 }
+
+void draw_board(sf::RenderWindow &window) {
+    window.clear(sf::Color::Cyan); // Set background color to white
+
+    const int boardSize = 10;
+    const int squareSize = 100;
+    sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
+
+    for (int i = 0; i < boardSize; ++i) {
+        for (int j = 0; j < boardSize; ++j) {
+            if (i == 0 || i == boardSize - 1 || j == 0 || j == boardSize - 1) {
+                square.setPosition(i * squareSize, j * squareSize);
+                square.setFillColor(sf::Color::Transparent);
+                window.draw(square); // Draw transparent square
+            } else {
+                square.setPosition(i * squareSize, j * squareSize);
+                if ((i + j) % 4 == 0) {
+                    square.setFillColor(sf::Color::White);
+                } else if ((i + j) % 4 == 1) {
+                    square.setFillColor(sf::Color(255, 192, 203)); // pink
+                } else if ((i + j) % 4 == 2) {
+                    square.setFillColor(sf::Color(128, 128, 128)); // gray
+                } else {
+                    square.setFillColor(sf::Color(211, 211, 211));
+                }
+                window.draw(square); // Draw colored square
+                ///TO DO: imaginile cu numerele intr-un colt de patratel
+            }
+        }
+    }
+}
+
+void draw_pieces(sf::RenderWindow &window, std::vector<Player> players) {
+    /*
+      sf::Sprite sprite(temp.getTexture());
+        sprite.setScale(0.69f, 0.69f);
+        sprite.setPosition(100*lin,100*col);
+    */
+    for (unsigned long i = 0; i < players.size(); i++) {
+        auto piese = players[i].getPiese();
+        for (unsigned long j = 0; j < piese.size(); j++) {
+            sf::Sprite sprite(piese[j]->getTexture());
+            if (piese[j]->getType()[0] == 'N')
+                sprite.setScale(0.32f, 0.32f);
+            else if (piese[j]->getType()[0] == 'B')
+                sprite.setScale(0.2f, 0.2f);
+            else
+                sprite.setScale(0.69f, 0.69f);  ///asta din cauza imaginilor de dimensiuni amuzante
+            sprite.setPosition(100 * piese[j]->getLocatie().getLinie(), 100 * piese[j]->getLocatie().getColoana());
+            window.draw(sprite);
+            //window.display();
+        }
+    }
+    window.display();
+}
 void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
-                  Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player) {
+                  Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player, sf::RenderWindow &window,
+                  std::vector<Player> players) {
     std::cout
             << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
             << std::endl;
@@ -570,6 +615,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                 muta = 1;
         }
         if (muta == 1) {
+            ///aici updatez si tabla grafica
             map[type].setLinie(l);
             map[type].setColoana(c);
             if (board[l][c] != "***") {
@@ -621,6 +667,21 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                         std::cout << pair.first << " " << pair.second << std::endl;
                 }
             }
+            for (unsigned long i = 0; i < player.getPiese().size(); i++) {
+                if (player.getPiese()[i]->getType() == type) {
+                    player.getPiese()[i]->setLocatie(l, c);
+                    sf::Sprite sprite(player.getPiese()[i]->getTexture());
+                    if (player.getPiese()[i]->getType()[0] == 'N')
+                        sprite.setScale(0.32f, 0.32f);
+                    else if (player.getPiese()[i]->getType()[0] == 'B')
+                        sprite.setScale(0.2f, 0.2f);
+                    else
+                        sprite.setScale(0.69f, 0.69f);  ///asta din cauza imaginilor de dimensiuni amuzante
+                    sprite.setPosition(100 * player.getPiese()[i]->getLocatie().getLinie(),
+                                       100 * player.getPiese()[i]->getLocatie().getColoana());
+                    window.draw(sprite);
+                }
+            }
             board[l][c] = type;
             tabla.setCamp(l, c);
             board[ol][oc] = "***";
@@ -629,6 +690,11 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
         } else {
             std::cout << "You chose an invalid move" << std::endl;
         }
+        players[Player::getNr()].setPiese(player.getPiese());
+        window.clear();
+        draw_board(window);
+        draw_pieces(window, players);
+        window.display();
     }
     catch (resource_error &eroare) {
         std::cout << eroare.what() << std::endl;
@@ -636,52 +702,30 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
     catch (app_error &) {}
 }
 
-/*
-void draw_board(sf::RenderWindow& window)
-{
-    window.clear(sf::Color::Cyan); // Set background color to white
-
-    const int boardSize = 10;
-    const int squareSize = 100;
-    sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
-
-    for (int i = 0; i < boardSize; ++i) {
-        for (int j = 0; j < boardSize; ++j) {
-            if(i==0 || i==boardSize-1 || j==0 || j==boardSize-1){
-                square.setPosition(i * squareSize, j * squareSize);
-                square.setFillColor(sf::Color::Transparent);
-                window.draw(square); // Draw transparent square
-            }
-            else {
-                square.setPosition(i * squareSize, j * squareSize);
-                if ((i + j) % 4 == 0) {
-                    square.setFillColor(sf::Color::White);
-                } else if ((i + j) % 4 == 1) {
-                    square.setFillColor(sf::Color(255, 192, 203)); // pink
-                } else if ((i + j) % 4 == 2) {
-                    square.setFillColor(sf::Color(128, 128, 128)); // gray
-                } else {
-                    square.setFillColor(sf::Color(211, 211, 211));
-                }
-                window.draw(square); // Draw colored square
-            }
-        }
-    }
-}
- */
 void
 actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Pion *p, Cal *c, Nebun *ne,
-            Turn *t, Rege *r, Tabla &tabla, std::vector<Player> players) {
-    ///trebuie sa mai tai din playerii facuti din clasa
+            Turn *t, Rege *r, Tabla &tabla, std::vector<Player> players, sf::RenderWindow &window) {
+    draw_board(window);
+    draw_pieces(window, players);
     std::vector<int> playeri;
     for (int i = 0; i < n; i++)
         playeri.push_back(i + 1);
     //unsigned long j = 0;
     // /aici o sa incep cu staticul din Player
     Player::setNr(0);
-    while (playeri.size() > 1) {
+    while (playeri.size() > 1 && window.isOpen()) {
+        sf::Event event{};
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+        window.clear();
+        draw_board(window);
+        draw_pieces(window, players);
+        window.display();
         if (Player::getNr() >= playeri.size())
-            Player::setNr(0);   ///aici era j-ul de la linia 384
+            Player::setNr(0);
         p->setCuloare(playeri[Player::getNr()]);
         c->setCuloare(playeri[Player::getNr()]);
         ne->setCuloare(playeri[Player::getNr()]);
@@ -720,7 +764,11 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     t->setLocatie(map["R1*"].getLinie(), map["R1*"].getColoana());
                     r->setType("K1*");
                     r->setLocatie(map["K1*"].getLinie(), map["K1*"].getColoana());
-                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()]);
+                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
+                    window.clear();
+                    draw_board(window);
+                    draw_pieces(window, std::move(players));
+                    window.display();
                 } else {
                     you_dumb();
                     throw piece_error();
@@ -765,7 +813,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     t->setLocatie(map["R2*"].getLinie(), map["R2*"].getColoana());
                     r->setType("K2*");
                     r->setLocatie(map["K2*"].getLinie(), map["K2*"].getColoana());
-                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()]);
+                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
                 } else {
                     you_dumb();
                     throw piece_error();
@@ -811,7 +859,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     t->setLocatie(map["R3*"].getLinie(), map["R3*"].getColoana());
                     r->setType("K3*");
                     r->setLocatie(map["K3*"].getLinie(), map["K3*"].getColoana());
-                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()]);
+                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
                 } else {
                     you_dumb();
                     throw piece_error();
@@ -856,7 +904,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     t->setLocatie(map["R4*"].getLinie(), map["R4*"].getColoana());
                     r->setType("K4*");
                     r->setLocatie(map["K4*"].getLinie(), map["K4*"].getColoana());
-                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()]);
+                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
                 } else {
                     you_dumb();
                     throw piece_error();
@@ -899,7 +947,6 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             Player::inclNr();
         }
     }
-    //crapa:
     std::cout << "Game over!" << std::endl;
 }
 

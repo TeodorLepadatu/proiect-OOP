@@ -14,6 +14,7 @@ private:
     static unsigned long nr;
     static int nervi;
     Piesa *curr_piece;
+    std::vector<Piesa *> piese;
     //std::vector<Pacanea> inventar;
     int mutari_disponibile{};
     std::unordered_map<std::string, int> resurse;
@@ -27,8 +28,7 @@ public:
         delete curr_piece;
     }
     */
-    Player(const Player &other) : resurse(other.resurse) {
-        // Properly handle deep copy of curr_piece
+    Player(const Player &other) : resurse(other.resurse), piese(other.piese) {
         if (other.curr_piece) {
             switch (other.curr_piece->getTip()) {
                 case Piesa::P:
@@ -87,9 +87,14 @@ public:
             nr = other.nr;
             //inventar = other.inventar;
             mutari_disponibile = other.mutari_disponibile;
+            piese = other.piese;
         }
         return *this;
     }
+
+    bool operator==(const Player &rhs) const;
+
+    bool operator!=(const Player &rhs) const;
 
     /*
     [[nodiscard]] int getNr() const {
@@ -106,6 +111,11 @@ public:
         return mutari_disponibile;
     }
 
+    const std::vector<Piesa *> &getPiese() const;
+
+    void add_piece(Piesa *p);
+
+    void eliminate_piece(Piesa *p, std::vector<Piesa *> &piese);
     explicit Player(int mutariDisponibile) : curr_piece(nullptr), mutari_disponibile(mutariDisponibile) {}
 
     void setCurrPiece(Piesa *currPiece) {
@@ -132,8 +142,10 @@ public:
 
     std::unordered_map<std::string, int> &getResurse();
 
+    void setPiese(const std::vector<Piesa *> &piese);
+
     void setResurse(const std::unordered_map<std::string, int> &resurse);
 
-    static void schimbaResurse(std::unordered_map<std::string, int> &resurse, const std::string &res, int c);
+    void schimbaResurse(std::unordered_map<std::string, int> &resurse, const std::string &res, int c);
 };
 #endif

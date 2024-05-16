@@ -4,6 +4,7 @@
 #include "Locatie.h"
 #include <iostream>
 #include <utility>
+#include <SFML/Graphics.hpp>
 
 class Camp {
 private:
@@ -11,10 +12,13 @@ private:
     Locatie locatie;
     int numar;
     bool ocupat;    //daca exista piesa pe respectivul patratel
+    sf::Texture texture;
 public:
     explicit Camp(std::string culoare_ = std::string("WATER"), const Locatie &locatie_ = Locatie(0, 0),
          const int &numar_ = 0, bool ocupat_ = false)
-            : culoare{std::move(culoare_)}, locatie{locatie_}, numar{numar_}, ocupat{ocupat_} {}
+            : culoare{std::move(culoare_)}, locatie{locatie_}, numar{numar_}, ocupat{ocupat_} {
+        //if(numar_==2)
+    }
 
     friend std::ostream &operator<<(std::ostream &os, const Camp &camp) {
         os << "culoare: " << camp.culoare << " locatie: " << camp.locatie << " numar: " << camp.numar << " ocupat: "

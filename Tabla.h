@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Camp.h"
 #include <random>
+#include <SFML/Graphics.hpp>
 //#include "functii.h"
 
 
