@@ -496,11 +496,11 @@ void draw_pieces(sf::RenderWindow &window, std::vector<Player> players) {
             //window.display();
         }
     }
-    window.display();
+    //window.display();
 }
 void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
                   Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player, sf::RenderWindow &window,
-                  std::vector<Player> players) {
+                  std::vector<Player> &players) {
     std::cout
             << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
             << std::endl;
@@ -620,7 +620,9 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
             map[type].setColoana(c);
             if (board[l][c] != "***") {
                 map.erase(board[l][c]);
+                int numar = board[l][c][1] - '0' - 1;
                 if (board[l][c][0] == 'P') {
+                    numar = board[l][c][2] - '0' - 1; ///ca sa stiu de unde sterg piesa
                     temp_res = player.getResurse();
                     player.schimbaResurse(temp_res, "WATER", -1);
                     player.schimbaResurse(temp_res, "FOOD", -1);
@@ -666,6 +668,17 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                     for (const auto &pair: temp_res)
                         std::cout << pair.first << " " << pair.second << std::endl;
                 }
+                for (auto i = 0; i < players[numar].getPiese().size(); i++) {
+                    if (players[numar].getPiese()[i]->getType() == board[l][c]) {
+                        auto temp = players[numar].getPiese();
+                        temp.erase(temp.begin() + i);
+                        players[numar].setPiese(temp);
+                    }
+                }
+                window.clear();
+                draw_board(window);
+                draw_pieces(window, players);
+                window.display();
             }
             for (unsigned long i = 0; i < player.getPiese().size(); i++) {
                 if (player.getPiese()[i]->getType() == type) {
@@ -767,7 +780,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
                     window.clear();
                     draw_board(window);
-                    draw_pieces(window, std::move(players));
+                    draw_pieces(window, players);
                     window.display();
                 } else {
                     you_dumb();
