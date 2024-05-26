@@ -22,7 +22,7 @@ protected:
             throw object_error(type);
     }
 public:
-    explicit Piesa(std::string t) : culoare(0), type(t) {}
+    explicit Piesa(const std::string &t) : culoare(0), type(t), p_tip(P) {}
     // Copy constructor
     Piesa(const Piesa &other) : culoare(other.culoare), locatie(other.locatie), resurse(other.resurse),
                                 texture(other.texture), p_tip(other.p_tip) {}
@@ -160,7 +160,7 @@ public:
         resurse.emplace_back("WEAPON");
     }
 
-    Cal(std::string t) : Piesa(t) {
+    explicit Cal(std::string t) : Piesa(t) {
         p_tip = Piesa::C;
         resurse.emplace_back("WATER");
         resurse.emplace_back("FOOD");
@@ -204,7 +204,7 @@ public:
         resurse.emplace_back("WEAPON");
     }
 
-    Nebun(std::string t) : Piesa(t) {
+    explicit Nebun(std::string t) : Piesa(t) {
         p_tip = Piesa::B;
         resurse.emplace_back("WATER");
         resurse.emplace_back("FOOD");
@@ -249,7 +249,7 @@ public:
         resurse.emplace_back("FOOD");
     }
 
-    Turn(std::string t) : Piesa(t) {
+    explicit Turn(std::string t) : Piesa(t) {
         p_tip = Piesa::T;
         resurse.emplace_back("WEAPON");
         resurse.emplace_back("STONE");
@@ -294,7 +294,7 @@ public:
         resurse.emplace_back("FOOD");
     }
 
-    Rege(std::string t) : Piesa(t) {
+    explicit Rege(std::string t) : Piesa(t) {
         p_tip = Piesa::K;
         resurse.emplace_back("STONE");
         resurse.emplace_back("WATER");
