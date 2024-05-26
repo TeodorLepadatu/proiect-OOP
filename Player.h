@@ -28,7 +28,7 @@ public:
         delete curr_piece;
     }
     */
-    Player(const Player &other) : resurse(other.resurse), piese(other.piese) {
+    Player(const Player &other) : piese(other.piese), resurse(other.resurse) {
         if (other.curr_piece) {
             switch (other.curr_piece->getTip()) {
                 case Piesa::P:
@@ -142,7 +142,7 @@ public:
 
     std::unordered_map<std::string, int> &getResurse();
 
-    void setPiese(const std::vector<Piesa *> &piese);
+    void setPiese(const std::vector<Piesa *> &piese_);
 
     void setResurse(const std::unordered_map<std::string, int> &resurse);
 

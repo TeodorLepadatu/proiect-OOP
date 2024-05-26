@@ -254,82 +254,6 @@ void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map, Pl
     }
 }
 
-void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playeri,
-                 std::unordered_map<std::string, Locatie> &map) {
-    int ok1 = 0, ok2 = 0, ok3 = 0, ok4 = 0;
-    for (const auto &pair: map) {
-        if (pair.first == "K1*")
-            ok1 = 1;
-        else if (pair.first == "K2*")
-            ok2 = 1;
-        else if (pair.first == "K3*")
-            ok3 = 1;
-        else if (pair.first == "K4*")
-            ok4 = 1;
-    }
-    //std::cout << ok1 << " " << ok2 << " " << ok3 << " " << ok4 << std::endl;
-    for (int i = 1; i <= 8; i++) {
-        for (int j1 = 1; j1 <= 8; j1++) {
-            if (ok1 == 0) {
-                if (board[i][j] == "P11" || board[i][j] == "P21" || board[i][j] == "P31" || board[i][j] == "P41" ||
-                    board[i][j] == "N1*" || board[i][j] == "B1*" || board[i][j] == "R1*" || board[i][j] == "K1*") {
-                    auto it = map.find(board[i][j]);
-                    if (it != map.end())
-                        map.erase(it);
-                }
-                int del = 1;
-                auto it = find(playeri.begin(), playeri.end(), del);
-
-                if (it != playeri.end()) {
-                    playeri.erase(it);
-                }
-            }
-            if (ok2 == 0) {
-                if (board[i][j] == "P12" || board[i][j] == "P22" || board[i][j] == "P32" || board[i][j] == "P42" ||
-                    board[i][j] == "N2*" || board[i][j] == "B2*" || board[i][j] == "R2*" || board[i][j] == "K2*") {
-                    auto it = map.find(board[i][j]);
-                    if (it != map.end())
-                        map.erase(it);
-                }
-                int del = 2;
-                auto it = find(playeri.begin(), playeri.end(), del);
-
-                if (it != playeri.end()) {
-                    playeri.erase(it);
-                }
-            }
-            if (ok3 == 0) {
-                if (board[i][j] == "P13" || board[i][j] == "P23" || board[i][j] == "P33" || board[i][j] == "P43" ||
-                    board[i][j] == "N3*" || board[i][j] == "B3*" || board[i][j] == "R3*" || board[i][j] == "K3*") {
-                    auto it = map.find(board[i][j]);
-                    if (it != map.end())
-                        map.erase(it);
-                }
-                int del = 3;
-                auto it = find(playeri.begin(), playeri.end(), del);
-
-                if (it != playeri.end()) {
-                    playeri.erase(it);
-                }
-            }
-            if (ok4 == 0) {
-                if (board[i][j] == "P14" || board[i][j] == "P24" || board[i][j] == "P34" || board[i][j] == "P44" ||
-                    board[i][j] == "N4*" || board[i][j] == "B4*" || board[i][j] == "R4*" || board[i][j] == "K4*") {
-                    auto it = map.find(board[i][j]);
-                    if (it != map.end())
-                        map.erase(it);
-                }
-                int del = 4;
-                auto it = find(playeri.begin(), playeri.end(), del);
-
-                if (it != playeri.end()) {
-                    playeri.erase(it);
-                }
-            }
-        }
-    }
-}
-
 void find_winner(std::string board[][9]) {
     int winner = 0;
     for (int i = 1; i <= 8; i++)
@@ -445,33 +369,38 @@ bool check_resources(const std::string &type, Player &player) {
 }
 
 void draw_board(sf::RenderWindow &window) {
-    window.clear(sf::Color::Cyan); // Set background color to white
+    try {
+        window.clear(sf::Color::Cyan); // Set background color to white
 
-    const int boardSize = 10;
-    const int squareSize = 100;
-    sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
+        const int boardSize = 10;
+        const int squareSize = 100;
+        sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
 
-    for (int i = 0; i < boardSize; ++i) {
-        for (int j = 0; j < boardSize; ++j) {
-            if (i == 0 || i == boardSize - 1 || j == 0 || j == boardSize - 1) {
-                square.setPosition(i * squareSize, j * squareSize);
-                square.setFillColor(sf::Color::Transparent);
-                window.draw(square); // Draw transparent square
-            } else {
-                square.setPosition(i * squareSize, j * squareSize);
-                if ((i + j) % 4 == 0) {
-                    square.setFillColor(sf::Color::White);
-                } else if ((i + j) % 4 == 1) {
-                    square.setFillColor(sf::Color(255, 192, 203)); // pink
-                } else if ((i + j) % 4 == 2) {
-                    square.setFillColor(sf::Color(128, 128, 128)); // gray
+        for (int i = 0; i < boardSize; ++i) {
+            for (int j = 0; j < boardSize; ++j) {
+                if (i == 0 || i == boardSize - 1 || j == 0 || j == boardSize - 1) {
+                    square.setPosition(i * squareSize, j * squareSize);
+                    square.setFillColor(sf::Color::Transparent);
+                    window.draw(square); // Draw transparent square
                 } else {
-                    square.setFillColor(sf::Color(211, 211, 211));
+                    square.setPosition(i * squareSize, j * squareSize);
+                    if ((i + j) % 4 == 0) {
+                        square.setFillColor(sf::Color::White);
+                    } else if ((i + j) % 4 == 1) {
+                        square.setFillColor(sf::Color(255, 192, 203)); // pink
+                    } else if ((i + j) % 4 == 2) {
+                        square.setFillColor(sf::Color(128, 128, 128)); // gray
+                    } else {
+                        square.setFillColor(sf::Color(211, 211, 211));
+                    }
+                    window.draw(square); // Draw colored square
+                    ///TO DO: imaginile cu numerele intr-un colt de patratel
                 }
-                window.draw(square); // Draw colored square
-                ///TO DO: imaginile cu numerele intr-un colt de patratel
             }
         }
+    }
+    catch (window_error &error) {
+        std::cout << "The game is going to be played in the terminal only!" << std::endl;
     }
 }
 
@@ -497,6 +426,106 @@ void draw_pieces(sf::RenderWindow &window, std::vector<Player> players) {
         }
     }
     //window.display();
+}
+
+void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playeri,
+                 std::unordered_map<std::string, Locatie> &map, sf::RenderWindow &window, std::vector<Player> players) {
+    int ok1 = 0, ok2 = 0, ok3 = 0, ok4 = 0;
+    for (const auto &pair: map) {
+        if (pair.first == "K1*")
+            ok1 = 1;
+        else if (pair.first == "K2*")
+            ok2 = 1;
+        else if (pair.first == "K3*")
+            ok3 = 1;
+        else if (pair.first == "K4*")
+            ok4 = 1;
+    }
+    //std::cout << ok1 << " " << ok2 << " " << ok3 << " " << ok4 << std::endl;
+    for (int i = 1; i <= 8; i++) {
+        for (int j1 = 1; j1 <= 8; j1++) {
+            if (ok1 == 0) {
+                if (board[i][j] == "P11" || board[i][j] == "P21" || board[i][j] == "P31" || board[i][j] == "P41" ||
+                    board[i][j] == "N1*" || board[i][j] == "B1*" || board[i][j] == "R1*" || board[i][j] == "K1*") {
+                    auto it = map.find(board[i][j]);
+                    if (it != map.end())
+                        map.erase(it);
+                }
+                int del = 1;
+                auto it = find(playeri.begin(), playeri.end(), del);
+
+                if (it != playeri.end()) {
+                    auto it1 = players.begin() + (it - playeri.begin());
+                    playeri.erase(it);
+                    players.erase(it1);
+                    window.clear();
+                    draw_board(window);
+                    draw_pieces(window, players);
+                    window.display();
+                }
+            }
+            if (ok2 == 0) {
+                if (board[i][j] == "P12" || board[i][j] == "P22" || board[i][j] == "P32" || board[i][j] == "P42" ||
+                    board[i][j] == "N2*" || board[i][j] == "B2*" || board[i][j] == "R2*" || board[i][j] == "K2*") {
+                    auto it = map.find(board[i][j]);
+                    if (it != map.end())
+                        map.erase(it);
+                }
+                int del = 2;
+                auto it = find(playeri.begin(), playeri.end(), del);
+
+                if (it != playeri.end()) {
+                    auto it1 = players.begin() + (it - playeri.begin());
+                    playeri.erase(it);
+                    players.erase(it1);
+                    window.clear();
+                    draw_board(window);
+                    draw_pieces(window, players);
+                    window.display();
+                }
+            }
+            if (ok3 == 0) {
+                if (board[i][j] == "P13" || board[i][j] == "P23" || board[i][j] == "P33" || board[i][j] == "P43" ||
+                    board[i][j] == "N3*" || board[i][j] == "B3*" || board[i][j] == "R3*" || board[i][j] == "K3*") {
+                    auto it = map.find(board[i][j]);
+                    if (it != map.end())
+                        map.erase(it);
+                }
+                int del = 3;
+                auto it = find(playeri.begin(), playeri.end(), del);
+
+                if (it != playeri.end()) {
+                    auto it1 = players.begin() + (it - playeri.begin());
+                    playeri.erase(it);
+                    players.erase(it1);
+                    window.clear();
+                    draw_board(window);
+                    draw_pieces(window, players);
+                    window.display();
+                }
+            }
+            if (ok4 == 0) {
+                if (board[i][j] == "P14" || board[i][j] == "P24" || board[i][j] == "P34" || board[i][j] == "P44" ||
+                    board[i][j] == "N4*" || board[i][j] == "B4*" || board[i][j] == "R4*" || board[i][j] == "K4*") {
+                    auto it = map.find(board[i][j]);
+                    if (it != map.end())
+                        map.erase(it);
+                }
+                int del = 4;
+                auto it = find(playeri.begin(), playeri.end(), del);
+
+                if (it != playeri.end()) {
+                    auto it1 = players.begin() + (it - playeri.begin());
+                    playeri.erase(it);
+                    players.erase(it1);
+                    window.clear();
+                    draw_board(window);
+                    draw_pieces(window, players);
+                    window.display();
+                }
+            }
+        }
+    }
 }
 void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
                   Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player, sf::RenderWindow &window,
@@ -615,7 +644,6 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                 muta = 1;
         }
         if (muta == 1) {
-            ///aici updatez si tabla grafica
             map[type].setLinie(l);
             map[type].setColoana(c);
             if (board[l][c] != "***") {
@@ -942,7 +970,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             nextplayer = playeri[0];
         else
             nextplayer = playeri[Player::getNr() + 1];
-        check_kings(Player::getNr(), board, playeri, map);
+        check_kings(Player::getNr(), board, playeri, map, window, players);
         ///test daca avem rege
         if (playeri.size() < s) {
             bool nusasinucis = false;

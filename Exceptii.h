@@ -40,5 +40,12 @@ public:
     explicit object_error(const std::string &mesaj) {
         std::cout << "Could not create the " << mesaj << " object." << std::endl;
     }
-};  ///o sa pun asta in constructori cand voi face grafica cu SFML (cand iau pozele cu piesele/tabla/resurse/etc sau altele)
+};
+
+class window_error : public app_error {
+public:
+    explicit window_error() {
+        std::cout << "Could not load the window" << std::endl;
+    }
+};
 #endif //OOP_EXCEPTII_H
