@@ -115,7 +115,7 @@ public:
 
     void add_piece(Piesa *p);
 
-    void eliminate_piece(Piesa *p, std::vector<Piesa *> &piese);
+    //void eliminate_piece(Piesa *p, std::vector<Piesa *> &piese);
     explicit Player(int mutariDisponibile) : curr_piece(nullptr), mutari_disponibile(mutariDisponibile) {}
 
     void setCurrPiece(Piesa *currPiece) {
