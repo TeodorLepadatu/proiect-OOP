@@ -399,7 +399,7 @@ void draw_board(sf::RenderWindow &window) {
             }
         }
     }
-    catch (window_error &error) {
+    catch (window_error &) {
         std::cout << "The game is going to be played in the terminal only!" << std::endl;
     }
 }
