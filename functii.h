@@ -696,7 +696,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                     for (const auto &pair: temp_res)
                         std::cout << pair.first << " " << pair.second << std::endl;
                 }
-                for (auto i = 0; i < players[numar].getPiese().size(); i++) {
+                for (long long unsigned int i = 0; i < players[numar].getPiese().size(); i++) {
                     if (players[numar].getPiese()[i]->getType() == board[l][c]) {
                         auto temp = players[numar].getPiese();
                         temp.erase(temp.begin() + i);
