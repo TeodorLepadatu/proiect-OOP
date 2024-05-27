@@ -7,7 +7,7 @@ Are you tired of the same old game of chess? Want something new, fresh, and exci
 ## Overview
 Catanus Chess is played by 2-4 players, each vying for supremacy on the board. The goal is simple: be the last player with their king standing. But achieving this goal requires cunning, resource management, and strategic thinking.
 
-Recommended: 2 players (now)
+Recommended: 2 players (for now)
 
 ## Setup
 
