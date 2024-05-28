@@ -22,100 +22,15 @@ public:
     Player() : curr_piece(nullptr) {}
 
     explicit Player(Piesa *currPiece);
-    // Destructor to deallocate memory properly
-    /*
-    ~Player() {
-        delete curr_piece;
-    }
-    */
-    Player(const Player &other) : piese(other.piese), resurse(other.resurse) {
-        if (other.curr_piece) {
-            switch (other.curr_piece->getTip()) {
-                case Piesa::P:
-                    curr_piece = new Pion(*dynamic_cast<Pion *>(other.curr_piece));
-                    break;
-                case Piesa::C:
-                    curr_piece = new Cal(*dynamic_cast<Cal *>(other.curr_piece));
-                    break;
-                case Piesa::B:
-                    curr_piece = new Nebun(*dynamic_cast<Nebun *>(other.curr_piece));
-                    break;
-                case Piesa::T:
-                    curr_piece = new Turn(*dynamic_cast<Turn *>(other.curr_piece));
-                    break;
-                case Piesa::K:
-                    curr_piece = new Rege(*dynamic_cast<Rege *>(other.curr_piece));
-                    break;
-                default:
-                    curr_piece = nullptr;
-                    break;
-            }
-        } else {
-            curr_piece = nullptr;
-        }
-    }
-
-    Player &operator=(const Player &other) {
-        if (this != &other) {
-            // Properly handle deep copy of curr_piece
-            delete curr_piece;
-            if (other.curr_piece) {
-                switch (other.curr_piece->getTip()) {
-                    case Piesa::P:
-                        curr_piece = new Pion(*dynamic_cast<Pion *>(other.curr_piece));
-                        break;
-                    case Piesa::C:
-                        curr_piece = new Cal(*dynamic_cast<Cal *>(other.curr_piece));
-                        break;
-                    case Piesa::B:
-                        curr_piece = new Nebun(*dynamic_cast<Nebun *>(other.curr_piece));
-                        break;
-                    case Piesa::T:
-                        curr_piece = new Turn(*dynamic_cast<Turn *>(other.curr_piece));
-                        break;
-                    case Piesa::K:
-                        curr_piece = new Rege(*dynamic_cast<Rege *>(other.curr_piece));
-                        break;
-                    default:
-                        curr_piece = nullptr;
-                        break;
-                }
-            } else {
-                curr_piece = nullptr;
-            }
-            // Copy other members
-            nr = other.nr;
-            //inventar = other.inventar;
-            mutari_disponibile = other.mutari_disponibile;
-            piese = other.piese;
-        }
-        return *this;
-    }
 
     bool operator==(const Player &rhs) const;
 
     bool operator!=(const Player &rhs) const;
 
-    /*
-    [[nodiscard]] int getNr() const {
-        return nr;
-    }
-
-    void setNr(int nr_) {
-        Player::nr = nr_;
-    }
-    */
-
-
-    [[nodiscard]] int getMutariDisponibile() const {
-        return mutari_disponibile;
-    }
-
     const std::vector<Piesa *> &getPiese() const;
 
     void add_piece(Piesa *p);
 
-    //void eliminate_piece(Piesa *p, std::vector<Piesa *> &piese);
     explicit Player(int mutariDisponibile) : curr_piece(nullptr), mutari_disponibile(mutariDisponibile) {}
 
     void setCurrPiece(Piesa *currPiece) {
@@ -134,9 +49,6 @@ public:
 
     static int getNervi();
 
-    //static void setNervi(int nervi);
-
-    //static unsigned long nextPlayer(unsigned long nr, std::string board[][9], std::unordered_map<std::string, Locatie> &map, std::vector<int> playeri);
     static void ma_enervez();
     static void inclNr();
 

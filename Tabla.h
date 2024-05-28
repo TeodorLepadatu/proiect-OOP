@@ -10,7 +10,7 @@
 
 class Tabla {
 private:
-    Camp m[9][9];  // Maximum number of squares
+    Camp m[9][9];
 public:
     Tabla() {
         for (int i = 1; i <= 8; i++) {
@@ -36,9 +36,6 @@ public:
         }
     }
 
-    /*
-    Camp &getCamp(int i, int j);
-    */
     void setCamp(int i, int j);
 
     void resetCamp(int i, int j);
@@ -49,9 +46,6 @@ public:
 
     [[nodiscard]] Camp displayCamp(int i, int j) const;
 
-    /*
-    void displayocupat() const;
-    */
     friend std::ostream &operator<<(std::ostream &os, const Tabla &tabla) {
         os << "m: " << tabla.m;
         return os;

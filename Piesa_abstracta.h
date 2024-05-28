@@ -10,24 +10,44 @@
 #include "Tabla.h"
 #include "Exceptii.h"
 class Piesa {
-protected:
-    int culoare;
-    Locatie locatie;
-    std::vector<std::string> resurse;
-    std::string type;
-    sf::Texture texture;
-
-    Piesa() : culoare(0), p_tip(P) {
-        if (!texture.loadFromFile("images/rege_rosu.png"))
-            throw object_error(type);
-    }
 public:
+    enum tip {
+        P, C, B, T, K
+    };
+
+    [[nodiscard]] int getCuloare() const {
+        return culoare;
+    }
+
+
+    [[nodiscard]] const Locatie &getLocatie() const {
+        return locatie;
+    }
+
+    void setLocatie(int linie, int coloana) {
+        locatie.setLinie(linie);
+        locatie.setColoana(coloana);
+    }
+
+    void setCuloare(const int &culoare_) {
+        culoare = culoare_;
+    }
+
+    void setType(const std::string &type_) {
+        Piesa::type = type_;
+    }
+
+    [[nodiscard]] const std::string &getType() const {
+        return type;
+    }
+
+    [[nodiscard]] const std::vector<std::string> &getResurse() const {
+        return resurse;
+    }
     explicit Piesa(const std::string &t) : culoare(0), type(t), p_tip(P) {}
-    // Copy constructor
     Piesa(const Piesa &other) : culoare(other.culoare), locatie(other.locatie), resurse(other.resurse),
                                 texture(other.texture), p_tip(other.p_tip) {}
 
-    // Copy assignment operator
     Piesa &operator=(const Piesa &other) {
         if (this != &other) {
             culoare = other.culoare;
@@ -49,62 +69,21 @@ public:
 
     virtual std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) = 0;
 
-    virtual ~Piesa() = default; // Virtual destructor
+    virtual ~Piesa() = default;
 
-    enum tip {
-        P, C, B, T, K
-    };
 protected:
+    int culoare;
+    Locatie locatie;
+    std::vector<std::string> resurse;
+    std::string type;
+    sf::Texture texture;
     tip p_tip;
-public:
-    [[nodiscard]] tip getTip() const { return p_tip; };
 
-    [[nodiscard]] int getCuloare() const {
-        return culoare;
+    Piesa() : culoare(0), p_tip(P) {
+        if (!texture.loadFromFile("images/rege_rosu.png"))
+            throw object_error(type);
     }
 
-    [[nodiscard]] const std::string &gettip() const {
-        return type;
-    }
-
-    [[nodiscard]] const Locatie &getLocatie() const {
-        return locatie;
-    }
-
-    void setLocatie(int linie, int coloana) {
-        locatie.setLinie(linie);
-        locatie.setColoana(coloana);
-    }
-
-    void setCuloare(const int &culoare_) {
-        culoare = culoare_;
-    }
-
-    void setTip(const std::string &tip_) {
-        if (tip_ == "P") {
-            p_tip = P;
-        } else if (tip_ == "C") {
-            p_tip = C;
-        } else if (tip_ == "B") {
-            p_tip = B;
-        } else if (tip_ == "T") {
-            p_tip = T;
-        } else if (tip_ == "K") {
-            p_tip = K;
-        }
-    }
-
-    void setType(const std::string &type_) {
-        Piesa::type = type_;
-    }
-
-    [[nodiscard]] const std::string &getType() const {
-        return type;
-    }
-
-    [[nodiscard]] const std::vector<std::string> &getResurse() const {
-        return resurse;
-    }
 };
 
 class Pion : public Piesa {
@@ -134,10 +113,8 @@ public:
             throw object_error("pawn");
     }
 
-    // Copy constructor
     Pion(const Pion &other) : Piesa(other), mutari_posibile(other.mutari_posibile) {}
 
-    // Copy assignment operator
     Pion &operator=(const Pion &other) {
         if (this != &other) {
             Piesa::operator=(other);
@@ -178,10 +155,8 @@ public:
             throw object_error("knight");
     }
 
-    // Copy constructor
     Cal(const Cal &other) : Piesa(other), mutari_posibile(other.mutari_posibile) {}
 
-    // Copy assignment operator
     Cal &operator=(const Cal &other) {
         if (this != &other) {
             Piesa::operator=(other);
@@ -222,10 +197,8 @@ public:
             throw object_error("bishop");
     }
 
-    // Copy constructor
     Nebun(const Nebun &other) : Piesa(other), mutari_posibile(other.mutari_posibile) {}
 
-    // Copy assignment operator
     Nebun &operator=(const Nebun &other) {
         if (this != &other) {
             Piesa::operator=(other);
@@ -268,10 +241,8 @@ public:
             throw object_error("rook");
     }
 
-    // Copy constructor
     Turn(const Turn &other) : Piesa(other), mutari_posibile(other.mutari_posibile) {}
 
-    // Copy assignment operator
     Turn &operator=(const Turn &other) {
         if (this != &other) {
             Piesa::operator=(other);
@@ -312,10 +283,8 @@ public:
             throw object_error("king");
     }
 
-    // Copy constructor
     Rege(const Rege &other) : Piesa(other), mutari_posibile(other.mutari_posibile) {}
 
-    // Copy assignment operator
     Rege &operator=(const Rege &other) {
         if (this != &other) {
             Piesa::operator=(other);

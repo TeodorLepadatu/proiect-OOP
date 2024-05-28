@@ -17,7 +17,6 @@ public:
     explicit Camp(std::string culoare_ = std::string("WATER"), const Locatie &locatie_ = Locatie(0, 0),
          const int &numar_ = 0, bool ocupat_ = false)
             : culoare{std::move(culoare_)}, locatie{locatie_}, numar{numar_}, ocupat{ocupat_} {
-        //if(numar_==2)
     }
 
     friend std::ostream &operator<<(std::ostream &os, const Camp &camp) {
@@ -31,18 +30,10 @@ public:
         return culoare;
     }
 
-    [[nodiscard]] const Locatie &getLocatie() const {
-        return locatie;
-    }
     [[nodiscard]] int getNumar() const {
         return numar;
     }
 
-    /*
-    [[nodiscard]] bool isOcupat() const {
-        return ocupat;
-    }
-    */
     void setOcupat() {
         Camp::ocupat = true;
     }
