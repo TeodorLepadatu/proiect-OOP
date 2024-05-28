@@ -400,7 +400,7 @@ void draw_board(sf::RenderWindow &window) {
         }
     }
     catch (window_error &) {
-        std::cout << "The game is going to be played in the terminal only as the board did not load!" << std::endl;
+        std::cout << "The game is going to be played in the terminal only!" << std::endl;
     }
 }
 
@@ -414,12 +414,7 @@ void draw_pieces(sf::RenderWindow &window, std::vector<Player> players) {
         auto piese = players[i].getPiese();
         for (unsigned long j = 0; j < piese.size(); j++) {
             sf::Sprite sprite(piese[j]->getTexture());
-            if (piese[j]->getType()[0] == 'N')
-                sprite.setScale(0.32f, 0.32f);
-            else if (piese[j]->getType()[0] == 'B')
-                sprite.setScale(0.2f, 0.2f);
-            else
-                sprite.setScale(0.69f, 0.69f);  ///asta din cauza imaginilor de dimensiuni amuzante
+            sprite.setScale(0.69f, 0.69f);
             sprite.setPosition(100 * piese[j]->getLocatie().getLinie(), 100 * piese[j]->getLocatie().getColoana());
             window.draw(sprite);
             //window.display();
@@ -712,12 +707,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                 if (player.getPiese()[i]->getType() == type) {
                     player.getPiese()[i]->setLocatie(l, c);
                     sf::Sprite sprite(player.getPiese()[i]->getTexture());
-                    if (player.getPiese()[i]->getType()[0] == 'N')
-                        sprite.setScale(0.32f, 0.32f);
-                    else if (player.getPiese()[i]->getType()[0] == 'B')
-                        sprite.setScale(0.2f, 0.2f);
-                    else
-                        sprite.setScale(0.69f, 0.69f);  ///asta din cauza imaginilor de dimensiuni amuzante
+                    sprite.setScale(0.69f, 0.69f);
                     sprite.setPosition(100 * player.getPiese()[i]->getLocatie().getLinie(),
                                        100 * player.getPiese()[i]->getLocatie().getColoana());
                     window.draw(sprite);
@@ -754,6 +744,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
     //unsigned long j = 0;
     // /aici o sa incep cu staticul din Player
     Player::setNr(0);
+    bool ok = true;
     while (playeri.size() > 1 && window.isOpen()) {
         sf::Event event{};
         while (window.pollEvent(event)) {
@@ -772,197 +763,204 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
         ne->setCuloare(playeri[Player::getNr()]);
         t->setCuloare(playeri[Player::getNr()]);
         r->setCuloare(playeri[Player::getNr()]);
-        if (playeri[Player::getNr()] == 1) {
-            try {
+        if (ok == true) {
+            if (playeri[Player::getNr()] == 1) {
+                try {
+                    primeste_resurse(board, tabla, players);
+                    printboard(board);
+                    std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
+                              << std::endl;
+                    for (const auto &pair: map)
+                        if (pair.first == "P11" || pair.first == "P21" || pair.first == "P31" || pair.first == "P41" ||
+                            pair.first == "N1*" || pair.first == "B1*" || pair.first == "R1*" || pair.first == "K1*")
+                            std::cout << pair.first << " ";
+                    show_resources_and_pieces(p, c, ne, t, r, players);
+                    std::string type;
+                    std::cin >> type;
+                    //std::cout<<map[type];
+                    if (type == "n") {}
+                    else if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" ||
+                             type == "B1*" ||
+                             type == "R1*" || type == "K1*") {
+                        if (type[0] == 'P') {
+                            p->setType(type);
+                            p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                        } else {
+                            p->setType("P11");
+                            p->setLocatie(map["P11"].getLinie(), map["P11"].getColoana());
+                        }
+                        c->setType("N1*");
+                        c->setLocatie(map["N1*"].getLinie(), map["N1*"].getColoana());
+                        ne->setType("B1*");
+                        ne->setLocatie(map["B1*"].getLinie(), map["B1*"].getColoana());
+                        t->setType("R1*");
+                        t->setLocatie(map["R1*"].getLinie(), map["R1*"].getColoana());
+                        r->setType("K1*");
+                        r->setLocatie(map["K1*"].getLinie(), map["K1*"].getColoana());
+                        piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window,
+                                     players);
+                        window.clear();
+                        draw_board(window);
+                        draw_pieces(window, players);
+                        window.display();
+                    } else {
+                        you_dumb();
+                        throw piece_error();
+                    }
+                }
+                catch (piece_error &eroare) {
+                    std::cout << eroare.what();
+                    Player::ma_enervez();
+                    if (check_stupidity())
+                        return;
+                }
+                catch (app_error &) {}
+            } else if (playeri[Player::getNr()] == 2) {
+                try {
+                    primeste_resurse(board, tabla, players);
+                    std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
+                              << std::endl;
+                    for (const auto &pair: map)
+                        if (pair.first == "P12" || pair.first == "P22" || pair.first == "P32" || pair.first == "P42" ||
+                            pair.first == "N2*" || pair.first == "B2*" || pair.first == "R2*" || pair.first == "K2*")
+                            std::cout << pair.first << " ";
+                    show_resources_and_pieces(p, c, ne, t, r, players);
+                    printboard(board);
+                    std::string type;
+                    std::cin >> type;
+                    if (type == "n") {}
+                    else if (type == "P12" || type == "P22" || type == "P32" || type == "P42" || type == "N2*" ||
+                             type == "B2*" ||
+                             type == "R2*" || type == "K2*") {
+                        if (type[0] == 'P') {
+                            p->setType(type);
+                            p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                        } else {
+                            p->setType("P12");
+                            p->setLocatie(map["P12"].getLinie(), map["P12"].getColoana());
+                        }
+                        c->setType("N2*");
+                        c->setLocatie(map["N2*"].getLinie(), map["N2*"].getColoana());
+                        ne->setType("B2*");
+                        ne->setLocatie(map["B2*"].getLinie(), map["B2*"].getColoana());
+                        t->setType("R2*");
+                        t->setLocatie(map["R2*"].getLinie(), map["R2*"].getColoana());
+                        r->setType("K2*");
+                        r->setLocatie(map["K2*"].getLinie(), map["K2*"].getColoana());
+                        piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window,
+                                     players);
+                    } else {
+                        you_dumb();
+                        throw piece_error();
+                    }
+                }
+                catch (piece_error &eroare) {
+                    std::cout << eroare.what();
+                    Player::ma_enervez();
+                    if (check_stupidity())
+                        return;
+                }
+                catch (app_error &) {}
+            } else if (playeri[Player::getNr()] == 3) {
                 primeste_resurse(board, tabla, players);
+                std::cout << "Player " << playeri[Player::getNr()]
+                          << ", choose the piece that you want to move (if you want to move a pawn, enter both the numbers and if you want to move anything else, type the letter, the number and the star, otherwise it will not work): "
+                          << std::endl;
+                for (const auto &pair: map)
+                    if (pair.first == "P13" || pair.first == "P23" || pair.first == "P33" || pair.first == "P43" ||
+                        pair.first == "N3*" || pair.first == "B3*" || pair.first == "R3*" || pair.first == "K3*")
+                        std::cout << pair.first << " ";
+                show_resources_and_pieces(p, c, ne, t, r, players);
                 printboard(board);
+                std::string type;
+                std::cin >> type;
+                try {
+                    if (type == "n") {}
+                    else if (type == "P13" || type == "P23" || type == "P33" || type == "P43" || type == "N3*" ||
+                             type == "B3*" ||
+                             type == "R3*" || type == "K3*") {
+                        if (type[0] == 'P') {
+                            p->setType(type);
+                            p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                        } else {
+                            p->setType("P13");
+                            p->setLocatie(map["P13"].getLinie(), map["P13"].getColoana());
+                        }
+                        c->setType("N3*");
+                        c->setLocatie(map["N3*"].getLinie(), map["N3*"].getColoana());
+                        ne->setType("B3*");
+                        ne->setLocatie(map["B3*"].getLinie(), map["B3*"].getColoana());
+                        t->setType("R3*");
+                        t->setLocatie(map["R3*"].getLinie(), map["R3*"].getColoana());
+                        r->setType("K3*");
+                        r->setLocatie(map["K3*"].getLinie(), map["K3*"].getColoana());
+                        piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window,
+                                     players);
+                    } else {
+                        you_dumb();
+                        throw piece_error();
+                    }
+                }
+                catch (piece_error &eroare) {
+                    std::cout << eroare.what();
+                    Player::ma_enervez();
+                    if (check_stupidity())
+                        return;
+                }
+                catch (app_error &) {}
+            } else if (playeri[Player::getNr()] == 4) {
+                primeste_resurse(board, tabla, players);
                 std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
                           << std::endl;
                 for (const auto &pair: map)
-                    if (pair.first == "P11" || pair.first == "P21" || pair.first == "P31" || pair.first == "P41" ||
-                        pair.first == "N1*" || pair.first == "B1*" || pair.first == "R1*" || pair.first == "K1*")
-                        std::cout << pair.first << " ";
-                show_resources_and_pieces(p, c, ne, t, r, players);
-                std::string type;
-                std::cin >> type;
-                //std::cout<<map[type];
-                if (type == "n") {}
-                else if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" ||
-                         type == "B1*" ||
-                         type == "R1*" || type == "K1*") {
-                    if (type[0] == 'P') {
-                        p->setType(type);
-                        p->setLocatie(map[type].getLinie(), map[type].getColoana());
-                    } else {
-                        p->setType("P11");
-                        p->setLocatie(map["P11"].getLinie(), map["P11"].getColoana());
-                    }
-                    c->setType("N1*");
-                    c->setLocatie(map["N1*"].getLinie(), map["N1*"].getColoana());
-                    ne->setType("B1*");
-                    ne->setLocatie(map["B1*"].getLinie(), map["B1*"].getColoana());
-                    t->setType("R1*");
-                    t->setLocatie(map["R1*"].getLinie(), map["R1*"].getColoana());
-                    r->setType("K1*");
-                    r->setLocatie(map["K1*"].getLinie(), map["K1*"].getColoana());
-                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
-                    window.clear();
-                    draw_board(window);
-                    draw_pieces(window, players);
-                    window.display();
-                } else {
-                    you_dumb();
-                    throw piece_error();
-                }
-            }
-            catch (piece_error &eroare) {
-                std::cout << eroare.what();
-                Player::ma_enervez();
-                if (check_stupidity())
-                    return;
-            }
-            catch (app_error &) {}
-        } else if (playeri[Player::getNr()] == 2) {
-            try {
-                primeste_resurse(board, tabla, players);
-                std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
-                          << std::endl;
-                for (const auto &pair: map)
-                    if (pair.first == "P12" || pair.first == "P22" || pair.first == "P32" || pair.first == "P42" ||
-                        pair.first == "N2*" || pair.first == "B2*" || pair.first == "R2*" || pair.first == "K2*")
+                    if (pair.first == "P14" || pair.first == "P24" || pair.first == "P34" || pair.first == "P44" ||
+                        pair.first == "N4*" || pair.first == "B4*" || pair.first == "R4*" || pair.first == "K4*")
                         std::cout << pair.first << " ";
                 show_resources_and_pieces(p, c, ne, t, r, players);
                 printboard(board);
                 std::string type;
                 std::cin >> type;
-                if (type == "n") {}
-                else if (type == "P12" || type == "P22" || type == "P32" || type == "P42" || type == "N2*" ||
-                         type == "B2*" ||
-                         type == "R2*" || type == "K2*") {
-                    if (type[0] == 'P') {
-                        p->setType(type);
-                        p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                try {
+                    if (type == "n") {}
+                    else if (type == "P14" || type == "P24" || type == "P34" || type == "P44" || type == "N4*" ||
+                             type == "B4*" ||
+                             type == "R4*" || type == "K4*") {
+                        if (type[0] == 'P') {
+                            p->setType(type);
+                            p->setLocatie(map[type].getLinie(), map[type].getColoana());
+                        } else {
+                            p->setType("P14");
+                            p->setLocatie(map["P14"].getLinie(), map["P14"].getColoana());
+                        }
+                        c->setType("N4*");
+                        c->setLocatie(map["N4*"].getLinie(), map["P12"].getColoana());
+                        ne->setType("B4*");
+                        ne->setLocatie(map["B4*"].getLinie(), map["B4*"].getColoana());
+                        t->setType("R4*");
+                        t->setLocatie(map["R4*"].getLinie(), map["R4*"].getColoana());
+                        r->setType("K4*");
+                        r->setLocatie(map["K4*"].getLinie(), map["K4*"].getColoana());
+                        piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window,
+                                     players);
                     } else {
-                        p->setType("P12");
-                        p->setLocatie(map["P12"].getLinie(), map["P12"].getColoana());
+                        you_dumb();
+                        throw piece_error();
                     }
-                    c->setType("N2*");
-                    c->setLocatie(map["N2*"].getLinie(), map["N2*"].getColoana());
-                    ne->setType("B2*");
-                    ne->setLocatie(map["B2*"].getLinie(), map["B2*"].getColoana());
-                    t->setType("R2*");
-                    t->setLocatie(map["R2*"].getLinie(), map["R2*"].getColoana());
-                    r->setType("K2*");
-                    r->setLocatie(map["K2*"].getLinie(), map["K2*"].getColoana());
-                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
-                } else {
-                    you_dumb();
-                    throw piece_error();
+                }
+                catch (piece_error &eroare) {
+                    std::cout << eroare.what();
+                    Player::ma_enervez();
+                    if (check_stupidity())
+                        return;
+                }
+                catch (app_error &) {
+                    Player::ma_enervez();
+                    if (check_stupidity())
+                        return;
                 }
             }
-            catch (piece_error &eroare) {
-                std::cout << eroare.what();
-                Player::ma_enervez();
-                if (check_stupidity())
-                    return;
-            }
-            catch (app_error &) {}
-        } else if (playeri[Player::getNr()] == 3) {
-            primeste_resurse(board, tabla, players);
-            std::cout << "Player " << playeri[Player::getNr()]
-                      << ", choose the piece that you want to move (if you want to move a pawn, enter both the numbers and if you want to move anything else, type the letter, the number and the star, otherwise it will not work): "
-                      << std::endl;
-            for (const auto &pair: map)
-                if (pair.first == "P13" || pair.first == "P23" || pair.first == "P33" || pair.first == "P43" ||
-                    pair.first == "N3*" || pair.first == "B3*" || pair.first == "R3*" || pair.first == "K3*")
-                    std::cout << pair.first << " ";
-            show_resources_and_pieces(p, c, ne, t, r, players);
-            printboard(board);
-            std::string type;
-            std::cin >> type;
-            try {
-                if (type == "n") {}
-                else if (type == "P13" || type == "P23" || type == "P33" || type == "P43" || type == "N3*" ||
-                         type == "B3*" ||
-                         type == "R3*" || type == "K3*") {
-                    if (type[0] == 'P') {
-                        p->setType(type);
-                        p->setLocatie(map[type].getLinie(), map[type].getColoana());
-                    } else {
-                        p->setType("P13");
-                        p->setLocatie(map["P13"].getLinie(), map["P13"].getColoana());
-                    }
-                    c->setType("N3*");
-                    c->setLocatie(map["N3*"].getLinie(), map["N3*"].getColoana());
-                    ne->setType("B3*");
-                    ne->setLocatie(map["B3*"].getLinie(), map["B3*"].getColoana());
-                    t->setType("R3*");
-                    t->setLocatie(map["R3*"].getLinie(), map["R3*"].getColoana());
-                    r->setType("K3*");
-                    r->setLocatie(map["K3*"].getLinie(), map["K3*"].getColoana());
-                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
-                } else {
-                    you_dumb();
-                    throw piece_error();
-                }
-            }
-            catch (piece_error &eroare) {
-                std::cout << eroare.what();
-                Player::ma_enervez();
-                if (check_stupidity())
-                    return;
-            }
-            catch (app_error &) {}
-        } else if (playeri[Player::getNr()] == 4) {
-            primeste_resurse(board, tabla, players);
-            std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
-                      << std::endl;
-            for (const auto &pair: map)
-                if (pair.first == "P14" || pair.first == "P24" || pair.first == "P34" || pair.first == "P44" ||
-                    pair.first == "N4*" || pair.first == "B4*" || pair.first == "R4*" || pair.first == "K4*")
-                    std::cout << pair.first << " ";
-            show_resources_and_pieces(p, c, ne, t, r, players);
-            printboard(board);
-            std::string type;
-            std::cin >> type;
-            try {
-                if (type == "n") {}
-                else if (type == "P14" || type == "P24" || type == "P34" || type == "P44" || type == "N4*" ||
-                         type == "B4*" ||
-                         type == "R4*" || type == "K4*") {
-                    if (type[0] == 'P') {
-                        p->setType(type);
-                        p->setLocatie(map[type].getLinie(), map[type].getColoana());
-                    } else {
-                        p->setType("P14");
-                        p->setLocatie(map["P14"].getLinie(), map["P14"].getColoana());
-                    }
-                    c->setType("N4*");
-                    c->setLocatie(map["N4*"].getLinie(), map["P12"].getColoana());
-                    ne->setType("B4*");
-                    ne->setLocatie(map["B4*"].getLinie(), map["B4*"].getColoana());
-                    t->setType("R4*");
-                    t->setLocatie(map["R4*"].getLinie(), map["R4*"].getColoana());
-                    r->setType("K4*");
-                    r->setLocatie(map["K4*"].getLinie(), map["K4*"].getColoana());
-                    piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window, players);
-                } else {
-                    you_dumb();
-                    throw piece_error();
-                }
-            }
-            catch (piece_error &eroare) {
-                std::cout << eroare.what();
-                Player::ma_enervez();
-                if (check_stupidity())
-                    return;
-            }
-            catch (app_error &) {
-                Player::ma_enervez();
-                if (check_stupidity())
-                    return;
-            }
-        }
+        } else
+            ok = true;
         long unsigned int s = playeri.size();
         int actualplayer = playeri[Player::getNr()];
         int nextplayer = 0;
@@ -977,12 +975,14 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             for (long unsigned int x = 0; x < playeri.size(); x++)
                 if (playeri[x] == actualplayer) {
                     Player::setNr(x);
+                    ok = false;
                     nusasinucis = true;
                 }
             if (!nusasinucis) {
                 for (long unsigned int x = 0; x < playeri.size(); x++)
-                    if (playeri[x] == nextplayer)
+                    if (playeri[x] == nextplayer) {
                         Player::setNr(x);
+                    }
             }
         } else {
             Player::inclNr();

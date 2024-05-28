@@ -9,7 +9,6 @@
 #include "Locatie.h"
 #include "Tabla.h"
 #include "Exceptii.h"
-
 class Piesa {
 protected:
     int culoare;
@@ -17,22 +16,18 @@ protected:
     std::vector<std::string> resurse;
     std::string type;
     sf::Texture texture;
-    enum tip {
-        P, C, B, T, K
-    };
-    tip p_tip;
+
     Piesa() : culoare(0), p_tip(P) {
         if (!texture.loadFromFile("images/rege_rosu.png"))
             throw object_error(type);
     }
-
 public:
     explicit Piesa(const std::string &t) : culoare(0), type(t), p_tip(P) {}
-
     // Copy constructor
     Piesa(const Piesa &other) : culoare(other.culoare), locatie(other.locatie), resurse(other.resurse),
                                 texture(other.texture), p_tip(other.p_tip) {}
 
+    // Copy assignment operator
     Piesa &operator=(const Piesa &other) {
         if (this != &other) {
             culoare = other.culoare;
@@ -44,11 +39,6 @@ public:
         return *this;
     }
 
-    virtual ~Piesa() = default; // Virtual destructor
-
-    // Clone method
-    virtual Piesa *clone() const = 0;
-
     const sf::Texture &getTexture() const {
         return texture;
     }
@@ -59,8 +49,15 @@ public:
 
     virtual std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) = 0;
 
+    virtual ~Piesa() = default; // Virtual destructor
 
-    [[nodiscard]] tip getTip() const { return p_tip; }
+    enum tip {
+        P, C, B, T, K
+    };
+protected:
+    tip p_tip;
+public:
+    [[nodiscard]] tip getTip() const { return p_tip; };
 
     [[nodiscard]] int getCuloare() const {
         return culoare;
@@ -113,7 +110,6 @@ public:
 class Pion : public Piesa {
 private:
     std::vector<Locatie> mutari_posibile;
-
 public:
     Pion() : Piesa() {
         p_tip = Piesa::P;
@@ -121,7 +117,7 @@ public:
         resurse.emplace_back("FOOD");
     }
 
-    explicit Pion(const std::string &t) : Piesa(t) {
+    explicit Pion(std::string t) : Piesa(t) {
         p_tip = Piesa::P;
         resurse.emplace_back("WATER");
         resurse.emplace_back("FOOD");
@@ -150,17 +146,12 @@ public:
         return *this;
     }
 
-    Piesa *clone() const override {
-        return new Pion(*this);
-    }
-
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
+
 };
 
 class Cal : public Piesa {
-private:
     std::vector<Locatie> mutari_posibile;
-
 public:
     Cal() : Piesa() {
         p_tip = Piesa::C;
@@ -169,7 +160,7 @@ public:
         resurse.emplace_back("WEAPON");
     }
 
-    explicit Cal(const std::string &t) : Piesa(t) {
+    explicit Cal(std::string t) : Piesa(t) {
         p_tip = Piesa::C;
         resurse.emplace_back("WATER");
         resurse.emplace_back("FOOD");
@@ -199,17 +190,12 @@ public:
         return *this;
     }
 
-    Piesa *clone() const override {
-        return new Cal(*this);
-    }
-
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
 };
 
 class Nebun : public Piesa {
 private:
     std::vector<Locatie> mutari_posibile;
-
 public:
     Nebun() : Piesa() {
         p_tip = Piesa::B;
@@ -218,7 +204,7 @@ public:
         resurse.emplace_back("WEAPON");
     }
 
-    explicit Nebun(const std::string &t) : Piesa(t) {
+    explicit Nebun(std::string t) : Piesa(t) {
         p_tip = Piesa::B;
         resurse.emplace_back("WATER");
         resurse.emplace_back("FOOD");
@@ -248,17 +234,12 @@ public:
         return *this;
     }
 
-    Piesa *clone() const override {
-        return new Nebun(*this);
-    }
-
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
 };
 
 class Turn : public Piesa {
 private:
     std::vector<Locatie> mutari_posibile;
-
 public:
     Turn() : Piesa() {
         p_tip = Piesa::T;
@@ -268,7 +249,7 @@ public:
         resurse.emplace_back("FOOD");
     }
 
-    explicit Turn(const std::string &t) : Piesa(t) {
+    explicit Turn(std::string t) : Piesa(t) {
         p_tip = Piesa::T;
         resurse.emplace_back("WEAPON");
         resurse.emplace_back("STONE");
@@ -299,17 +280,12 @@ public:
         return *this;
     }
 
-    Piesa *clone() const override {
-        return new Turn(*this);
-    }
-
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
 };
 
 class Rege : public Piesa {
 private:
     std::vector<Locatie> mutari_posibile;
-
 public:
     Rege() : Piesa() {
         p_tip = Piesa::K;
@@ -318,7 +294,7 @@ public:
         resurse.emplace_back("FOOD");
     }
 
-    explicit Rege(const std::string &t) : Piesa(t) {
+    explicit Rege(std::string t) : Piesa(t) {
         p_tip = Piesa::K;
         resurse.emplace_back("STONE");
         resurse.emplace_back("WATER");
@@ -348,11 +324,7 @@ public:
         return *this;
     }
 
-    Piesa *clone() const override {
-        return new Rege(*this);
-    }
-
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
 };
 
-#endif // OOP_PIESA_ABSTRACTA_H
+#endif
