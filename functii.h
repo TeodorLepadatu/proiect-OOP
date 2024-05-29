@@ -399,23 +399,23 @@ void draw_board(sf::RenderWindow &window) {
             }
         }
     }
-    catch (window_error &) {
-        std::cout << "The game is going to be played in the terminal only!" << std::endl;
+    catch (window_error &e) {
+        std::cout << "The game is going to be played in the terminal only!" << e.what() << std::endl;
     }
 }
 
-void draw_pieces(sf::RenderWindow &window, std::vector<Player> players) {
+void draw_pieces(sf::RenderWindow &window, const std::vector<Player> &players) {
     /*
       sf::Sprite sprite(temp.getTexture());
         sprite.setScale(0.69f, 0.69f);
         sprite.setPosition(100*lin,100*col);
     */
-    for (unsigned long i = 0; i < players.size(); i++) {
-        auto piese = players[i].getPiese();
-        for (unsigned long j = 0; j < piese.size(); j++) {
-            sf::Sprite sprite(piese[j]->getTexture());
+    for (const auto &player: players) {
+        auto piese = player.getPiese();
+        for (auto &j: piese) {
+            sf::Sprite sprite(j->getTexture());
             sprite.setScale(0.69f, 0.69f);
-            sprite.setPosition(100 * piese[j]->getLocatie().getLinie(), 100 * piese[j]->getLocatie().getColoana());
+            sprite.setPosition(100 * j->getLocatie().getLinie(), 100 * j->getLocatie().getColoana());
             window.draw(sprite);
             //window.display();
         }
@@ -703,13 +703,13 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                 draw_pieces(window, players);
                 window.display();
             }
-            for (unsigned long i = 0; i < player.getPiese().size(); i++) {
-                if (player.getPiese()[i]->getType() == type) {
-                    player.getPiese()[i]->setLocatie(l, c);
-                    sf::Sprite sprite(player.getPiese()[i]->getTexture());
+            for (auto i: player.getPiese()) {
+                if (i->getType() == type) {
+                    i->setLocatie(l, c);
+                    sf::Sprite sprite(i->getTexture());
                     sprite.setScale(0.69f, 0.69f);
-                    sprite.setPosition(100 * player.getPiese()[i]->getLocatie().getLinie(),
-                                       100 * player.getPiese()[i]->getLocatie().getColoana());
+                    sprite.setPosition(100 * i->getLocatie().getLinie(),
+                                       100 * i->getLocatie().getColoana());
                     window.draw(sprite);
                 }
             }
@@ -730,7 +730,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
     catch (resource_error &eroare) {
         std::cout << eroare.what() << std::endl;
     }
-    catch (app_error &) {}
+    catch (app_error &e) { std::cout << e.what() << std::endl; }
 }
 
 void
@@ -763,7 +763,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
         ne->setCuloare(playeri[Player::getNr()]);
         t->setCuloare(playeri[Player::getNr()]);
         r->setCuloare(playeri[Player::getNr()]);
-        if (ok == true) {
+        if (ok) {
             if (playeri[Player::getNr()] == 1) {
                 try {
                     primeste_resurse(board, tabla, players);
@@ -814,7 +814,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     if (check_stupidity())
                         return;
                 }
-                catch (app_error &) {}
+                catch (app_error &e) { std::cout << e.what() << std::endl; }
             } else if (playeri[Player::getNr()] == 2) {
                 try {
                     primeste_resurse(board, tabla, players);
@@ -860,7 +860,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     if (check_stupidity())
                         return;
                 }
-                catch (app_error &) {}
+                catch (app_error &e) { std::cout << e.what() << std::endl; }
             } else if (playeri[Player::getNr()] == 3) {
                 primeste_resurse(board, tabla, players);
                 std::cout << "Player " << playeri[Player::getNr()]
@@ -907,7 +907,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     if (check_stupidity())
                         return;
                 }
-                catch (app_error &) {}
+                catch (app_error &e) { std::cout << e.what() << std::endl; }
             } else if (playeri[Player::getNr()] == 4) {
                 primeste_resurse(board, tabla, players);
                 std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
@@ -1007,7 +1007,8 @@ void player_count(int &n) {
                 throw input_error();
             }
         }
-        catch (input_error &) {
+        catch (input_error &e) {
+            std::cout << e.what() << std::endl;
             std::cout << "Stop trying to crash the game!" << std::endl;
         }
         if (nc == '2' || nc == '3' || nc == '4') {

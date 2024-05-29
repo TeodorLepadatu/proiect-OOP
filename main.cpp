@@ -52,9 +52,9 @@ int main() {
             }
         }
     }
-    catch (object_error &) {
+    catch (object_error &e) {
         window.close();
-        std::cout << std::endl << "The graphics could not load" << std::endl;
+        std::cout << std::endl << "The graphics could not load" << e.what() << std::endl;
     }
     std::string board[9][9];
     for (int i = 1; i <= 8; i++) {
