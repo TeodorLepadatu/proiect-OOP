@@ -55,14 +55,11 @@ public:
         return *this;
     }
 
-
     virtual ~Player() {
         for (auto &p: piese) {
             delete p;
         }
-        delete curr_piece;
     }
-
 
     friend void swap(Player &first, Player &second) noexcept {
         using std::swap;

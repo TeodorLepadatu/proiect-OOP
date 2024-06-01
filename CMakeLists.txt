@@ -120,11 +120,8 @@ add_executable(${PROJECT_NAME}
         Piesa_abstracta.h
         Tabla.cpp
         Player.cpp
-        Locatie.cpp
         Piesa_abstracta.cpp
-        Camp.cpp
         Pacanea.cpp
-        Exceptii.cpp
         Exceptii.h
 )
 

@@ -969,6 +969,11 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
     }
     std::cout << "Game over!" << std::endl;
     window.close();
+    delete p;
+    delete c;
+    delete ne;
+    delete t;
+    delete r;
 }
 
 void player_count(int &n) {
