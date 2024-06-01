@@ -405,22 +405,9 @@ void draw_board(sf::RenderWindow &window) {
 }
 
 void draw_pieces(sf::RenderWindow &window, const std::vector<Player> &players) {
-    /*
-      sf::Sprite sprite(temp.getTexture());
-        sprite.setScale(0.69f, 0.69f);
-        sprite.setPosition(100*lin,100*col);
-    */
-    for (const auto &player: players) {
-        auto piese = player.getPiese();
-        for (auto &j: piese) {
-            sf::Sprite sprite(j->getTexture());
-            sprite.setScale(0.69f, 0.69f);
-            sprite.setPosition(100 * j->getLocatie().getLinie(), 100 * j->getLocatie().getColoana());
-            window.draw(sprite);
-            //window.display();
-        }
+    for (auto player: players) {
+        player.draw_player(window);
     }
-    //window.display();
 }
 
 void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playeri,
@@ -452,7 +439,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
                 if (it != playeri.end()) {
                     auto it1 = players.begin() + (it - playeri.begin());
                     playeri.erase(it);
-                    players.erase(it1);
+                    players.erase(it1); ///o fac cu nullptr
                     window.clear();
                     draw_board(window);
                     draw_pieces(window, players);
@@ -472,7 +459,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
                 if (it != playeri.end()) {
                     auto it1 = players.begin() + (it - playeri.begin());
                     playeri.erase(it);
-                    players.erase(it1);
+                    players.erase(it1); ///o fac cu nullptr
                     window.clear();
                     draw_board(window);
                     draw_pieces(window, players);
@@ -492,7 +479,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
                 if (it != playeri.end()) {
                     auto it1 = players.begin() + (it - playeri.begin());
                     playeri.erase(it);
-                    players.erase(it1);
+                    players.erase(it1); ///o fac cu nullptr
                     window.clear();
                     draw_board(window);
                     draw_pieces(window, players);
@@ -512,7 +499,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
                 if (it != playeri.end()) {
                     auto it1 = players.begin() + (it - playeri.begin());
                     playeri.erase(it);
-                    players.erase(it1);
+                    players.erase(it1); ///o  fac cu nullptr
                     window.clear();
                     draw_board(window);
                     draw_pieces(window, players);
@@ -525,6 +512,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
 void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t, Rege *r, std::string board[][9],
                   Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player, sf::RenderWindow &window,
                   std::vector<Player> &players) {
+    ///am nevoie de toti acei parametri cu piesele ca sa stiu ce piesa mut
     std::cout
             << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
             << std::endl;
@@ -691,28 +679,16 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                     for (const auto &pair: temp_res)
                         std::cout << pair.first << " " << pair.second << std::endl;
                 }
-                for (long long unsigned int i = 0; i < players[numar].getPiese().size(); i++) {
-                    if (players[numar].getPiese()[i]->getType() == board[l][c]) {
-                        auto temp = players[numar].getPiese();
-                        temp.erase(temp.begin() + i);
-                        players[numar].setPiese(temp);
-                    }
-                }
+                ///functie in clasa player
+                players[numar].lose_piece(board, l, c);
+
                 window.clear();
                 draw_board(window);
                 draw_pieces(window, players);
                 window.display();
             }
-            for (auto i: player.getPiese()) {
-                if (i->getType() == type) {
-                    i->setLocatie(l, c);
-                    sf::Sprite sprite(i->getTexture());
-                    sprite.setScale(0.69f, 0.69f);
-                    sprite.setPosition(100 * i->getLocatie().getLinie(),
-                                       100 * i->getLocatie().getColoana());
-                    window.draw(sprite);
-                }
-            }
+            ///din nou functie in clasa player
+            player.keep_piece(window, l, c, type);
             board[l][c] = type;
             tabla.setCamp(l, c);
             board[ol][oc] = "***";
@@ -721,7 +697,8 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
         } else {
             std::cout << "You chose an invalid move" << std::endl;
         }
-        players[Player::getNr()].setPiese(player.getPiese());
+        ///asta o pun ceva gen redraw tot in clasa player
+        players[Player::getNr()].redraw_player(window);
         window.clear();
         draw_board(window);
         draw_pieces(window, players);
@@ -736,13 +713,12 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
 void
 actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locatie> &map, Pion *p, Cal *c, Nebun *ne,
             Turn *t, Rege *r, Tabla &tabla, std::vector<Player> players, sf::RenderWindow &window) {
+    ///parametri cu toate piesele existente pe tabla (posibile)
     draw_board(window);
     draw_pieces(window, players);
     std::vector<int> playeri;
     for (int i = 0; i < n; i++)
         playeri.push_back(i + 1);
-    //unsigned long j = 0;
-    // /aici o sa incep cu staticul din Player
     Player::setNr(0);
     bool ok = true;
     while (playeri.size() > 1 && window.isOpen()) {
@@ -846,7 +822,8 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                         t->setType("R2*");
                         t->setLocatie(map["R2*"].getLinie(), map["R2*"].getColoana());
                         r->setType("K2*");
-                        r->setLocatie(map["K2*"].getLinie(), map["K2*"].getColoana());
+                        r->setLocatie(map["K2*"].getLinie(),
+                                      map["K2*"].getColoana()); ///chestia asta seteaza toate piesele pt jucatorul respectiv
                         piece_chosen(type, p, c, ne, t, r, board, tabla, map, players[Player::getNr()], window,
                                      players);
                     } else {

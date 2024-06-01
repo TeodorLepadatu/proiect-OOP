@@ -60,3 +60,45 @@ bool Player::operator!=(const Player &rhs) const {
 void Player::setPiese(const std::vector<Piesa *> &piese_) {
     Player::piese = piese_;
 }
+
+void Player::draw_player(sf::RenderWindow &window) {
+    auto piese = this->getPiese();
+    for (auto &j: piese) {
+        sf::Sprite sprite(j->getTexture());
+        sprite.setScale(0.69f, 0.69f);
+        sprite.setPosition(100 * j->getLocatie().getLinie(), 100 * j->getLocatie().getColoana());
+        window.draw(sprite);
+        //window.display();
+    }
+}
+
+void Player::lose_piece(std::string board[][9], int l, int c) {
+    for (auto i = 0; i < this->getPiese().size(); i++) {
+        if (this->getPiese()[i]->getType() == board[l][c]) {
+            auto temp = this->getPiese();
+            temp.erase(temp.begin() + i);
+            this->setPiese(temp);
+        }
+    }
+}
+
+void Player::keep_piece(sf::RenderWindow &window, int l, int c, const std::string &type) {
+    for (auto i: this->getPiese()) {
+        if (i->getType() == type) {
+            i->setLocatie(l, c);
+            sf::Sprite sprite(i->getTexture());
+            sprite.setScale(0.69f, 0.69f);
+            sprite.setPosition(100 * i->getLocatie().getLinie(),
+                               100 * i->getLocatie().getColoana());
+            window.draw(sprite);
+        }
+    }
+}
+
+void Player::redraw_player(sf::RenderWindow &window) {
+    this->setPiese(this->getPiese());
+    window.clear();
+    //draw_board(window);
+    draw_player(window);
+    window.display();
+}

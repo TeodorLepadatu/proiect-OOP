@@ -8,7 +8,7 @@
 //#include "functii.h"
 
 
-class Tabla {
+class Tabla {   ///singleton
 private:
     Camp m[9][9];
 public:

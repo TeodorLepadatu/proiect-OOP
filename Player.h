@@ -7,7 +7,7 @@
 #include <unordered_map> ///pentru resursele pe care le are jucatorul
 #include <algorithm>
 #include "Piesa_abstracta.h"
-
+#include <SFML/Graphics.hpp>
 //#include "Pacanea.h"
 class Player {
 private:
@@ -18,6 +18,10 @@ private:
     //std::vector<Pacanea> inventar;
     int mutari_disponibile{};
     std::unordered_map<std::string, int> resurse;
+
+    const std::vector<Piesa *> &getPiese() const;
+
+    void setPiese(const std::vector<Piesa *> &piese_);
 public:
     Player() : curr_piece(nullptr) {}
 
@@ -26,8 +30,6 @@ public:
     bool operator==(const Player &rhs) const;
 
     bool operator!=(const Player &rhs) const;
-
-    const std::vector<Piesa *> &getPiese() const;
 
     void add_piece(Piesa *p);
 
@@ -54,10 +56,16 @@ public:
 
     std::unordered_map<std::string, int> &getResurse();
 
-    void setPiese(const std::vector<Piesa *> &piese_);
-
     void setResurse(const std::unordered_map<std::string, int> &resurse);
 
     void schimbaResurse(std::unordered_map<std::string, int> &resurse, const std::string &res, int c);
+
+    void draw_player(sf::RenderWindow &window);
+
+    void lose_piece(std::string board[][9], int l, int c);
+
+    void keep_piece(sf::RenderWindow &window, int l, int c, const std::string &type);
+
+    void redraw_player(sf::RenderWindow &window);
 };
 #endif
