@@ -27,7 +27,7 @@ public:
 
     explicit Player(Piesa *currPiece);
 
-    Player(int mutariDisponibile) : curr_piece(nullptr), mutari_disponibile(mutariDisponibile) {}
+    explicit Player(int mutariDisponibile) : curr_piece(nullptr), mutari_disponibile(mutariDisponibile) {}
 
     // Copy constructor
     Player(const Player &other)

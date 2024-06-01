@@ -62,8 +62,8 @@ void Player::setPiese(const std::vector<Piesa *> &piese_) {
 }
 
 void Player::draw_player(sf::RenderWindow &window) {
-    auto piese = this->getPiese();
-    for (auto &j: piese) {
+    auto piese_ = this->getPiese();
+    for (auto &j: piese_) {
         sf::Sprite sprite(j->getTexture());
         sprite.setScale(0.69f, 0.69f);
         sprite.setPosition(100 * j->getLocatie().getLinie(), 100 * j->getLocatie().getColoana());

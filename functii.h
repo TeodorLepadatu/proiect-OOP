@@ -719,7 +719,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
     std::vector<int> playeri;
     for (int i = 0; i < n; i++)
         playeri.push_back(i + 1);
-    for (auto i = 0; i < players.size(); i++)
+    for (long unsigned int i = 0; i < players.size(); i++)
         players[i].initilize_player(board, i + 1);
     Player::setNr(0);
     bool ok = true;
