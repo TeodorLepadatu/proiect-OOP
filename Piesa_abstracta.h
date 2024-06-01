@@ -9,16 +9,22 @@
 #include "Locatie.h"
 #include "Tabla.h"
 #include "Exceptii.h"
+
 class Piesa {
 public:
     enum tip {
         P, C, B, T, K
     };
 
+    tip getPTip() const {
+        return p_tip;
+    }
+
+    virtual ~Piesa() = default;
+
     [[nodiscard]] int getCuloare() const {
         return culoare;
     }
-
 
     [[nodiscard]] const Locatie &getLocatie() const {
         return locatie;
@@ -44,7 +50,9 @@ public:
     [[nodiscard]] const std::vector<std::string> &getResurse() const {
         return resurse;
     }
+
     explicit Piesa(const std::string &t) : culoare(0), type(t), p_tip(P) {}
+
     Piesa(const Piesa &other) : culoare(other.culoare), locatie(other.locatie), resurse(other.resurse),
                                 texture(other.texture), p_tip(other.p_tip) {}
 
@@ -69,7 +77,7 @@ public:
 
     virtual std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) = 0;
 
-    virtual ~Piesa() = default;
+    virtual Piesa *clone() const = 0; // Pure virtual clone method
 
 protected:
     int culoare;
@@ -125,6 +133,9 @@ public:
 
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
 
+    Piesa *clone() const override {
+        return new Pion(*this);
+    }
 };
 
 class Cal : public Piesa {
@@ -166,6 +177,10 @@ public:
     }
 
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
+
+    Piesa *clone() const override {
+        return new Cal(*this);
+    }
 };
 
 class Nebun : public Piesa {
@@ -208,6 +223,10 @@ public:
     }
 
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
+
+    Piesa *clone() const override {
+        return new Nebun(*this);
+    }
 };
 
 class Turn : public Piesa {
@@ -252,6 +271,10 @@ public:
     }
 
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
+
+    Piesa *clone() const override {
+        return new Turn(*this);
+    }
 };
 
 class Rege : public Piesa {
@@ -294,6 +317,10 @@ public:
     }
 
     std::vector<Locatie> muta(Locatie const &locatie_, Piesa const &p) override;
+
+    Piesa *clone() const override {
+        return new Rege(*this);
+    }
 };
 
 #endif

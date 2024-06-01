@@ -32,6 +32,7 @@ int main() {
         Player pl(nullptr);
         players.push_back(pl);
     }
+
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Catanus chess");
     std::unordered_map<std::string, Locatie> map;
     draw_board(window);
@@ -77,7 +78,6 @@ int main() {
             }
         }
     }
-
     draw_board(window);
     draw_pieces(window, players);
     window.display();

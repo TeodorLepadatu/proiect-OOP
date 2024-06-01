@@ -102,3 +102,44 @@ void Player::redraw_player(sf::RenderWindow &window) {
     draw_player(window);
     window.display();
 }
+
+void Player::initilize_player(std::string board[9][9], int x) {
+    for (int i = 1; i <= 8; i++)
+        for (int j = 1; j <= 8; j++) {
+            if (board[i][j][0] == 'P' && board[i][j][2] == static_cast<char>('0' + x)) {
+                for (auto piesa: piese) {
+                    if (piesa->getPTip() == Piesa::P) {
+                        piesa->setType(board[i][j]);
+                        break;
+                    }
+                }
+            } else if (board[i][j][0] == 'N' && board[i][j][1] == static_cast<char>('0' + x))
+                for (auto piesa: piese) {
+                    if (piesa->getPTip() == Piesa::C) {
+                        piesa->setType(board[i][j]);
+                        break;
+                    }
+                }
+            else if (board[i][j][0] == 'B' && board[i][j][1] == static_cast<char>('0' + x))
+                for (auto piesa: piese) {
+                    if (piesa->getPTip() == Piesa::B) {
+                        piesa->setType(board[i][j]);
+                        break;
+                    }
+                }
+            else if (board[i][j][0] == 'R' && board[i][j][1] == static_cast<char>('0' + x))
+                for (auto piesa: piese) {
+                    if (piesa->getPTip() == Piesa::T) {
+                        piesa->setType(board[i][j]);
+                        break;
+                    }
+                }
+            else if (board[i][j][0] == 'K' && board[i][j][1] == static_cast<char>('0' + x))
+                for (auto piesa: piese) {
+                    if (piesa->getPTip() == Piesa::K) {
+                        piesa->setType(board[i][j]);
+                        break;
+                    }
+                }
+        }
+}
