@@ -107,12 +107,8 @@ void Player::initilize_player(std::string board[9][9], int x) {
     for (int i = 1; i <= 8; i++)
         for (int j = 1; j <= 8; j++) {
             if (board[i][j][0] == 'P' && board[i][j][2] == static_cast<char>('0' + x)) {
-                for (auto piesa: piese) {
-                    if (piesa->getPTip() == Piesa::P) {
-                        piesa->setType(board[i][j]);
-                        break;
-                    }
-                }
+                if (piese[board[i][j][1] - '0' - 1]->getPTip() == Piesa::P)
+                    piese[board[i][j][1] - '0' - 1]->setType(board[i][j]);
             } else if (board[i][j][0] == 'N' && board[i][j][1] == static_cast<char>('0' + x))
                 for (auto piesa: piese) {
                     if (piesa->getPTip() == Piesa::C) {

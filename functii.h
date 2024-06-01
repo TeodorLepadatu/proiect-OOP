@@ -272,7 +272,7 @@ void find_winner(std::string board[][9]) {
                 break;
             }
         }
-    std::cout << "The winner is Player " << winner << ", congratulations!";
+    std::cout << "The winner is Player " << winner << ", congratulations!" << std::endl;
 }
 
 void primeste_resurse(std::string board[][9], const Tabla &tabla, std::vector<Player> &players) {
@@ -843,7 +843,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
             } else if (playeri[Player::getNr()] == 3) {
                 primeste_resurse(board, tabla, players);
                 std::cout << "Player " << playeri[Player::getNr()]
-                          << ", choose the piece that you want to move (if you want to move a pawn, enter both the numbers and if you want to move anything else, type the letter, the number and the star, otherwise it will not work): "
+                        << ", choose the piece that you want to move: "
                           << std::endl;
                 for (const auto &pair: map)
                     if (pair.first == "P13" || pair.first == "P23" || pair.first == "P33" || pair.first == "P43" ||
@@ -968,6 +968,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
         }
     }
     std::cout << "Game over!" << std::endl;
+    window.close();
 }
 
 void player_count(int &n) {

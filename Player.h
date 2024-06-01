@@ -55,15 +55,15 @@ public:
         return *this;
     }
 
-    // Destructor
-    ~Player() {
+
+    virtual ~Player() {
         for (auto &p: piese) {
             delete p;
         }
         delete curr_piece;
     }
 
-    // Swap function
+
     friend void swap(Player &first, Player &second) noexcept {
         using std::swap;
         swap(first.curr_piece, second.curr_piece);

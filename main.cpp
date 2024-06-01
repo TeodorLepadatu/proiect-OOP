@@ -81,9 +81,9 @@ int main() {
     draw_board(window);
     draw_pieces(window, players);
     window.display();
-
     //window.display();
     while (window.isOpen()) {
+
         sf::Event event{};
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -92,7 +92,6 @@ int main() {
         }
         actual_play(n, board, map, dynamic_cast<Pion *>(p), dynamic_cast<Cal *>(c), dynamic_cast<Nebun *>(ne),
                     dynamic_cast<Turn *>(t), dynamic_cast<Rege *>(r), tabla, players, window);
-        window.close();
         /*
         window.clear();
         draw_board(window);
@@ -100,13 +99,14 @@ int main() {
         window.display();
          */
     }
-
     find_winner(board);
-    window.close();
     delete p;
     delete c;
     delete ne;
     delete t;
     delete r;
+
+    //window.close();
+
     return 0;
 }
