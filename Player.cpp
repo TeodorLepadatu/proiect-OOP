@@ -73,7 +73,7 @@ void Player::draw_player(sf::RenderWindow &window) {
 }
 
 void Player::lose_piece(std::string board[][9], int l, int c) {
-    for (auto i = 0; i < this->getPiese().size(); i++) {
+    for (long unsigned int i = 0; i < this->getPiese().size(); i++) {
         if (this->getPiese()[i]->getType() == board[l][c]) {
             auto temp = this->getPiese();
             temp.erase(temp.begin() + i);
