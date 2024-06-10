@@ -3,54 +3,73 @@
 
 #include <iostream>
 #include <string>
-#include <random>
-//#include "functii.h"
+#include <vector>
+#include <memory>
+#include "Player.h"
+#include "Tabla.h"
 
-int random_number_generator() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 4);
-    return dis(gen);
-}
+// Strategy Interface
+class PacaneaBehavior {
+public:
+    virtual ~PacaneaBehavior() = default;
 
-std::string give_me_pacanea() {
-    int nr = random_number_generator();
-    if (nr == 1) {
-        std::string aux = "monopoly";
-        return aux;
-    } else if (nr == 2) {
-        std::string aux = "+2 mutari";
-        return aux;
-    } else if (nr == 3) {
-        std::string aux = "+2 resurse";
-        return aux;
-    } else {
-        std::string aux = "nimic, ai bagat la pacanele degeaba asa ca esti prost";
-        return aux;
-    }
-}
+    virtual void perform(Player &player, std::vector<Player> &players) = 0;
+};
+
+// Concrete Strategies
+class MonopolyBehavior : public PacaneaBehavior {
+private:
+    static int calculateResource(std::vector<Player> &players, const std::string &resursa);
+
+public:
+    void perform(Player &player, std::vector<Player> &players) override;
+};
+
+class RobberBehavior : public PacaneaBehavior {
+public:
+    void perform(Player &player, std::vector<Player> &players) override;
+};
+
+class Plus2ResourcesBehavior : public PacaneaBehavior {
+public:
+    void perform(Player &player, std::vector<Player> &players) override;
+};
+
+class NothingBehavior : public PacaneaBehavior {
+public:
+    void perform(Player &player, std::vector<Player> &players) override;
+};
+
 class Pacanea {
 private:
-    std::string tip; //monopoly, +doua mutari, +2resurse, nimic: esti prost
-    std::vector<std::string> resurse;
+    std::string tip;
+    std::shared_ptr<PacaneaBehavior> behavior;
 public:
+    Pacanea() = default;
 
-    [[nodiscard]] const std::string &getTip() const {
-        return tip;
-    }
+    Pacanea(std::string t, std::shared_ptr<PacaneaBehavior> b);
 
-    friend std::ostream &operator<<(std::ostream &os, const Pacanea &pacanea) {
-        os << "Ai pacaneaua " << pacanea.tip;
-        return os;
-    }
+    [[nodiscard]] const std::string &getTip() const;
 
-    Pacanea() {
-        resurse.push_back("piatra");
-        resurse.push_back("arma");
-        resurse.push_back("apa");
-        resurse.push_back("mancare");
-        tip = give_me_pacanea();
-    }
+    void performBehavior(Player &player, std::vector<Player> &players) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const Pacanea &pacanea);
+};
+
+// Factory Class
+class PacaneaFactory {
+private:
+    static int random_pacanea_generator();
+public:
+    static Pacanea monopoly();
+
+    static Pacanea robber();
+
+    static Pacanea plus2Resources();
+
+    static Pacanea nothing();
+
+    static Pacanea createRandomPacanea();
 };
 
 #endif //OOP_PACANEA_H

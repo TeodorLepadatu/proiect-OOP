@@ -15,7 +15,6 @@ private:
     static int nervi;
     Piesa *curr_piece;
     std::vector<Piesa *> piese;
-    //std::vector<Pacanea> inventar;
     int mutari_disponibile{};
     std::unordered_map<std::string, int> resurse;
 
@@ -95,6 +94,8 @@ public:
     static void ma_enervez();
     static void inclNr();
 
+    void setResursa(const std::string &r, int val);
+
     std::unordered_map<std::string, int> &getResurse();
 
     void setResurse(const std::unordered_map<std::string, int> &resurse);
@@ -111,5 +112,8 @@ public:
 
     void initilize_player(std::string board[9][9], int x);
 
+    bool find_piece(int lin, int col);
+
+    void afis_resurse();
 };
 #endif

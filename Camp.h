@@ -11,12 +11,13 @@ private:
     std::string culoare;
     Locatie locatie;
     int numar;
+    bool blocat; //daca am hot acolo
     bool ocupat;    //daca exista piesa pe respectivul patratel
     sf::Texture texture;
 public:
     explicit Camp(std::string culoare_ = std::string("WATER"), const Locatie &locatie_ = Locatie(0, 0),
-         const int &numar_ = 0, bool ocupat_ = false)
-            : culoare{std::move(culoare_)}, locatie{locatie_}, numar{numar_}, ocupat{ocupat_} {
+                  const int &numar_ = 0, bool ocupat_ = false, bool blocat_ = false)
+            : culoare{std::move(culoare_)}, locatie{locatie_}, numar{numar_}, blocat{blocat_}, ocupat{ocupat_} {
     }
 
     friend std::ostream &operator<<(std::ostream &os, const Camp &camp) {
@@ -34,6 +35,10 @@ public:
         return numar;
     }
 
+    bool isOcupat() const {
+        return ocupat;
+    }
+
     void setOcupat() {
         Camp::ocupat = true;
     }
@@ -42,6 +47,13 @@ public:
         this->ocupat = false; //cand nu mai avem o piesa acolo
     }
 
+    bool isBlocat() const {
+        return blocat;
+    }
+
+    void setBlocat(bool blocat_) {
+        Camp::blocat = blocat_;
+    }
 };
 
 

@@ -11,7 +11,6 @@
 class Tabla {   ///singleton
 private:
     Camp m[9][9];
-public:
     Tabla() {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
@@ -31,9 +30,20 @@ public:
                 int roll1 = dis(gen);
                 int roll2 = dis(gen);
                 int nr = roll1 + roll2;
-                m[i][j] = Camp(c, loc, nr, false);
+                m[i][j] = Camp(c, loc, nr, false, false);
             }
         }
+    }
+
+public:
+
+    Tabla(const Tabla &) = delete;
+
+    Tabla &operator=(const Tabla &) = delete;
+
+    static Tabla &get_tabla() {
+        static Tabla tabla;
+        return tabla;
     }
 
     void setCamp(int i, int j);
@@ -44,6 +54,7 @@ public:
 
     void displaycolor() const;
 
+    void displayocupat();
     [[nodiscard]] Camp displayCamp(int i, int j) const;
 
     friend std::ostream &operator<<(std::ostream &os, const Tabla &tabla) {

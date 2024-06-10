@@ -14,14 +14,13 @@
 #include <SFML/Graphics.hpp>
 //#include <filesystem>
 int main() {
-    Tabla tabla;
+    auto &tabla = Tabla::get_tabla();
     std::cout << "The numbers on the board: " << std::endl;
     tabla.displaynr();
     std::cout << "The resources on the board: " << std::endl;
     tabla.displaycolor();
     int n = 0;
     player_count(n);
-    ///de taiat si facut dynamic cast la asta
     Piesa *p = new Pion;
     Piesa *c = new Cal;
     Piesa *ne = new Nebun;
@@ -32,7 +31,6 @@ int main() {
         Player pl(nullptr);
         players.push_back(pl);
     }
-
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Catanus chess");
     std::unordered_map<std::string, Locatie> map;
     draw_board(window);

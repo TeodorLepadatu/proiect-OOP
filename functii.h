@@ -12,6 +12,7 @@
 #include "Tabla.h"
 #include "Player.h"
 #include "Exceptii.h"
+#include "Pacanea.h"
 #include <SFML/Graphics.hpp>
 
 bool check_stupidity() {
@@ -275,6 +276,11 @@ void find_winner(std::string board[][9]) {
     std::cout << "The winner is Player " << winner << ", congratulations!" << std::endl;
 }
 
+void primeste_pacanea(std::vector<Player> &players) {
+    Pacanea devcard = PacaneaFactory::createRandomPacanea();
+    std::cout << devcard << std::endl;
+    devcard.performBehavior(players[Player::getNr()], players);
+}
 void primeste_resurse(std::string board[][9], const Tabla &tabla, std::vector<Player> &players) {
     std::cout << "Press any key to roll the dice" << std::endl;
     std::string temp;
@@ -283,7 +289,12 @@ void primeste_resurse(std::string board[][9], const Tabla &tabla, std::vector<Pl
     std::cout << "You rolled " << roll << std::endl;
     for (int i = 1; i <= 8; i++)
         for (int j = 1; j <= 8; j++) {
-            if (board[i][j] != "***" && tabla.displayCamp(i, j).getNumar() == roll) {
+            /*
+            if(tabla.displayCamp(i,j).isBlocat())
+                std::cout<<"it's blocked, you dumbass"<<std::endl;
+                */
+            if (board[i][j] != "***" && tabla.displayCamp(i, j).getNumar() == roll &&
+                !tabla.displayCamp(i, j).isBlocat()) {
                 if (board[i][j][0] == 'P') {
                     int p = board[i][j][2] - '1';
                     auto temp_res = players[p].getResurse();
@@ -297,15 +308,16 @@ void primeste_resurse(std::string board[][9], const Tabla &tabla, std::vector<Pl
                 }
             }
         }
+    if (roll == 7) {
+        primeste_pacanea(players);
+    }
 }
 
 void show_resources_and_pieces(Pion *p, Cal *c, Nebun *ne, Turn *t, Rege *r, std::vector<Player> players) {
     std::cout << std::endl;
     std::cout << "Your resources are:" << std::endl;
-    std::unordered_map<std::string, int> temp_res;
-    temp_res = players[Player::getNr()].getResurse();
-    for (const auto &pair: temp_res)
-        std::cout << pair.first << " " << pair.second << std::endl;
+    auto temp_res = players[Player::getNr()].getResurse();
+    players[Player::getNr()].afis_resurse();
     std::cout << "You can move the following pieces: ";
     bool ok = true;
     for (const auto &req: p->getResurse()) {
@@ -627,8 +639,10 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                 muta = 1;
         }
         if (muta == 1) {
+            ///de setat ca ala de la ol si oc nu mai e ocupat
             map[type].setLinie(l);
             map[type].setColoana(c);
+            ///de setat ca e ocupat
             if (board[l][c] != "***") {
                 map.erase(board[l][c]);
                 int numar = board[l][c][1] - '0' - 1;
@@ -755,7 +769,6 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                     show_resources_and_pieces(p, c, ne, t, r, players);
                     std::string type;
                     std::cin >> type;
-                    //std::cout<<map[type];
                     if (type == "n") {}
                     else if (type == "P11" || type == "P21" || type == "P31" || type == "P41" || type == "N1*" ||
                              type == "B1*" ||

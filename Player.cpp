@@ -139,3 +139,20 @@ void Player::initilize_player(std::string board[9][9], int x) {
                 }
         }
 }
+
+void Player::setResursa(const std::string &r, int val) {
+    resurse[r] = val;
+}
+
+bool Player::find_piece(int lin, int col) {
+    for (auto p: piese) {
+        if (p->getLocatie().getLinie() == lin && p->getLocatie().getColoana() == col)
+            return true;
+    }
+    return false;
+}
+
+void Player::afis_resurse() {
+    for (const auto &pair: resurse)
+        std::cout << pair.first << " " << pair.second << std::endl;
+}
