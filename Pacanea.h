@@ -35,7 +35,7 @@ public:
     void perform(Player &player, std::vector<Player> &players) override;
 };
 
-class NothingBehavior : public PacaneaBehavior {
+class LoseResourceBehavior : public PacaneaBehavior {
 public:
     void perform(Player &player, std::vector<Player> &players) override;
 };
@@ -67,7 +67,7 @@ public:
 
     static Pacanea plus2Resources();
 
-    static Pacanea nothing();
+    static Pacanea loseresource();
 
     static Pacanea createRandomPacanea();
 };

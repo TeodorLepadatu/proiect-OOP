@@ -68,14 +68,26 @@ void Plus2ResourcesBehavior::perform(Player &player, std::vector<Player> &player
     player.setResursa(res1, player.getResurse()[res1] + 1);
     player.setResursa(res2, player.getResurse()[res2] + 1);
     player.afis_resurse();
-    auto troll = players;
 }
 
 // NothingBehavior
-void NothingBehavior::perform(Player &player, std::vector<Player> &players) {
+void LoseResourceBehavior::perform(Player &player, std::vector<Player> &players) {
     std::cout << "Gambling is good..." << std::endl;
-    auto troll = players;
-    auto mem = player;
+    std::cout << "Choose the resource that you want to lose completely: " << std::endl;
+    for (const auto &pair: player.getResurse()) {
+        if (pair.second != 0)
+            std::cout << pair.first << " " << pair.second << std::endl;
+    }
+    std::string r;
+    std::cin >> r;
+    player.setResursa(r, 0);
+    player.afis_resurse();
+    std::cout << "Choose a resource that you want everyone to discard: " << std::endl;
+    std::cin >> r;
+    for (auto p: players) {
+        if (p.getResurse()[r] > 0)
+            p.setResursa(r, p.getResurse()[r] - 1);
+    }
 }
 
 // Pacanea
@@ -116,8 +128,8 @@ Pacanea PacaneaFactory::plus2Resources() {
     return Pacanea("+2 resources", std::make_shared<Plus2ResourcesBehavior>());
 }
 
-Pacanea PacaneaFactory::nothing() {
-    return Pacanea("nothing", std::make_shared<NothingBehavior>());
+Pacanea PacaneaFactory::loseresource() {
+    return Pacanea("lose resource", std::make_shared<LoseResourceBehavior>());
 }
 
 Pacanea PacaneaFactory::createRandomPacanea() {
@@ -130,6 +142,6 @@ Pacanea PacaneaFactory::createRandomPacanea() {
         case 3:
             return plus2Resources();
         default:
-            return nothing();
+            return loseresource();
     }
 }
