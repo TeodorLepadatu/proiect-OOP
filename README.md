@@ -19,6 +19,8 @@ Resources: Players gather resources (water, food, weapon, stone) based on the nu
 
 Roll the Dice: Before each turn, players roll the dice. The number rolled determines which tiles produce resources.
 
+If the diceroll is 7, you got a little surprise (good or bad, depending on your luck). If the diceroll is 2 or 12, there is a 50% chance that a player will lose all of their resources and a 50% chance your get another "bonus".
+
 Resource Management: Use gathered resources to move and capture pieces. Different pieces require different combinations of resources.
 
 Pawn: Water + Food
@@ -35,7 +37,7 @@ Movement: Pieces can move to any empty square on the board, provided the player 
 
 ## Special Rules:
 
-Pawn: Does not promote and captures vertically.
+Pawn: Does not promote and captures vertically. Also, no en-passant...
 
 No Castling: Traditional castling is not allowed.
 
