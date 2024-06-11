@@ -19,7 +19,7 @@ Resources: Players gather resources (water, food, weapon, stone) based on the nu
 
 Roll the Dice: Before each turn, players roll the dice. The number rolled determines which tiles produce resources.
 
-If the diceroll is 7, you got a little surprise (good or bad, depending on your luck). If the diceroll is 2 or 12, there is a 50% chance that a player will lose all of their resources and a 50% chance your get another "bonus".
+If the diceroll is 7, you get a little surprise (good or bad, depending on your luck). If the diceroll is 2 or 12, there is a 50% chance that a player will lose all of their resources and a 50% chance you get another "bonus". Both events can not happen at the same time, unfortunately...
 
 Resource Management: Use gathered resources to move and capture pieces. Different pieces require different combinations of resources.
 
