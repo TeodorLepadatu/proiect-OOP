@@ -959,6 +959,11 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
         ///test daca avem rege
         if (playeri.size() < s) {
             bool nusasinucis = false;
+            players[Player::getNr()].setResursa("WATER", 0);
+            players[Player::getNr()].setResursa("FOOD", 0);
+            players[Player::getNr()].setResursa("STONE", 0);
+            players[Player::getNr()].setResursa("WEAPON", 0);
+            std::cout << "You killed someone and you lost all of your resources!" << std::endl;
             for (long unsigned int x = 0; x < playeri.size(); x++)
                 if (playeri[x] == actualplayer) {
                     Player::setNr(x);
