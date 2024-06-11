@@ -54,7 +54,7 @@ public:
 
     void displaycolor() const;
 
-    void displayocupat();
+    //void displayocupat();
     [[nodiscard]] Camp displayCamp(int i, int j) const;
 
     friend std::ostream &operator<<(std::ostream &os, const Tabla &tabla) {

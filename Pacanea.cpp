@@ -68,21 +68,25 @@ void Plus2ResourcesBehavior::perform(Player &player, std::vector<Player> &player
     player.setResursa(res1, player.getResurse()[res1] + 1);
     player.setResursa(res2, player.getResurse()[res2] + 1);
     player.afis_resurse();
+    auto troll = players;
 }
 
 // NothingBehavior
 void NothingBehavior::perform(Player &player, std::vector<Player> &players) {
-    std::cout << "Gambling is not good..." << std::endl;
+    std::cout << "Gambling is good..." << std::endl;
+    auto troll = players;
+    auto mem = player;
 }
 
 // Pacanea
 Pacanea::Pacanea(std::string t, std::shared_ptr<PacaneaBehavior> b)
         : tip(std::move(t)), behavior(std::move(b)) {}
 
+/*
 const std::string &Pacanea::getTip() const {
     return tip;
 }
-
+*/
 void Pacanea::performBehavior(Player &player, std::vector<Player> &players) const {
     behavior->perform(player, players);
 }

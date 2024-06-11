@@ -30,7 +30,7 @@ void Tabla::displaycolor() const {
 Camp Tabla::displayCamp(int i, int j) const {
     return m[i][j];
 }
-
+/*
 void Tabla::displayocupat() {
     for (int i = 1; i <= 8; i++) {
         for (int j = 1; j <= 8; j++) {
@@ -39,3 +39,4 @@ void Tabla::displayocupat() {
         std::cout << std::endl;
     }
 }
+*/

@@ -653,8 +653,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                     player.schimbaResurse(temp_res, "FOOD", -1);
                     player.setResurse(temp_res);
                     std::cout << "You resources now are:" << std::endl;
-                    for (const auto &pair: temp_res)
-                        std::cout << pair.first << " " << pair.second << std::endl;
+                    player.afis_resurse();
                 } else if (board[l][c][0] == 'N') {
                     temp_res = player.getResurse();
                     player.schimbaResurse(temp_res, "WATER", -1);
@@ -662,8 +661,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                     player.schimbaResurse(temp_res, "WEAPON", -1);
                     player.setResurse(temp_res);
                     std::cout << "You resources now are:" << std::endl;
-                    for (const auto &pair: temp_res)
-                        std::cout << pair.first << " " << pair.second << std::endl;
+                    player.afis_resurse();
                 } else if (board[l][c][0] == 'B') {
                     temp_res = player.getResurse();
                     player.schimbaResurse(temp_res, "WATER", -1);
@@ -671,8 +669,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                     player.schimbaResurse(temp_res, "WEAPON", -1);
                     player.setResurse(temp_res);
                     std::cout << "You resources now are:" << std::endl;
-                    for (const auto &pair: temp_res)
-                        std::cout << pair.first << " " << pair.second << std::endl;
+                    player.afis_resurse();
                 } else if (board[l][c][0] == 'R') {
                     temp_res = player.getResurse();
                     player.schimbaResurse(temp_res, "WATER", -1);
@@ -681,8 +678,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                     player.schimbaResurse(temp_res, "STONE", -1);
                     player.setResurse(temp_res);
                     std::cout << "You resources now are:" << std::endl;
-                    for (const auto &pair: temp_res)
-                        std::cout << pair.first << " " << pair.second << std::endl;
+                    player.afis_resurse();
                 } else if (board[l][c][0] == 'K') {
                     temp_res = player.getResurse();
                     player.schimbaResurse(temp_res, "WATER", -1);
@@ -690,8 +686,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                     player.schimbaResurse(temp_res, "STONE", -1);
                     player.setResurse(temp_res);
                     std::cout << "You resources now are:" << std::endl;
-                    for (const auto &pair: temp_res)
-                        std::cout << pair.first << " " << pair.second << std::endl;
+                    player.afis_resurse();
                 }
                 ///functie in clasa player
                 players[numar].lose_piece(board, l, c);

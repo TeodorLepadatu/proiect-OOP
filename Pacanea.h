@@ -49,7 +49,7 @@ public:
 
     Pacanea(std::string t, std::shared_ptr<PacaneaBehavior> b);
 
-    [[nodiscard]] const std::string &getTip() const;
+    //[[nodiscard]] const std::string &getTip() const;
 
     void performBehavior(Player &player, std::vector<Player> &players) const;
 
