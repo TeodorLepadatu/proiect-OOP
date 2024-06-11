@@ -48,4 +48,11 @@ public:
         std::cout << "Could not load the window" << std::endl;
     }
 };
+
+class raritate_error : public app_error {
+public:
+    explicit raritate_error() {
+        std::cout << "Choose what player will lose the last piece they've moved!" << std::endl;
+    }
+};
 #endif //OOP_EXCEPTII_H

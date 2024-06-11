@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Exceptii.h"
 #include "Pacanea.h"
+#include "Raritate.h"
 #include <SFML/Graphics.hpp>
 
 bool check_stupidity() {
@@ -27,6 +28,13 @@ int dau_cu_zaru() {
     int roll1 = dis(gen);
     int roll2 = dis(gen);
     return roll1 + roll2;
+}
+
+int random_stuff_generator(int N) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, N);
+    return dis(gen);
 }
 
 void you_dumb() {
@@ -163,37 +171,7 @@ void primeste_pacanea(std::vector<Player> &players) {
     std::cout << devcard << std::endl;
     devcard.performBehavior(players[Player::getNr()], players);
 }
-void primeste_resurse(std::string board[][9], const Tabla &tabla, std::vector<Player> &players) {
-    std::cout << "Press any key to roll the dice" << std::endl;
-    std::string temp;
-    std::cin >> temp;
-    int roll = dau_cu_zaru();
-    std::cout << "You rolled " << roll << std::endl;
-    for (int i = 1; i <= 8; i++)
-        for (int j = 1; j <= 8; j++) {
-            /*
-            if(tabla.displayCamp(i,j).isBlocat())
-                std::cout<<"it's blocked, you dumbass"<<std::endl;
-                */
-            if (board[i][j] != "***" && tabla.displayCamp(i, j).getNumar() == roll &&
-                !tabla.displayCamp(i, j).isBlocat()) {
-                if (board[i][j][0] == 'P') {
-                    int p = board[i][j][2] - '1';
-                    auto temp_res = players[p].getResurse();
-                    players[p].schimbaResurse(temp_res, tabla.displayCamp(i, j).getCuloare(), 1);
-                    players[p].setResurse(temp_res);
-                } else {
-                    int p = board[i][j][1] - '1';
-                    auto temp_res = players[p].getResurse();
-                    players[p].schimbaResurse(temp_res, tabla.displayCamp(i, j).getCuloare(), 1);
-                    players[p].setResurse(temp_res);
-                }
-            }
-        }
-    if (roll == 7) {
-        primeste_pacanea(players);
-    }
-}
+
 
 void show_resources_and_pieces(Pion *p, Cal *c, Nebun *ne, Turn *t, Rege *r, std::vector<Player> players) {
     std::cout << std::endl;
@@ -304,6 +282,77 @@ void draw_pieces(sf::RenderWindow &window, const std::vector<Player> &players) {
     }
 }
 
+void draw_everything(sf::RenderWindow &window, const std::vector<Player> &players) {
+
+}
+
+void primeste_raritate(std::vector<Player> &players) {
+    int random_value = random_stuff_generator(2);
+    try {
+        if (random_value == 1) {
+            Raritate<Pacanea> rarePacanea(random_value);
+            rarePacanea.getBonus().performBehavior(players[Player::getNr()], players);
+        } else if (random_value == 2) {
+            Raritate<int> rareInt(random_value);
+            if (rareInt.getBonus() >= players.size()) {
+                auto x = random_stuff_generator(players.size());
+                rareInt.setBonus(x);
+                std::cout << "Player " << rareInt.getBonus() << " lost all of their resources :(" << std::endl;
+                players[rareInt.getBonus() - 1].setResursa("WATER", 0);
+                players[rareInt.getBonus() - 1].setResursa("FOOD", 0);
+                players[rareInt.getBonus() - 1].setResursa("WEAPON", 0);
+                players[rareInt.getBonus() - 1].setResursa("STONE", 0);
+            } else {
+                std::cout << "Player " << rareInt.getBonus() << " lost all of their resources :(" << std::endl;
+                players[rareInt.getBonus() - 1].setResursa("WATER", 0);
+                players[rareInt.getBonus() - 1].setResursa("FOOD", 0);
+                players[rareInt.getBonus() - 1].setResursa("WEAPON", 0);
+                players[rareInt.getBonus() - 1].setResursa("STONE", 0);
+            }
+        }
+    } catch (const raritate_error &e) {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+void
+primeste_resurse(std::string board[][9], const Tabla &tabla, std::vector<Player> &players, sf::RenderWindow &window) {
+    std::cout << "Press any key to roll the dice" << std::endl;
+    std::string temp;
+    std::cin >> temp;
+    int roll = dau_cu_zaru();
+    std::cout << "You rolled " << roll << std::endl;
+    for (int i = 1; i <= 8; i++)
+        for (int j = 1; j <= 8; j++) {
+            /*
+            if(tabla.displayCamp(i,j).isBlocat())
+                std::cout<<"it's blocked, you dumbass"<<std::endl;
+                */
+            if (board[i][j] != "***" && tabla.displayCamp(i, j).getNumar() == roll &&
+                !tabla.displayCamp(i, j).isBlocat()) {
+                if (board[i][j][0] == 'P') {
+                    int p = board[i][j][2] - '1';
+                    auto temp_res = players[p].getResurse();
+                    players[p].schimbaResurse(temp_res, tabla.displayCamp(i, j).getCuloare(), 1);
+                    players[p].setResurse(temp_res);
+                } else {
+                    int p = board[i][j][1] - '1';
+                    auto temp_res = players[p].getResurse();
+                    players[p].schimbaResurse(temp_res, tabla.displayCamp(i, j).getCuloare(), 1);
+                    players[p].setResurse(temp_res);
+                }
+            }
+        }
+    if (roll == 7) {
+        primeste_pacanea(players);
+    } else if (roll == 2 || roll == 12) {
+        primeste_raritate(players);
+        window.clear();
+        draw_board(window);
+        draw_pieces(window, players);
+        window.display();
+    }
+}
 void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playeri,
                  std::unordered_map<std::string, Locatie> &map, sf::RenderWindow &window, std::vector<Player> players) {
     int ok1 = 0, ok2 = 0, ok3 = 0, ok4 = 0;
@@ -333,7 +382,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
                 if (it != playeri.end()) {
                     auto it1 = players.begin() + (it - playeri.begin());
                     playeri.erase(it);
-                    players.erase(it1); ///o fac cu nullptr
+                    players.erase(it1);
                     window.clear();
                     draw_board(window);
                     draw_pieces(window, players);
@@ -353,7 +402,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
                 if (it != playeri.end()) {
                     auto it1 = players.begin() + (it - playeri.begin());
                     playeri.erase(it);
-                    players.erase(it1); ///o fac cu nullptr
+                    players.erase(it1);
                     window.clear();
                     draw_board(window);
                     draw_pieces(window, players);
@@ -373,7 +422,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
                 if (it != playeri.end()) {
                     auto it1 = players.begin() + (it - playeri.begin());
                     playeri.erase(it);
-                    players.erase(it1); ///o fac cu nullptr
+                    players.erase(it1);
                     window.clear();
                     draw_board(window);
                     draw_pieces(window, players);
@@ -393,7 +442,7 @@ void check_kings(unsigned int j, std::string board[][9], std::vector<int> &playe
                 if (it != playeri.end()) {
                     auto it1 = players.begin() + (it - playeri.begin());
                     playeri.erase(it);
-                    players.erase(it1); ///o  fac cu nullptr
+                    players.erase(it1);
                     window.clear();
                     draw_board(window);
                     draw_pieces(window, players);
@@ -407,6 +456,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
                   Tabla &tabla, std::unordered_map<std::string, Locatie> &map, Player &player, sf::RenderWindow &window,
                   std::vector<Player> &players) {
     ///am nevoie de toti acei parametri cu piesele ca sa stiu ce piesa mut
+    ///unii din ei pot fi si nullptr, nu ne pasa
     std::cout
             << "Choose where you want to move it (a pair of coordinates (line, column) from the following list): "
             << std::endl;
@@ -517,14 +567,16 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
         } while (!inputValid);
         int muta = 0;
         for (const auto &move: moves) {
-            if (move.getLinie() == l && move.getColoana() == c)
+            if (move.getLinie() == l && move.getColoana() == c) {
                 muta = 1;
+                break;
+            }
         }
         if (muta == 1) {
-            ///de setat ca ala de la ol si oc nu mai e ocupat
+            Tabla::get_tabla().displayCamp(ol, oc).reset();
             map[type].setLinie(l);
             map[type].setColoana(c);
-            ///de setat ca e ocupat
+            Tabla::get_tabla().displayCamp(l, c).setOcupat();
             if (board[l][c] != "***") {
                 map.erase(board[l][c]);
                 int numar = board[l][c][1] - '0' - 1;
@@ -588,7 +640,7 @@ void piece_chosen(const std::string &type, Pion *p, Cal *ca, Nebun *ne, Turn *t,
         } else {
             std::cout << "You chose an invalid move" << std::endl;
         }
-        ///asta o pun ceva gen redraw tot in clasa player
+
         players[Player::getNr()].redraw_player(window);
         window.clear();
         draw_board(window);
@@ -635,7 +687,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
         if (ok) {
             if (playeri[Player::getNr()] == 1) {
                 try {
-                    primeste_resurse(board, tabla, players);
+                    primeste_resurse(board, tabla, players, window);
                     printboard(board);
                     std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
                               << std::endl;
@@ -685,7 +737,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 catch (app_error &e) { std::cout << e.what() << std::endl; }
             } else if (playeri[Player::getNr()] == 2) {
                 try {
-                    primeste_resurse(board, tabla, players);
+                    primeste_resurse(board, tabla, players, window);
                     std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
                               << std::endl;
                     for (const auto &pair: map)
@@ -731,7 +783,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 }
                 catch (app_error &e) { std::cout << e.what() << std::endl; }
             } else if (playeri[Player::getNr()] == 3) {
-                primeste_resurse(board, tabla, players);
+                primeste_resurse(board, tabla, players, window);
                 std::cout << "Player " << playeri[Player::getNr()]
                         << ", choose the piece that you want to move: "
                           << std::endl;
@@ -778,7 +830,7 @@ actual_play(int n, std::string board[][9], std::unordered_map<std::string, Locat
                 }
                 catch (app_error &e) { std::cout << e.what() << std::endl; }
             } else if (playeri[Player::getNr()] == 4) {
-                primeste_resurse(board, tabla, players);
+                primeste_resurse(board, tabla, players, window);
                 std::cout << "Player " << playeri[Player::getNr()] << ", choose the piece that you want to move: "
                           << std::endl;
                 for (const auto &pair: map)

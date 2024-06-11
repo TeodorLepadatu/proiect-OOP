@@ -15,7 +15,7 @@ void MonopolyBehavior::perform(Player &player, std::vector<Player> &players) {
     std::string resursa;
     std::cout << "This is your inventory right now: " << std::endl;
     player.afis_resurse();
-    std::cout << "Choose the resource that you want to steal: " << std::endl;
+    std::cout << "Choose the resource that you want to steal from everyone: " << std::endl;
     std::cin >> resursa;
     int total = calculateResource(players, resursa);
     player.setResursa(resursa, player.getResurse()[resursa] + total);
@@ -63,7 +63,7 @@ void RobberBehavior::perform(Player &player, std::vector<Player> &players) {
 void Plus2ResourcesBehavior::perform(Player &player, std::vector<Player> &players) {
     std::string res1, res2;
     player.afis_resurse();
-    std::cout << "Choose the resources that you want to take!" << std::endl;
+    std::cout << "Choose 2 resources that you want to earn for free!" << std::endl;
     std::cin >> res1 >> res2;
     player.setResursa(res1, player.getResurse()[res1] + 1);
     player.setResursa(res2, player.getResurse()[res2] + 1);
@@ -88,7 +88,7 @@ void LoseResourceBehavior::perform(Player &player, std::vector<Player> &players)
     std::cin >> r;
     player.setResursa(r, 0);
     player.afis_resurse();
-    std::cout << "Choose a resource that you want everyone to discard: " << std::endl;
+    std::cout << "Choose a resource that you want everyone to discard (1 copy): " << std::endl;
     std::cin >> r;
     for (auto p: players) {
         if (p.getResurse()[r] > 0)

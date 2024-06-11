@@ -80,6 +80,13 @@ void Player::lose_piece(std::string board[][9], int l, int c) {
             this->setPiese(temp);
         }
     }
+    bool ok = false;
+    for (auto piesa: piese) {
+        if (piesa == curr_piece)
+            ok = true;
+    }
+    if (!ok)
+        curr_piece = nullptr;
 }
 
 void Player::keep_piece(sf::RenderWindow &window, int l, int c, const std::string &type) {
@@ -156,3 +163,4 @@ void Player::afis_resurse() {
     for (const auto &pair: resurse)
         std::cout << pair.first << " " << pair.second << std::endl;
 }
+

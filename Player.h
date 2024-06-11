@@ -74,7 +74,6 @@ public:
 
     void add_piece(Piesa *p);
 
-
     void setCurrPiece(Piesa *currPiece) {
         curr_piece = currPiece;
     }
@@ -115,5 +114,6 @@ public:
     bool find_piece(int lin, int col);
 
     void afis_resurse();
+
 };
 #endif

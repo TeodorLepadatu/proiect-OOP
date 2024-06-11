@@ -123,6 +123,8 @@ add_executable(${PROJECT_NAME}
         Piesa_abstracta.cpp
         Pacanea.cpp
         Exceptii.h
+        Raritate.cpp
+        Raritate.h
 )
 
 ###############################################################################
