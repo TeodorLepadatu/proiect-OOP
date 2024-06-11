@@ -81,7 +81,7 @@ void Player::lose_piece(std::string board[][9], int l, int c) {
         }
     }
     bool ok = false;
-    for (auto const &piesa: piese) {
+    for (const auto &piesa: piese) {// cppcheck-suppress constVariable
         if (piesa == curr_piece)
             ok = true;
     }
