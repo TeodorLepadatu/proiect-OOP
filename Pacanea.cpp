@@ -68,6 +68,12 @@ void Plus2ResourcesBehavior::perform(Player &player, std::vector<Player> &player
     player.setResursa(res1, player.getResurse()[res1] + 1);
     player.setResursa(res2, player.getResurse()[res2] + 1);
     player.afis_resurse();
+    for (auto p: players) {
+        if (p.getResurse()[res1] > 0)
+            p.setResursa(res1, p.getResurse()[res1] - 1);
+        if (p.getResurse()[res2] > 0)
+            p.setResursa(res2, p.getResurse()[res2] - 1);
+    }
 }
 
 // NothingBehavior
