@@ -18,7 +18,7 @@ public:
         return bonus;
     }
 
-    void setBonus(T bonus_) {
+    void setBonus(const T &bonus_) {
         Raritate::bonus = bonus_;
     }
 

@@ -282,10 +282,6 @@ void draw_pieces(sf::RenderWindow &window, const std::vector<Player> &players) {
     }
 }
 
-void draw_everything(sf::RenderWindow &window, const std::vector<Player> &players) {
-
-}
-
 void primeste_raritate(std::vector<Player> &players) {
     int random_value = random_stuff_generator(2);
     try {
@@ -294,7 +290,7 @@ void primeste_raritate(std::vector<Player> &players) {
             rarePacanea.getBonus().performBehavior(players[Player::getNr()], players);
         } else if (random_value == 2) {
             Raritate<int> rareInt(random_value);
-            if (rareInt.getBonus() >= players.size()) {
+            if ((long unsigned int) rareInt.getBonus() >= players.size()) {
                 auto x = random_stuff_generator(players.size());
                 rareInt.setBonus(x);
                 std::cout << "Player " << rareInt.getBonus() << " lost all of their resources :(" << std::endl;
