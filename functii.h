@@ -95,9 +95,11 @@ void pune_pion(int i, int j, Pion *p, std::unordered_map<std::string, Locatie> &
     //delete temp;
 }
 
-void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
+template<typename Piece>
+void pune_piesa(int j, Piece *p, std::unordered_map<std::string, Locatie> &map, Player &player,
+                const std::string &pieceName) {
     std::cout << "Player " << j + 1
-              << " choose the location for the knight by entering two numbers from 1 to 8: " << std::endl;
+            << " choose the location for the piece by entering two numbers from 1 to 8: " << std::endl;
     int lin = 0, col = 0;
     std::cin >> lin;
     if (lin > 8 || lin < 1) {
@@ -106,7 +108,7 @@ void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map, Play
         if (check_stupidity())
             return;
     }
-    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
+    std::cout << "Choose the column (number from 1 to 8): " << std::endl;
     std::cin >> col;
     if (col > 8 || col < 1) {
         you_dumb();
@@ -114,7 +116,7 @@ void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map, Play
         if (check_stupidity())
             return;
     }
-    Cal *temp = new Cal("N" + std::to_string(j + 1) + "*");
+    Piece *temp = new Piece(pieceName + std::to_string(j + 1) + "*");
     p->setType(temp->getType());
     if (!occupied(lin, col, map) && lin != 0 && col != 0) {
         p->setLocatie(lin, col);
@@ -123,131 +125,11 @@ void pune_cal(int j, Cal *p, std::unordered_map<std::string, Locatie> &map, Play
         temp->setLocatie(lin, col);
         temp->setCuloare(j + 1);
         std::string tip_str = p->getType(); // Convert enum to string
-        map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
+        map.insert(std::make_pair(tip_str, p->getLocatie()));
         player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
         //sf::Sprite sprite(temp->getTexture());
         //sprite.setScale(0.32f, 0.32f);
-        //sprite.setPosition(100*lin,100*col);
-        //window.draw(sprite);
-        //window.display();
-    } else {
-        you_dumb();
-    }
-}
-
-void pune_nebun(int j, Nebun *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
-    std::cout << "Player " << j + 1
-              << " choose the location for the bishop by entering two numbers from 1 to 8: " << std::endl;
-    int lin = 0, col = 0;
-    std::cin >> lin;
-    if (lin > 8 || lin < 1) {
-        you_dumb();
-        Player::ma_enervez();
-        if (check_stupidity())
-            return;
-    }
-    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
-    std::cin >> col;
-    if (col > 8 || col < 1) {
-        you_dumb();
-        Player::ma_enervez();
-        if (check_stupidity())
-            return;
-    }
-    Nebun *temp = new Nebun("B" + std::to_string(j + 1) + "*");
-    p->setType(temp->getType());
-    if (!occupied(lin, col, map) && lin != 0 && col != 0) {
-        p->setLocatie(lin, col);
-        p->setCuloare(j + 1);
-        p->setTexture(temp->getTexture());
-        temp->setLocatie(lin, col);
-        temp->setCuloare(j + 1);
-        std::string tip_str = p->getType(); // Convert enum to string
-        map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
-        player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
-        //sf::Sprite sprite(temp.getTexture());
-        //sprite.setScale(0.2f, 0.2f);
-        //sprite.setPosition(100*lin,100*col);
-        //window.draw(sprite);
-        //window.display();
-    } else {
-        you_dumb();
-    }
-}
-
-void pune_tura(int j, Turn *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
-    std::cout << "Player " << j + 1
-              << " choose the location for the rook by entering two numbers from 1 to 8: " << std::endl;
-    int lin = 0, col = 0;
-    std::cin >> lin;
-    if (lin > 8 || lin < 1) {
-        you_dumb();
-        Player::ma_enervez();
-        if (check_stupidity())
-            return;
-    }
-    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
-    std::cin >> col;
-    if (col > 8 || col < 1) {
-        you_dumb();
-        Player::ma_enervez();
-        if (check_stupidity())
-            return;
-    }
-    Turn *temp = new Turn("R" + std::to_string(j + 1) + "*");
-    p->setType(temp->getType());
-    if (!occupied(lin, col, map) && lin != 0 && col != 0) {
-        p->setLocatie(lin, col);
-        p->setCuloare(j + 1);
-        p->setTexture(temp->getTexture());
-        temp->setLocatie(lin, col);
-        temp->setCuloare(j + 1);
-        std::string tip_str = p->getType(); // Convert enum to string
-        map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
-        player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
-        //sf::Sprite sprite(temp.getTexture());
-        //sprite.setScale(0.69f, 0.69f);
-        //sprite.setPosition(100*lin,100*col);
-        //window.draw(sprite);
-        //window.display();
-    } else {
-        you_dumb();
-    }
-}
-
-void pune_rege(int j, Rege *p, std::unordered_map<std::string, Locatie> &map, Player &player) {
-    std::cout << "Player " << j + 1
-              << " choose the location for the king by entering two numbers from 1 to 8: " << std::endl;
-    int lin = 0, col = 0;
-    std::cin >> lin;
-    if (lin > 8 || lin < 1) {
-        you_dumb();
-        Player::ma_enervez();
-        if (check_stupidity())
-            return;
-    }
-    std::cout << "Choose the column(number from 1 to 8): " << std::endl;
-    std::cin >> col;
-    if (col > 8 || col < 1) {
-        you_dumb();
-        Player::ma_enervez();
-        if (check_stupidity())
-            return;
-    }
-    Rege *temp = new Rege("K" + std::to_string(j + 1) + "*");
-    p->setType(temp->getType());
-    if (!occupied(lin, col, map) && lin != 0 && col != 0) {
-        p->setLocatie(lin, col);
-        p->setCuloare(j + 1);
-        p->setTexture(temp->getTexture());
-        temp->setLocatie(lin, col);
-        temp->setCuloare(j + 1);
-        std::string tip_str = p->getType(); // Convert enum to string
-        map.insert(std::pair<std::string, Locatie>(tip_str, p->getLocatie()));
-        player.add_piece(temp);  ///s ar putea sa aiba o mica problema dar vedem
-        //sf::Sprite sprite(temp.getTexture());
-        //sprite.setScale(0.69f, 0.69f);
-        //sprite.setPosition(100*lin,100*col);
+        //sprite.setPosition(100 * lin, 100 * col);
         //window.draw(sprite);
         //window.display();
     } else {

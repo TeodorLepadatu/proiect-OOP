@@ -40,13 +40,17 @@ int main() {
                 if (i <= 4) {
                     pune_pion(i, j, dynamic_cast<Pion *>(p), map, players[j]);
                 } else if (i == 5) {
-                    pune_cal(j, dynamic_cast<Cal *>(c), map, players[j]);
+                    std::cout << "knight:" << std::endl;
+                    pune_piesa(j, dynamic_cast<Cal *>(c), map, players[j], "N");
                 } else if (i == 6) {
-                    pune_nebun(j, dynamic_cast<Nebun *>(ne), map, players[j]);
+                    std::cout << "bishop:" << std::endl;
+                    pune_piesa(j, dynamic_cast<Nebun *>(ne), map, players[j], "B");
                 } else if (i == 7) {
-                    pune_tura(j, dynamic_cast<Turn *>(t), map, players[j]);
+                    std::cout << "rook:" << std::endl;
+                    pune_piesa(j, dynamic_cast<Turn *>(t), map, players[j], "R");
                 } else {
-                    pune_rege(j, dynamic_cast<Rege *>(r), map, players[j]);
+                    std::cout << "king:" << std::endl;
+                    pune_piesa(j, dynamic_cast<Rege *>(r), map, players[j], "K");
                 }
             }
         }
