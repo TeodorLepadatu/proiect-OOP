@@ -27,10 +27,11 @@ public:
 
 template<typename T>
 int Raritate<T>::find_victim(const std::vector<Player> &players) {
-    for (auto i = 0; i < players.size(); i++) {
+    for (size_t i = 0; i < players.size(); i++) {
         if (players[i].pacanea_finder() == p.pacanea_finder())
             return i;
     }
+    return 0;
 }
 
 

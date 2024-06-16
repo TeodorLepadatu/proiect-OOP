@@ -26,10 +26,10 @@ Raritate<int>::Raritate(int random_value, std::vector<Player> &players) {
         std::uniform_int_distribution<> dis(1, 4);
         bonus = dis(gen);
         if ((long unsigned int) bonus >= players.size()) {
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            std::uniform_int_distribution<> dis(0, players.size() - 1);
-            auto x = dis(gen);
+            std::random_device rd_;
+            std::mt19937 gen_(rd_());
+            std::uniform_int_distribution<> dis_(0, players.size() - 1);
+            auto x = dis_(gen_);
             bonus = x;
             p = players[x];
             std::cout << "Player " << x + 1 << " lost all of their resources :(" << std::endl;
