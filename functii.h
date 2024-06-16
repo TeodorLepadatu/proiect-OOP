@@ -286,10 +286,15 @@ void primeste_raritate(std::vector<Player> &players) {
     int random_value = random_stuff_generator(2);
     try {
         if (random_value == 1) {
-            Raritate<Pacanea> rarePacanea(random_value);
-            rarePacanea.getBonus().performBehavior(players[Player::getNr()], players);
+            Raritate<Pacanea> rarePacanea(random_value, players);
+            rarePacanea.getBonus().performBehavior(players[rarePacanea.find_victim(players)], players);
+            for (auto player: players) {
+                if (player.pacanea_finder())
+                    player.reset_pacanea();
+            }
         } else if (random_value == 2) {
-            Raritate<int> rareInt(random_value);
+            Raritate<int> rareInt(random_value, players);
+            /*
             if ((long unsigned int) rareInt.getBonus() >= players.size()) {
                 auto x = random_stuff_generator(players.size());
                 rareInt.setBonus(x);
@@ -305,6 +310,7 @@ void primeste_raritate(std::vector<Player> &players) {
                 players[rareInt.getBonus() - 1].setResursa("WEAPON", 0);
                 players[rareInt.getBonus() - 1].setResursa("STONE", 0);
             }
+             */
         }
     } catch (const raritate_error &e) {
         std::cerr << e.what() << std::endl;

@@ -17,7 +17,7 @@ private:
     std::vector<Piesa *> piese;
     int mutari_disponibile{};
     std::unordered_map<std::string, int> resurse;
-
+    bool are_pacanea = false;
     const std::vector<Piesa *> &getPiese() const;
 
     void setPiese(const std::vector<Piesa *> &piese_);
@@ -48,7 +48,14 @@ public:
         other.curr_piece = nullptr;
     }
 
-    // Copy assignment operator using copy-and-swap idiom
+    friend void swap(Player &first, Player &second) noexcept {
+        using std::swap;
+        swap(first.curr_piece, second.curr_piece);
+        swap(first.piese, second.piese);
+        swap(first.mutari_disponibile, second.mutari_disponibile);
+        swap(first.resurse, second.resurse);
+    }
+
     Player &operator=(Player other) {
         swap(*this, other);
         return *this;
@@ -60,13 +67,7 @@ public:
         }
     }
 
-    friend void swap(Player &first, Player &second) noexcept {
-        using std::swap;
-        swap(first.curr_piece, second.curr_piece);
-        swap(first.piese, second.piese);
-        swap(first.mutari_disponibile, second.mutari_disponibile);
-        swap(first.resurse, second.resurse);
-    }
+
 
     bool operator==(const Player &rhs) const;
 
@@ -115,5 +116,8 @@ public:
 
     void afis_resurse();
 
+    void reset_pacanea();
+
+    bool pacanea_finder() const;
 };
 #endif

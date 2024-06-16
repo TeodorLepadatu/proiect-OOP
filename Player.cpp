@@ -164,3 +164,11 @@ void Player::afis_resurse() {
         std::cout << pair.first << " " << pair.second << std::endl;
 }
 
+void Player::reset_pacanea() {
+    are_pacanea = !are_pacanea;
+}
+
+bool Player::pacanea_finder() const {
+    return are_pacanea;
+}
+
