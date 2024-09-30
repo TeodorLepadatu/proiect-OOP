@@ -36,27 +36,18 @@ private:
     }
 
 public:
-
     Tabla(const Tabla &) = delete;
-
     Tabla &operator=(const Tabla &) = delete;
-
     static Tabla &get_tabla() {
         static Tabla tabla;
         return tabla;
     }
-
     void setCamp(int i, int j);
-
     void resetCamp(int i, int j);
-
     void displaynr() const;
-
     void displaycolor() const;
-
     //void displayocupat();
     [[nodiscard]] Camp displayCamp(int i, int j) const;
-
     friend std::ostream &operator<<(std::ostream &os, const Tabla &tabla) {
         os << "m: " << tabla.m;
         return os;
